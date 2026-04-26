@@ -1,0 +1,2831 @@
+
+> puedo-hacer-algo-asi-https-www@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.102:3000
+✓ Ready in 461ms
+
+ GET / 200 in 2.5s (next.js: 2.1s, application-code: 360ms)
+ GET /admin 200 in 413ms (next.js: 309ms, application-code: 104ms)
+ GET / 200 in 63ms (next.js: 4ms, application-code: 58ms)
+ GET /admin 200 in 24ms (next.js: 3ms, application-code: 21ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+✓ Compiled in 43ms
+✓ Compiled in 169ms
+ GET /admin 200 in 359ms (next.js: 116ms, application-code: 242ms)
+ GET /admin 200 in 220ms (next.js: 49ms, application-code: 171ms)
+ GET /admin 200 in 177ms (next.js: 7ms, application-code: 170ms)
+ GET /admin 200 in 177ms (next.js: 30ms, application-code: 147ms)
+ GET /admin 200 in 177ms (next.js: 51ms, application-code: 126ms)
+ GET /admin 200 in 101ms (next.js: 7ms, application-code: 94ms)
+ GET /admin 200 in 64ms (next.js: 14ms, application-code: 50ms)
+ GET /admin 200 in 56ms (next.js: 28ms, application-code: 27ms)
+  Reload env: .env.local
+No se pudieron leer propiedades desde Supabase. {
+  message: 'Invalid API key',
+  hint: 'Double check your Supabase `anon` or `service_role` API key.'
+}
+No se pudieron leer propiedades desde Supabase. {
+  message: 'Invalid API key',
+  hint: 'Double check your Supabase `anon` or `service_role` API key.'
+}
+No se pudieron leer propiedades desde Supabase. {
+  message: 'Invalid API key',
+  hint: 'Double check your Supabase `anon` or `service_role` API key.'
+}
+No se pudieron leer propiedades desde Supabase. {
+  message: 'Invalid API key',
+  hint: 'Double check your Supabase `anon` or `service_role` API key.'
+}
+No se pudieron leer propiedades desde Supabase. {
+  message: 'Invalid API key',
+  hint: 'Double check your Supabase `anon` or `service_role` API key.'
+}
+ GET /admin 200 in 388ms (next.js: 30ms, application-code: 359ms)
+ GET /admin 200 in 390ms (next.js: 4ms, application-code: 386ms)
+ GET /admin 200 in 533ms (next.js: 60ms, application-code: 473ms)
+ GET /admin 200 in 391ms (next.js: 56ms, application-code: 335ms)
+ GET /admin 200 in 420ms (next.js: 3ms, application-code: 418ms)
+  Reload env: .env.local
+ GET /admin 200 in 926ms (next.js: 60ms, application-code: 866ms)
+ GET /admin 200 in 929ms (next.js: 6ms, application-code: 922ms)
+ GET /admin 200 in 928ms (next.js: 33ms, application-code: 895ms)
+ GET /admin 200 in 978ms (next.js: 3ms, application-code: 976ms)
+ GET /admin 200 in 1051ms (next.js: 44ms, application-code: 1006ms)
+  Reload env: .env.local
+ GET /admin 200 in 581ms (next.js: 29ms, application-code: 553ms)
+ GET /admin 200 in 610ms (next.js: 2ms, application-code: 608ms)
+ GET /admin 200 in 582ms (next.js: 58ms, application-code: 524ms)
+ GET /admin 200 in 717ms (next.js: 55ms, application-code: 661ms)
+ GET /admin 200 in 836ms (next.js: 4ms, application-code: 832ms)
+ GET /admin 200 in 323ms (next.js: 3ms, application-code: 320ms)
+✓ Compiled in 67ms
+ GET /admin 200 in 320ms (next.js: 102ms, application-code: 219ms)
+ GET /admin 200 in 182ms (next.js: 3ms, application-code: 178ms)
+ GET /admin 200 in 169ms (next.js: 4ms, application-code: 165ms)
+ GET /admin 200 in 169ms (next.js: 28ms, application-code: 141ms)
+ GET /admin 200 in 168ms (next.js: 81ms, application-code: 88ms)
+ GET /admin 200 in 173ms (next.js: 51ms, application-code: 122ms)
+ GET /admin 200 in 190ms (next.js: 3ms, application-code: 187ms)
+ GET /admin 200 in 164ms (next.js: 3ms, application-code: 161ms)
+ GET /admin 200 in 155ms (next.js: 3ms, application-code: 152ms)
+ GET /admin 200 in 155ms (next.js: 59ms, application-code: 96ms)
+ GET /admin 200 in 156ms (next.js: 31ms, application-code: 125ms)
+ GET /admin 200 in 95ms (next.js: 7ms, application-code: 88ms)
+ GET /admin 200 in 121ms (next.js: 4ms, application-code: 117ms)
+ GET /admin 200 in 93ms (next.js: 5ms, application-code: 89ms)
+ GET /admin 200 in 64ms (next.js: 7ms, application-code: 57ms)
+ GET /admin 200 in 64ms (next.js: 33ms, application-code: 31ms)
+ GET /admin 200 in 318ms (next.js: 3ms, application-code: 315ms)
+  Reload env: .env.local
+ GET /admin 200 in 81ms (next.js: 37ms, application-code: 45ms)
+ PATCH /api/admin/properties/11111111-1111-1111-1111-111111111111 500 in 1743ms (next.js: 937ms, application-code: 806ms)
+ PATCH /api/admin/properties/a33fccdc-b3f9-4703-a5cb-aeaef9d1ae42 200 in 244ms (next.js: 11ms, application-code: 233ms)
+ GET /admin 200 in 299ms (next.js: 2ms, application-code: 297ms)
+ GET /admin 200 in 187ms (next.js: 2ms, application-code: 184ms)
+ GET /admin 200 in 216ms (next.js: 2ms, application-code: 214ms)
+ GET /admin 200 in 217ms (next.js: 1874µs, application-code: 215ms)
+ GET /admin 200 in 262ms (next.js: 2ms, application-code: 260ms)
+ GET /admin 200 in 757ms (next.js: 106ms, application-code: 650ms)
+ GET /admin 200 in 557ms (next.js: 3ms, application-code: 554ms)
+ GET /admin 200 in 586ms (next.js: 2ms, application-code: 584ms)
+ GET /admin 200 in 557ms (next.js: 27ms, application-code: 530ms)
+ GET /admin 200 in 307ms (next.js: 2ms, application-code: 305ms)
+ GET /admin 200 in 342ms (next.js: 3ms, application-code: 339ms)
+ PATCH /api/admin/properties/82505047-3445-4f71-892f-fd3205353502 200 in 346ms (next.js: 78ms, application-code: 268ms)
+ PATCH /api/admin/properties/82505047-3445-4f71-892f-fd3205353502 200 in 281ms (next.js: 12ms, application-code: 269ms)
+ PATCH /api/admin/properties/82505047-3445-4f71-892f-fd3205353502 200 in 227ms (next.js: 10ms, application-code: 217ms)
+ PATCH /api/admin/properties/a33fccdc-b3f9-4703-a5cb-aeaef9d1ae42 200 in 260ms (next.js: 11ms, application-code: 249ms)
+ PATCH /api/admin/properties/82505047-3445-4f71-892f-fd3205353502 200 in 344ms (next.js: 10ms, application-code: 333ms)
+ GET /admin 200 in 1506ms (next.js: 3ms, application-code: 1503ms)
+ GET /admin 200 in 309ms (next.js: 97ms, application-code: 212ms)
+ GET /admin 200 in 155ms (next.js: 3ms, application-code: 152ms)
+ GET /admin 200 in 159ms (next.js: 31ms, application-code: 128ms)
+ GET /admin 200 in 159ms (next.js: 56ms, application-code: 103ms)
+ GET /admin 200 in 164ms (next.js: 4ms, application-code: 160ms)
+ GET /admin 200 in 166ms (next.js: 3ms, application-code: 163ms)
+ GET /admin 200 in 175ms (next.js: 4ms, application-code: 171ms)
+ GET /admin 200 in 152ms (next.js: 3ms, application-code: 149ms)
+ GET /admin 200 in 152ms (next.js: 4ms, application-code: 149ms)
+ GET /admin 200 in 179ms (next.js: 52ms, application-code: 127ms)
+ GET /admin 200 in 181ms (next.js: 27ms, application-code: 154ms)
+ GET /admin 200 in 126ms (next.js: 7ms, application-code: 119ms)
+ GET /admin 200 in 92ms (next.js: 4ms, application-code: 88ms)
+ GET /admin 200 in 62ms (next.js: 4ms, application-code: 58ms)
+ GET /admin 200 in 32ms (next.js: 3ms, application-code: 29ms)
+ POST /api/admin/properties 200 in 838ms (next.js: 171ms, application-code: 668ms)
+ GET /admin 200 in 366ms (next.js: 2ms, application-code: 363ms)
+ POST /api/admin/properties 200 in 208ms (next.js: 1527µs, application-code: 206ms)
+ POST /api/admin/properties 200 in 212ms (next.js: 1468µs, application-code: 211ms)
+ GET / 200 in 727ms (next.js: 79ms, application-code: 648ms)
+ GET / 200 in 190ms (next.js: 87ms, application-code: 103ms)
+ GET / 200 in 48ms (next.js: 3ms, application-code: 45ms)
+ GET / 200 in 578ms (next.js: 3ms, application-code: 576ms)
+ GET /admin 200 in 348ms (next.js: 10ms, application-code: 338ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+ GET / 200 in 162ms (next.js: 80ms, application-code: 82ms)
+ GET / 200 in 35ms (next.js: 3ms, application-code: 32ms)
+ GET / 200 in 387ms (next.js: 2ms, application-code: 385ms)
+ GET / 200 in 190ms (next.js: 76ms, application-code: 113ms)
+ GET / 200 in 62ms (next.js: 3ms, application-code: 59ms)
+ GET / 200 in 199ms (next.js: 91ms, application-code: 108ms)
+ GET / 200 in 35ms (next.js: 4ms, application-code: 31ms)
+ GET / 200 in 427ms (next.js: 1914µs, application-code: 426ms)
+ GET / 200 in 177ms (next.js: 84ms, application-code: 93ms)
+ GET / 200 in 40ms (next.js: 2ms, application-code: 38ms)
+ GET /admin 200 in 631ms (next.js: 13ms, application-code: 618ms)
+ POST /api/admin/properties 200 in 278ms (next.js: 58ms, application-code: 220ms)
+✓ Compiled in 105ms
+ GET /admin 200 in 389ms (next.js: 178ms, application-code: 212ms)
+ GET /admin 200 in 124ms (next.js: 4ms, application-code: 120ms)
+ GET /admin 200 in 123ms (next.js: 4ms, application-code: 120ms)
+ GET /admin 200 in 123ms (next.js: 24ms, application-code: 99ms)
+ GET /admin 200 in 123ms (next.js: 68ms, application-code: 55ms)
+ GET /admin 200 in 124ms (next.js: 47ms, application-code: 77ms)
+ GET /admin 200 in 151ms (next.js: 3ms, application-code: 148ms)
+ GET /admin 200 in 126ms (next.js: 4ms, application-code: 122ms)
+ GET /admin 200 in 121ms (next.js: 3ms, application-code: 118ms)
+ GET /admin 200 in 121ms (next.js: 47ms, application-code: 74ms)
+ GET /admin 200 in 122ms (next.js: 26ms, application-code: 96ms)
+ GET /admin 200 in 121ms (next.js: 73ms, application-code: 49ms)
+ GET /admin 200 in 151ms (next.js: 3ms, application-code: 148ms)
+ GET /admin 200 in 131ms (next.js: 4ms, application-code: 127ms)
+ GET /admin 200 in 124ms (next.js: 3ms, application-code: 121ms)
+ GET /admin 200 in 124ms (next.js: 23ms, application-code: 101ms)
+ GET /admin 200 in 124ms (next.js: 43ms, application-code: 82ms)
+ GET /admin 200 in 125ms (next.js: 66ms, application-code: 59ms)
+ GET /admin 200 in 84ms (next.js: 4ms, application-code: 81ms)
+ GET /admin 200 in 64ms (next.js: 4ms, application-code: 59ms)
+ GET /admin 200 in 37ms (next.js: 3ms, application-code: 34ms)
+[browser] Uncaught Error: Invalid src prop (https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+    at AdminPropertiesManager (src/components/admin-properties-manager.tsx:441:17)
+    at AdminPage (about://React/Server/C:%5CUsers%5CFEDE%5CDocuments%5CCodex%5C2026-04-25%5Cpuedo-hacer-algo-asi-https-www%5C.next%5Cdev%5Cserver%5Cchunks%5Cssr%5C%5Broot-of-the-server%5D__09r7v3j._.js?11:324:268)
+  439 |             <div className="overflow-hidden rounded-[1.5rem] border border-[#e7ddd2]">
+  440 |               <div className="relative aspect-[16/10] bg-[#f4ede5]">
+> 441 |                 <Image
+      |                 ^
+  442 |                   src={selectedProperty.cover}
+  443 |                   alt={selectedProperty.title}
+  444 |                   fill
+ POST /api/admin/properties/a33fccdc-b3f9-4703-a5cb-aeaef9d1ae42/cover 200 in 3.8s (next.js: 914ms, application-code: 2.9s)
+ PATCH /api/admin/properties/a33fccdc-b3f9-4703-a5cb-aeaef9d1ae42 200 in 545ms (next.js: 79ms, application-code: 466ms)
+⨯ Error: Invalid src prop (https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at ignore-listed frames {
+  digest: '2627374581@E231'
+}
+ GET /admin? 500 in 421ms (next.js: 2ms, application-code: 419ms)
+[browser] Uncaught Error: Invalid src prop (https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+    at AdminPropertiesManager (src/components/admin-properties-manager.tsx:441:17)
+    at AdminPage (src\app\admin\page.tsx:26:9)
+  439 |             <div className="overflow-hidden rounded-[1.5rem] border border-[#e7ddd2]">
+  440 |               <div className="relative aspect-[16/10] bg-[#f4ede5]">
+> 441 |                 <Image
+      |                 ^
+  442 |                   src={selectedProperty.cover}
+  443 |                   alt={selectedProperty.title}
+  444 |                   fill
+⨯ Error: Invalid src prop (https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at ignore-listed frames {
+  digest: '2627374581@E231'
+}
+ GET /admin 500 in 256ms (next.js: 3ms, application-code: 253ms)
+[browser] Uncaught Error: Invalid src prop (https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+    at AdminPropertiesManager (src/components/admin-properties-manager.tsx:441:17)
+    at AdminPage (src\app\admin\page.tsx:26:9)
+  439 |             <div className="overflow-hidden rounded-[1.5rem] border border-[#e7ddd2]">
+  440 |               <div className="relative aspect-[16/10] bg-[#f4ede5]">
+> 441 |                 <Image
+      |                 ^
+  442 |                   src={selectedProperty.cover}
+  443 |                   alt={selectedProperty.title}
+  444 |                   fill
+⨯ Error: Invalid src prop (https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at ignore-listed frames {
+  digest: '2627374581@E231'
+}
+ GET /admin 500 in 292ms (next.js: 2ms, application-code: 289ms)
+[browser] Uncaught Error: Invalid src prop (https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80) on `next/image`, hostname "images.unsplash.com" is not configured under images in your `next.config.js`
+See more info: https://nextjs.org/docs/messages/next-image-unconfigured-host
+    at Array.map (<anonymous>)
+    at AdminPropertiesManager (src/components/admin-properties-manager.tsx:441:17)
+    at AdminPage (src\app\admin\page.tsx:26:9)
+  439 |             <div className="overflow-hidden rounded-[1.5rem] border border-[#e7ddd2]">
+  440 |               <div className="relative aspect-[16/10] bg-[#f4ede5]">
+> 441 |                 <Image
+      |                 ^
+  442 |                   src={selectedProperty.cover}
+  443 |                   alt={selectedProperty.title}
+  444 |                   fill
+⚠ Found a change in next.config.ts. Restarting the server to apply the changes...
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.102:3000
+- Environments: .env.local
+✓ Ready in 382ms
+
+ GET /admin 200 in 812ms (next.js: 359ms, application-code: 453ms)
+ GET /admin 200 in 338ms (next.js: 6ms, application-code: 332ms)
+ POST /api/admin/properties 200 in 400ms (next.js: 165ms, application-code: 235ms)
+ POST /api/admin/properties 200 in 198ms (next.js: 3ms, application-code: 195ms)
+ POST /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93/cover 200 in 1641ms (next.js: 682ms, application-code: 959ms)
+ GET /admin 200 in 293ms (next.js: 3ms, application-code: 290ms)
+[browser] Image with src "https://xxmksmyhdlpkwzvnjiwq.supabase.co/storage/v1/object/public/property-images/76668f39-18ef-42bc-bb98-5e22ec365c93/1777142014071-captura-de-pantalla-2024-12-20-104251.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /admin 200 in 324ms (next.js: 3ms, application-code: 322ms)
+[browser] Image with src "https://xxmksmyhdlpkwzvnjiwq.supabase.co/storage/v1/object/public/property-images/76668f39-18ef-42bc-bb98-5e22ec365c93/1777142014071-captura-de-pantalla-2024-12-20-104251.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+✓ Compiled in 111ms
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id,
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/admin'
+}
+ GET /admin 500 in 1673ms (next.js: 1561ms, application-code: 112ms)
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/admin'
+}
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/admin'
+}
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/admin'
+}
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/admin'
+}
+ GET /admin 500 in 873ms (next.js: 438ms, application-code: 435ms)
+ GET /admin 500 in 453ms (next.js: 443ms, application-code: 10ms)
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/admin'
+}
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\admin\page.tsx:2:1)
+    at module evaluation (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\chunks\ssr\[root-of-the-server]__09r7v3j._.js:386:47)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/admin'
+}
+ GET /admin 500 in 440ms (next.js: 3ms, application-code: 437ms)
+[browser] Uncaught TypeError: gallery is not iterable
+    at mapPropertyRow (src/data/properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src/data/properties.ts:162:36)
+    at module evaluation (src/lib/properties.ts:9:1)
+    at module evaluation (src/app/admin/page.tsx:2:1)
+    at module evaluation (src/app/admin/page.tsx:39:1)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id,
+⨯ TypeError: gallery is not iterable
+    at mapPropertyRow (src\data\properties.ts:64:55)
+    at Array.map (<anonymous>)
+    at module evaluation (src\data\properties.ts:162:36)
+    at module evaluation (src\lib\properties.ts:9:1)
+    at module evaluation (src\app\api\admin\properties\[id]\cover\route.ts:3:1)
+    at Object.<anonymous> (C:\Users\FEDE\Documents\Codex\2026-04-25\puedo-hacer-algo-asi-https-www\.next\dev\server\app\api\admin\properties\[id]\cover\route.js:9:3)
+  62 | ...er_url ??
+  63 | ...//images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+> 64 | ...gedGallery = Array.from(new Set([cover, ...gallery]));
+     |                                               ^
+  65 | ...
+  66 | ...
+  67 | ....id, {
+  page: '/api/admin/properties/467fb38d-aea8-45de-a94c-2200abdbd2a9/cover'
+}
+ POST /api/admin/properties/467fb38d-aea8-45de-a94c-2200abdbd2a9/cover 500 in 112ms (next.js: 104ms, application-code: 8ms)
+✓ Compiled in 40ms
+ GET /admin 200 in 1594ms (next.js: 99ms, application-code: 1495ms)
+ POST /api/admin/properties/467fb38d-aea8-45de-a94c-2200abdbd2a9/cover 200 in 2.5s (next.js: 65ms, application-code: 2.4s)
+ POST /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93/cover 200 in 1185ms (next.js: 20ms, application-code: 1164ms)
+ GET /admin 200 in 1231ms (next.js: 2ms, application-code: 1229ms)
+ GET /admin 200 in 442ms (next.js: 96ms, application-code: 346ms)
+ GET /admin 200 in 226ms (next.js: 3ms, application-code: 223ms)
+ GET /admin 200 in 147ms (next.js: 3ms, application-code: 143ms)
+ GET /admin 200 in 146ms (next.js: 80ms, application-code: 67ms)
+ GET / 200 in 1396ms (next.js: 29ms, application-code: 1368ms)
+ GET / 200 in 1189ms (next.js: 3ms, application-code: 1186ms)
+ GET / 200 in 703ms (next.js: 102ms, application-code: 601ms)
+ GET / 200 in 425ms (next.js: 6ms, application-code: 419ms)
+ GET / 200 in 210ms (next.js: 5ms, application-code: 205ms)
+ GET /admin 200 in 1476ms (next.js: 76ms, application-code: 1400ms)
+ POST /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93/cover 200 in 1104ms (next.js: 90ms, application-code: 1015ms)
+ POST /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93/cover 200 in 2.2s (next.js: 17ms, application-code: 2.2s)
+ GET / 200 in 967ms (next.js: 3ms, application-code: 964ms)
+ GET / 200 in 316ms (next.js: 78ms, application-code: 238ms)
+ GET / 200 in 122ms (next.js: 7ms, application-code: 115ms)
+ GET / 200 in 1617ms (next.js: 3ms, application-code: 1615ms)
+✓ Compiled in 212ms
+ GET / 200 in 878ms (next.js: 289ms, application-code: 588ms)
+ GET / 200 in 472ms (next.js: 79ms, application-code: 393ms)
+ GET / 200 in 272ms (next.js: 3ms, application-code: 268ms)
+ GET / 200 in 272ms (next.js: 66ms, application-code: 205ms)
+ GET / 200 in 272ms (next.js: 137ms, application-code: 135ms)
+ GET / 200 in 74ms (next.js: 2ms, application-code: 72ms)
+ GET / 200 in 687ms (next.js: 3ms, application-code: 685ms)
+ GET / 200 in 656ms (next.js: 77ms, application-code: 580ms)
+ GET / 200 in 122ms (next.js: 3ms, application-code: 119ms)
+ GET / 200 in 62ms (next.js: 5ms, application-code: 57ms)
+ GET / 200 in 1272ms (next.js: 89ms, application-code: 1184ms)
+ GET / 200 in 1090ms (next.js: 53ms, application-code: 1037ms)
+ GET / 200 in 1092ms (next.js: 31ms, application-code: 1061ms)
+ GET / 200 in 1094ms (next.js: 12ms, application-code: 1082ms)
+✓ Compiled in 94ms
+✓ Compiled in 64ms
+ GET / 200 in 686ms (next.js: 128ms, application-code: 557ms)
+ GET / 200 in 447ms (next.js: 71ms, application-code: 376ms)
+ GET / 200 in 339ms (next.js: 5ms, application-code: 334ms)
+ GET / 200 in 338ms (next.js: 144ms, application-code: 194ms)
+ GET / 200 in 338ms (next.js: 208ms, application-code: 130ms)
+ GET / 200 in 340ms (next.js: 90ms, application-code: 249ms)
+ GET / 200 in 67ms (next.js: 5ms, application-code: 62ms)
+✓ Compiled in 169ms
+⨯ ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  [90m37 |[0m   );
+  [90m38 |[0m }
+[31m[1m>[0m [90m39 |[0m       />
+  [90m   |[0m       [31m[1m^^[0m
+  [90m40 |[0m       {properties.map((property) => (
+  [90m41 |[0m         <[33mCircleMarker[0m
+  [90m42 |[0m           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+
+ GET / 500 in 105ms (next.js: 71ms, application-code: 34ms)
+⨯ ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  [90m37 |[0m   );
+  [90m38 |[0m }
+[31m[1m>[0m [90m39 |[0m       />
+  [90m   |[0m       [31m[1m^^[0m
+  [90m40 |[0m       {properties.map((property) => (
+  [90m41 |[0m         <[33mCircleMarker[0m
+  [90m42 |[0m           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+ GET / 500 in 24ms (next.js: 7ms, application-code: 17ms)
+⨯ ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  [90m37 |[0m   );
+  [90m38 |[0m }
+[31m[1m>[0m [90m39 |[0m       />
+  [90m   |[0m       [31m[1m^^[0m
+  [90m40 |[0m       {properties.map((property) => (
+  [90m41 |[0m         <[33mCircleMarker[0m
+  [90m42 |[0m           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+
+ GET / 500 in 17ms (next.js: 6ms, application-code: 10ms)
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+ GET / 200 in 338ms (next.js: 87ms, application-code: 251ms)
+ GET / 200 in 133ms (next.js: 3ms, application-code: 130ms)
+ GET / 200 in 68ms (next.js: 3ms, application-code: 65ms)
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+[browser] ./src/components/properties-map-canvas.tsx:39:7
+Unterminated regexp literal
+  37 |   );
+  38 | }
+> 39 |       />
+     |       ^^
+  40 |       {properties.map((property) => (
+  41 |         <CircleMarker
+  42 |           key={property.id}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component] 
+ GET /admin 200 in 846ms (next.js: 79ms, application-code: 768ms)
+ PATCH /api/admin/properties/7c4e683d-c2d1-4d74-8e74-8a0ff0df8472 500 in 924ms (next.js: 673ms, application-code: 251ms)
+ GET /admin 200 in 1198ms (next.js: 3ms, application-code: 1195ms)
+ PATCH /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93 500 in 232ms (next.js: 9ms, application-code: 223ms)
+ PATCH /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93 500 in 271ms (next.js: 10ms, application-code: 261ms)
+ GET /admin 200 in 696ms (next.js: 2ms, application-code: 694ms)
+[browser] Image with src "https://xxmksmyhdlpkwzvnjiwq.supabase.co/storage/v1/object/public/property-images/76668f39-18ef-42bc-bb98-5e22ec365c93/1777142529255-0-captura-de-pantalla-2025-03-31-123210.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ PATCH /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93 500 in 222ms (next.js: 10ms, application-code: 212ms)
+ GET /admin 200 in 1038ms (next.js: 4ms, application-code: 1034ms)
+ PATCH /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93 200 in 478ms (next.js: 11ms, application-code: 468ms)
+ GET / 200 in 872ms (next.js: 2ms, application-code: 870ms)
+ GET / 200 in 646ms (next.js: 100ms, application-code: 546ms)
+ GET / 200 in 436ms (next.js: 2ms, application-code: 433ms)
+ GET / 200 in 419ms (next.js: 7ms, application-code: 412ms)
+ GET / 200 in 418ms (next.js: 150ms, application-code: 268ms)
+ GET / 200 in 418ms (next.js: 228ms, application-code: 190ms)
+ GET / 200 in 417ms (next.js: 291ms, application-code: 126ms)
+ GET / 200 in 64ms (next.js: 3ms, application-code: 61ms)
+ GET / 200 in 843ms (next.js: 3ms, application-code: 840ms)
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 34ms
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found 
+ GET / 500 in 32ms (next.js: 17ms, application-code: 16ms)
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET / 500 in 23ms (next.js: 11ms, application-code: 12ms)
+ GET / 500 in 27ms (next.js: 18ms, application-code: 9ms)
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/components/properties-explorer.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/components/properties-explorer.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found 
+ GET / 200 in 309ms (next.js: 194ms, application-code: 115ms)
+⨯ ReferenceError: window is not defined
+    at module evaluation (src\components\properties-map-canvas.tsx:4:1)
+    at module evaluation (src\components\properties-explorer.tsx:5:1)
+  2 |
+  3 | import { useMemo } from "react";
+> 4 | import L from "leaflet";
+    | ^
+  5 | import {
+  6 |   MapContainer,
+  7 |   Marker, {
+  digest: '1805895296'
+}
+⨯ ReferenceError: window is not defined
+    at module evaluation (src\components\properties-map-canvas.tsx:4:1)
+    at module evaluation (src\components\properties-explorer.tsx:5:1)
+  2 |
+  3 | import { useMemo } from "react";
+> 4 | import L from "leaflet";
+    | ^
+  5 | import {
+  6 |   MapContainer,
+  7 |   Marker, {
+  digest: '1805895296'
+}
+ GET / 500 in 2.1s (next.js: 5ms, application-code: 2.1s)
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 38ms
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  1 | import Link from "next/link";
+> 2 | import { PropertiesExplorer } from "@/components/properties-explorer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { getProperties } from "@/lib/properties";
+  4 |
+  5 | export default async function Home() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+ GET / 500 in 31ms (next.js: 16ms, application-code: 15ms)
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET / 500 in 23ms (next.js: 9ms, application-code: 14ms)
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  [90m1 |[0m [36mimport[0m [33mLink[0m [36mfrom[0m [32m"next/link"[0m;
+[31m[1m>[0m [90m2 |[0m [36mimport[0m { [33mPropertiesExplorer[0m } [36mfrom[0m [32m"@/components/properties-explorer"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m3 |[0m [36mimport[0m { getProperties } [36mfrom[0m [32m"@/lib/properties"[0m;
+  [90m4 |[0m
+  [90m5 |[0m [36mexport[0m [36mdefault[0m [36masync[0m [36mfunction[0m [33mHome[0m() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET / 500 in 21ms (next.js: 7ms, application-code: 14ms)
+ GET / 500 in 29ms (next.js: 17ms, application-code: 12ms)
+[browser] Uncaught Error: ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  1 | import Link from "next/link";
+> 2 | import { PropertiesExplorer } from "@/components/properties-explorer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { getProperties } from "@/lib/properties";
+  4 |
+  5 | export default async function Home() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/page.tsx:2:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  1 | import Link from "next/link";
+> 2 | import { PropertiesExplorer } from "@/components/properties-explorer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { getProperties } from "@/lib/properties";
+  4 |
+  5 | export default async function Home() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/page.tsx:2:1
+Module not found: Can't resolve '@/components/properties-explorer'
+  1 | import Link from "next/link";
+> 2 | import { PropertiesExplorer } from "@/components/properties-explorer";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { getProperties } from "@/lib/properties";
+  4 |
+  5 | export default async function Home() {
+
+Import map: aliased to relative './src/components/properties-explorer' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+ GET / 200 in 286ms (next.js: 159ms, application-code: 126ms)
+⨯ ReferenceError: window is not defined
+    at module evaluation (src\components\properties-map-canvas.tsx:4:1)
+    at module evaluation (src\components\properties-explorer.tsx:5:1)
+  2 |
+  3 | import { useMemo } from "react";
+> 4 | import L from "leaflet";
+    | ^
+  5 | import {
+  6 |   MapContainer,
+  7 |   Marker, {
+  digest: '1805895296'
+}
+⨯ ReferenceError: window is not defined
+    at module evaluation (src\components\properties-map-canvas.tsx:4:1)
+    at module evaluation (src\components\properties-explorer.tsx:5:1)
+  2 |
+  3 | import { useMemo } from "react";
+> 4 | import L from "leaflet";
+    | ^
+  5 | import {
+  6 |   MapContainer,
+  7 |   Marker, {
+  digest: '1805895296'
+}
+ GET / 500 in 2.3s (next.js: 4ms, application-code: 2.3s)
+✓ Compiled in 27ms
+ GET / 200 in 244ms (next.js: 103ms, application-code: 142ms)
+ GET / 200 in 637ms (next.js: 117ms, application-code: 520ms)
+ GET / 200 in 414ms (next.js: 71ms, application-code: 343ms)
+ GET / 200 in 281ms (next.js: 3ms, application-code: 278ms)
+ GET / 200 in 281ms (next.js: 77ms, application-code: 204ms)
+ GET / 200 in 132ms (next.js: 4ms, application-code: 128ms)
+⨯ ReferenceError: window is not defined
+    at module evaluation (src\components\properties-map-canvas.tsx:4:1)
+    at module evaluation (src\components\properties-explorer.tsx:5:1)
+  2 |
+  3 | import { useEffect, useMemo } from "react";
+> 4 | import L from "leaflet";
+    | ^
+  5 | import {
+  6 |   MapContainer,
+  7 |   Marker, {
+  digest: '925637633'
+}
+ GET / 500 in 1682ms (next.js: 3ms, application-code: 1679ms)
+✓ Compiled in 60ms
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 36ms
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found 
+ GET / 500 in 29ms (next.js: 15ms, application-code: 13ms)
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET / 500 in 15ms (next.js: 6ms, application-code: 9ms)
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET / 500 in 17ms (next.js: 8ms, application-code: 9ms)
+ GET / 500 in 24ms (next.js: 14ms, application-code: 10ms)
+[browser] Uncaught Error: ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/components/properties-explorer.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/components/properties-explorer.tsx:5:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  3 | import { useEffect, useMemo, useState } from "react";
+  4 | import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
+> 5 | import { PropertiesMapCanvas } from "@/components/properties-map-canvas";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 |
+  7 | type Props = {
+  8 |   properties: Property[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found 
+ GET / 200 in 1175ms (next.js: 92ms, application-code: 1083ms)
+ GET / 200 in 1294ms (next.js: 2ms, application-code: 1292ms)
+ GET / 200 in 486ms (next.js: 92ms, application-code: 394ms)
+ GET / 200 in 300ms (next.js: 3ms, application-code: 298ms)
+ GET / 200 in 337ms (next.js: 61ms, application-code: 277ms)
+ GET / 200 in 337ms (next.js: 171ms, application-code: 166ms)
+ GET / 200 in 339ms (next.js: 3ms, application-code: 335ms)
+ GET / 200 in 338ms (next.js: 114ms, application-code: 224ms)
+ GET / 200 in 104ms (next.js: 4ms, application-code: 99ms)
+✓ Compiled in 69ms
+ GET / 200 in 323ms (next.js: 102ms, application-code: 221ms)
+ GET / 200 in 93ms (next.js: 3ms, application-code: 89ms)
+ GET / 200 in 736ms (next.js: 2ms, application-code: 734ms)
+ GET / 200 in 910ms (next.js: 2ms, application-code: 908ms)
+ GET /admin 200 in 1482ms (next.js: 88ms, application-code: 1394ms)
+ PATCH /api/admin/properties/76668f39-18ef-42bc-bb98-5e22ec365c93 200 in 607ms (next.js: 107ms, application-code: 500ms)
+ GET / 200 in 915ms (next.js: 2ms, application-code: 913ms)
+ GET / 200 in 402ms (next.js: 3ms, application-code: 400ms)
+ GET /admin 200 in 364ms (next.js: 2ms, application-code: 362ms)
+ GET /admin 200 in 658ms (next.js: 2ms, application-code: 655ms)
+ GET / 200 in 621ms (next.js: 3ms, application-code: 619ms)
+⨯ ./src/components/properties-map-canvas.tsx
+Module not found: Can't resolve '@/components/properties-map-client'
+Import map: aliased to relative './src/components/properties-map-client' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-map-canvas.tsx:12:5
+Module not found: Can't resolve '@/components/properties-map-client'
+  [90m10 |[0m [36mconst[0m [33mDynamicPropertiesMap[0m = dynamic(
+  [90m11 |[0m   () =>
+[31m[1m>[0m [90m12 |[0m     [36mimport[0m([32m"@/components/properties-map-client"[0m).then(
+  [90m   |[0m     [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m13 |[0m       (module) => module.[33mPropertiesMapClient[0m,
+  [90m14 |[0m     ),
+  [90m15 |[0m   {
+
+Import map: aliased to relative './src/components/properties-map-client' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./src/components/properties-map-canvas.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Client Component Browser]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./src/components/properties-map-canvas.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Client Component SSR]
+    ./src/components/properties-explorer.tsx [Server Component]
+    ./src/app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/components/properties-explorer.tsx:5:1
+Module not found: Can't resolve '@/components/properties-map-canvas'
+  [90m3 |[0m [36mimport[0m { useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+  [90m4 |[0m [36mimport[0m [36mtype[0m { [33mProperty[0m, [33mPropertyOperation[0m, [33mPropertyType[0m } [36mfrom[0m [32m"@/data/properties"[0m;
+[31m[1m>[0m [90m5 |[0m [36mimport[0m { [33mPropertiesMapCanvas[0m } [36mfrom[0m [32m"@/components/properties-map-canvas"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mtype[0m [33mProps[0m = {
+  [90m8 |[0m   properties: [33mProperty[0m[];
+
+Import map: aliased to relative './src/components/properties-map-canvas' inside of [project]/
+
+
+Import trace:
+  Server Component:
+    ./src/components/properties-explorer.tsx
+    ./src/app/page.tsx
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 50ms
+✓ Compiled in 36ms
+ GET / 200 in 1072ms (next.js: 89ms, application-code: 983ms)
+ GET / 200 in 1159ms (next.js: 3ms, application-code: 1156ms)
+ GET / 200 in 1107ms (next.js: 94ms, application-code: 1013ms)
+ GET / 200 in 957ms (next.js: 3ms, application-code: 954ms)
+ GET / 200 in 521ms (next.js: 96ms, application-code: 426ms)
+ GET / 200 in 317ms (next.js: 3ms, application-code: 314ms)
+ GET / 200 in 366ms (next.js: 3ms, application-code: 363ms)
+ GET / 200 in 366ms (next.js: 127ms, application-code: 239ms)
+ GET / 200 in 367ms (next.js: 60ms, application-code: 307ms)
+ GET / 200 in 367ms (next.js: 189ms, application-code: 177ms)
+ GET / 200 in 186ms (next.js: 4ms, application-code: 181ms)
+ GET / 200 in 79ms (next.js: 5ms, application-code: 74ms)
+ GET / 200 in 186ms (next.js: 77ms, application-code: 108ms)
+ GET / 200 in 829ms (next.js: 2ms, application-code: 827ms)
+✓ Compiled in 26ms
+ GET / 200 in 627ms (next.js: 102ms, application-code: 525ms)
+ GET / 200 in 407ms (next.js: 2ms, application-code: 405ms)
+ GET / 200 in 474ms (next.js: 5ms, application-code: 469ms)
+ GET / 200 in 337ms (next.js: 4ms, application-code: 333ms)
+ GET / 200 in 337ms (next.js: 58ms, application-code: 279ms)
+ GET / 200 in 337ms (next.js: 119ms, application-code: 218ms)
+ GET / 200 in 139ms (next.js: 4ms, application-code: 135ms)
+ GET / 200 in 68ms (next.js: 3ms, application-code: 65ms)
+ GET / 200 in 961ms (next.js: 4ms, application-code: 957ms)
+ GET / 200 in 886ms (next.js: 2ms, application-code: 884ms)
+ GET / 200 in 647ms (next.js: 1857µs, application-code: 645ms)
+[?25h

@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5efe8;
+  --foreground: #1f2a30;
+  --color-cream: #f5efe8;
+  --color-ink: #1f2a30;
+  --color-deep: #203947;
+  --color-clay: #9f6b44;
+  --color-sand: #f2d3b2;
+  --color-line: #e6dacd;
+  --color-muted: #667178;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-manrope);
+  --font-serif-display: var(--font-cormorant);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), sans-serif;
+}
+
+.leaflet-container {
+  font: inherit;
+  background: #dfe7ec;
+}
+
+.leaflet-control-attribution {
+  font-size: 10px;
+}
+
+.property-live-marker-shell {
+  background: transparent;
+  border: 0;
+}
+
+.property-live-marker {
+  display: inline-flex;
+  min-width: 110px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 9999px;
+  background: rgba(19, 30, 38, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  box-shadow: 0 12px 28px rgba(15, 24, 31, 0.18);
+}
+
+.property-live-marker.is-active {
+  background: rgba(159, 107, 68, 0.96);
+}
+
+a {
+  text-decoration: none;
+}
+
+.hero-shell {
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.9), transparent 32%),
+    linear-gradient(180deg, #efe4d7 0%, #f5efe8 100%);
+}
+
+.hero-panel {
+  position: relative;
+}
+
+.hero-panel::after {
+  content: "";
+  position: absolute;
+  inset: auto -10% -25% auto;
+  width: 22rem;
+  height: 22rem;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.22), transparent 70%);
+  pointer-events: none;
+}

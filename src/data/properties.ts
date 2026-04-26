@@ -1,0 +1,228 @@
+export type PropertyType = "Casa" | "Departamento" | "Lote" | "Oficina";
+export type PropertyOperation = "Venta" | "Alquiler";
+export type PropertyStatus = "Publicada" | "Borrador" | "Pausada";
+
+export type Property = {
+  id: string;
+  slug: string;
+  title: string;
+  location: string;
+  locationLabel: string;
+  type: PropertyType;
+  operation: PropertyOperation;
+  price: string;
+  numericPrice: number;
+  currency: "USD" | "ARS";
+  surface: string;
+  surfaceM2: number;
+  bedrooms: number;
+  featured?: boolean;
+  status: PropertyStatus;
+  cover: string;
+  gallery: string[];
+  latitude?: number;
+  longitude?: number;
+  mapsUrl?: string;
+  description?: string;
+};
+
+export type PropertyRow = {
+  id: string;
+  slug: string;
+  title: string;
+  location: string;
+  property_type: PropertyType;
+  operation_type: PropertyOperation;
+  price: number;
+  currency: "USD" | "ARS";
+  surface_m2: number;
+  bedrooms: number;
+  status: "published" | "draft" | "paused";
+  featured: boolean;
+  cover_url: string | null;
+  description: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
+  maps_url?: string | null;
+};
+
+function isValidLatitude(value: number) {
+  return Number.isFinite(value) && value >= -90 && value <= 90;
+}
+
+function isValidLongitude(value: number) {
+  return Number.isFinite(value) && value >= -180 && value <= 180;
+}
+
+function formatPrice(price: number, currency: "USD" | "ARS") {
+  const locale = "es-AR";
+  const formatted = new Intl.NumberFormat(locale).format(price);
+  return currency === "USD" ? `USD ${formatted}` : `AR$ ${formatted}`;
+}
+
+function mapStatus(status: PropertyRow["status"]): PropertyStatus {
+  if (status === "published") {
+    return "Publicada";
+  }
+
+  if (status === "paused") {
+    return "Pausada";
+  }
+
+  return "Borrador";
+}
+
+export function extractCoordinatesFromMapsUrl(mapsUrl?: string | null) {
+  if (!mapsUrl) {
+    return {};
+  }
+
+  const patterns = [
+    /[?&]q=(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i,
+    /@(-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)/i,
+    /!3d(-?\d+(?:\.\d+)?)!4d(-?\d+(?:\.\d+)?)/i,
+  ];
+
+  for (const pattern of patterns) {
+    const match = mapsUrl.match(pattern);
+    if (!match) {
+      continue;
+    }
+
+    const latitude = Number(match[1]);
+    const longitude = Number(match[2]);
+
+    if (isValidLatitude(latitude) && isValidLongitude(longitude)) {
+      return { latitude, longitude };
+    }
+  }
+
+  return {};
+}
+
+export function mapPropertyRow(row: PropertyRow, gallery: string[] = []): Property {
+  const cover =
+    row.cover_url ??
+    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80";
+  const mergedGallery = Array.from(new Set([cover, ...gallery]));
+  const fallbackCoordinates = extractCoordinatesFromMapsUrl(row.maps_url);
+  const safeLatitude = isValidLatitude(row.latitude ?? NaN)
+    ? (row.latitude ?? undefined)
+    : fallbackCoordinates.latitude;
+  const safeLongitude = isValidLongitude(row.longitude ?? NaN)
+    ? (row.longitude ?? undefined)
+    : fallbackCoordinates.longitude;
+
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    location: row.location,
+    locationLabel: row.location,
+    type: row.property_type,
+    operation: row.operation_type,
+    price: formatPrice(row.price, row.currency),
+    numericPrice: row.price,
+    currency: row.currency,
+    surface: `${row.surface_m2} m2`,
+    surfaceM2: row.surface_m2,
+    bedrooms: row.bedrooms,
+    featured: row.featured,
+    status: mapStatus(row.status),
+    cover,
+    gallery: mergedGallery,
+    latitude: safeLatitude,
+    longitude: safeLongitude,
+    mapsUrl: row.maps_url ?? undefined,
+    description: row.description ?? undefined,
+  };
+}
+
+const mockRows: PropertyRow[] = [
+  {
+    id: "11111111-1111-1111-1111-111111111111",
+    slug: "casa-rioja-pellegrini",
+    title: "Casa reciclada con patio y pileta",
+    location: "Pichincha, Rosario",
+    property_type: "Casa",
+    operation_type: "Venta",
+    price: 248000,
+    currency: "USD",
+    surface_m2: 214,
+    bedrooms: 3,
+    featured: true,
+    status: "published",
+    cover_url:
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Casa reciclada con tres dormitorios, patio verde y pileta. Ideal para familia.",
+    latitude: -33.0442,
+    longitude: -61.1681,
+    maps_url: "https://maps.google.com/?q=-33.0442,-61.1681",
+  },
+  {
+    id: "22222222-2222-2222-2222-222222222222",
+    slug: "departamento-premium-parque-espana",
+    title: "Semipiso premium frente al rio",
+    location: "Parque Espana, Rosario",
+    property_type: "Departamento",
+    operation_type: "Venta",
+    price: 189000,
+    currency: "USD",
+    surface_m2: 128,
+    bedrooms: 2,
+    featured: true,
+    status: "published",
+    cover_url:
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Semipiso luminoso con visuales abiertas, balcon corrido y terminaciones premium.",
+    latitude: -33.0465,
+    longitude: -61.1672,
+    maps_url: "https://maps.google.com/?q=-33.0465,-61.1672",
+  },
+  {
+    id: "33333333-3333-3333-3333-333333333333",
+    slug: "oficina-corporativa-centro",
+    title: "Oficina corporativa con sala de reuniones",
+    location: "Centro, Rosario",
+    property_type: "Oficina",
+    operation_type: "Alquiler",
+    price: 1150000,
+    currency: "ARS",
+    surface_m2: 96,
+    bedrooms: 0,
+    featured: false,
+    status: "draft",
+    cover_url:
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Planta flexible para equipos comerciales o estudios profesionales.",
+    latitude: -33.0408,
+    longitude: -61.1656,
+    maps_url: "https://maps.google.com/?q=-33.0408,-61.1656",
+  },
+  {
+    id: "44444444-4444-4444-4444-444444444444",
+    slug: "lote-barrio-abierto-funes",
+    title: "Lote en barrio abierto listo para construir",
+    location: "Funes, Santa Fe",
+    property_type: "Lote",
+    operation_type: "Venta",
+    price: 64000,
+    currency: "USD",
+    surface_m2: 540,
+    bedrooms: 0,
+    featured: false,
+    status: "paused",
+    cover_url:
+      "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80",
+    description:
+      "Lote regular con servicios y excelente acceso desde autopista.",
+    latitude: -33.0514,
+    longitude: -61.1731,
+    maps_url: "https://maps.google.com/?q=-33.0514,-61.1731",
+  },
+];
+
+export const properties = mockRows.map((row) => mapPropertyRow(row));
