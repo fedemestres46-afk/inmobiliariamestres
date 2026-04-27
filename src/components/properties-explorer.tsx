@@ -9,6 +9,13 @@ type Props = {
 };
 
 type ViewMode = "grid" | "map";
+type SortOption =
+  | "default"
+  | "price-asc"
+  | "price-desc"
+  | "surface-desc"
+  | "surface-asc"
+  | "bedrooms-asc";
 
 const propertyTypeOptions: Array<PropertyType | "Todos"> = [
   "Todos",
@@ -24,16 +31,26 @@ const operationOptions: Array<PropertyOperation | "Todas"> = [
   "Alquiler",
 ];
 
+const sortOptions: Array<{ value: SortOption; label: string }> = [
+  { value: "default", label: "Destacadas primero" },
+  { value: "price-asc", label: "Menor precio" },
+  { value: "price-desc", label: "Mayor precio" },
+  { value: "surface-desc", label: "Mayor m2" },
+  { value: "surface-asc", label: "Menor m2" },
+  { value: "bedrooms-asc", label: "Ambientes: menor a mayor" },
+];
+
 export function PropertiesExplorer({ properties }: Props) {
   const [typeFilter, setTypeFilter] = useState<PropertyType | "Todos">("Todos");
   const [operationFilter, setOperationFilter] = useState<
     PropertyOperation | "Todas"
   >("Todas");
   const [locationFilter, setLocationFilter] = useState("");
+  const [sortOption, setSortOption] = useState<SortOption>("default");
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
 
   const filteredProperties = useMemo(() => {
-    return properties.filter((property) => {
+    const nextProperties = properties.filter((property) => {
       const matchesType =
         typeFilter === "Todos" ? true : property.type === typeFilter;
       const matchesOperation =
@@ -49,7 +66,39 @@ export function PropertiesExplorer({ properties }: Props) {
 
       return matchesType && matchesOperation && matchesLocation;
     });
-  }, [locationFilter, operationFilter, properties, typeFilter]);
+
+    const sortedProperties = [...nextProperties];
+
+    switch (sortOption) {
+      case "price-asc":
+        sortedProperties.sort((a, b) => a.numericPrice - b.numericPrice);
+        break;
+      case "price-desc":
+        sortedProperties.sort((a, b) => b.numericPrice - a.numericPrice);
+        break;
+      case "surface-desc":
+        sortedProperties.sort((a, b) => b.surfaceM2 - a.surfaceM2);
+        break;
+      case "surface-asc":
+        sortedProperties.sort((a, b) => a.surfaceM2 - b.surfaceM2);
+        break;
+      case "bedrooms-asc":
+        sortedProperties.sort((a, b) => a.bedrooms - b.bedrooms);
+        break;
+      default:
+        sortedProperties.sort((a, b) => {
+          const featuredDelta = Number(b.featured ?? false) - Number(a.featured ?? false);
+          if (featuredDelta !== 0) {
+            return featuredDelta;
+          }
+
+          return a.title.localeCompare(b.title, "es");
+        });
+        break;
+    }
+
+    return sortedProperties;
+  }, [locationFilter, operationFilter, properties, sortOption, typeFilter]);
 
   const propertiesWithCoords = filteredProperties.filter(
     (property) =>
@@ -72,7 +121,7 @@ export function PropertiesExplorer({ properties }: Props) {
   return (
     <div className="mt-10 space-y-8">
       <div className="rounded-[2rem] border border-[var(--color-line)] bg-white p-5 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
-        <div className="grid gap-4 md:grid-cols-[1fr_1fr_1.1fr_auto]">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_1.1fr_1fr_auto]">
           <label className="space-y-2">
             <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
               Tipo
@@ -123,6 +172,23 @@ export function PropertiesExplorer({ properties }: Props) {
               placeholder="Casilda, Rosario, Funes..."
               className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
             />
+          </label>
+
+          <label className="space-y-2">
+            <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
+              Orden
+            </span>
+            <select
+              value={sortOption}
+              onChange={(event) => setSortOption(event.target.value as SortOption)}
+              className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
           </label>
 
           <div className="space-y-2">
