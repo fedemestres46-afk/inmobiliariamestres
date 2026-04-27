@@ -119,19 +119,13 @@ export default async function Home() {
         id="propiedades"
         className="mx-auto max-w-7xl px-6 py-12 md:px-10 lg:px-14"
       >
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-clay)]">
-              Destacadas
-            </p>
-            <h3 className="mt-3 font-serif-display text-4xl md:text-5xl">
-              Una portada que ya se siente inmobiliaria.
-            </h3>
-          </div>
-          <p className="max-w-xl text-base leading-8 text-[var(--color-muted)]">
-            Filtra por tipo, operacion o zona y cambia entre listado y mapa para
-            explorar cada propiedad de una forma mas clara.
+        <div>
+          <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-clay)]">
+            Destacadas
           </p>
+          <h3 className="mt-3 font-serif-display text-4xl md:text-5xl">
+            Una portada que ya se siente inmobiliaria.
+          </h3>
         </div>
 
         <PropertiesExplorer properties={properties} />

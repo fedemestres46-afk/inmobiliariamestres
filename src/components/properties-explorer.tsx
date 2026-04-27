@@ -238,7 +238,7 @@ export function PropertiesExplorer({ properties }: Props) {
       </div>
 
       {viewMode === "grid" ? (
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {filteredProperties.map((property) => (
             <article
               key={property.id}
