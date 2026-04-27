@@ -2,6 +2,8 @@ import Link from "next/link";
 import { PropertiesExplorer } from "@/components/properties-explorer";
 import { getProperties } from "@/lib/properties";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const properties = await getProperties();
 

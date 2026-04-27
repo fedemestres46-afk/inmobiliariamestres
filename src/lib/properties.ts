@@ -1,4 +1,3 @@
-import { cache } from "react";
 import {
   getSupabaseAdminClient,
   getSupabaseClient,
@@ -42,7 +41,7 @@ export async function mapRowsWithGallery(rows: PropertyRow[]) {
   );
 }
 
-export const getProperties = cache(async (): Promise<Property[]> => {
+export async function getProperties(): Promise<Property[]> {
   if (isSupabaseAdminConfigured()) {
     try {
       const supabase = getSupabaseAdminClient();
@@ -85,4 +84,4 @@ export const getProperties = cache(async (): Promise<Property[]> => {
     console.error("Fallo la inicializacion de Supabase.", error);
     return mockProperties;
   }
-});
+}

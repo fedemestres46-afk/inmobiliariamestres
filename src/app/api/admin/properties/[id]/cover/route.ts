@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
 import { getPropertyGallery, mapRowsWithGallery } from "@/lib/properties";
@@ -129,7 +130,7 @@ export async function POST(request: Request, context: RouteContext) {
     )
     .eq("id", id)
     .select(
-      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description",
+      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description, latitude, longitude, maps_url",
     )
     .single();
 
@@ -145,6 +146,8 @@ export async function POST(request: Request, context: RouteContext) {
   }
 
   const [property] = await mapRowsWithGallery([data as PropertyRow]);
+  revalidatePath("/");
+  revalidatePath("/admin");
 
   return NextResponse.json({ property });
 }
@@ -234,5 +237,7 @@ export async function DELETE(request: Request, context: RouteContext) {
   }
 
   const [property] = await mapRowsWithGallery([data as PropertyRow]);
+  revalidatePath("/");
+  revalidatePath("/admin");
   return NextResponse.json({ property });
 }

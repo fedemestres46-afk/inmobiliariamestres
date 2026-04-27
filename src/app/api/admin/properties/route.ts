@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
 import { mapRowsWithGallery } from "@/lib/properties";
@@ -47,7 +48,7 @@ export async function POST() {
       description: "Completa los datos de esta propiedad desde el panel admin.",
     })
     .select(
-      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description",
+      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description, latitude, longitude, maps_url",
     )
     .single();
 
@@ -61,6 +62,8 @@ export async function POST() {
   }
 
   const [property] = await mapRowsWithGallery([data as PropertyRow]);
+  revalidatePath("/");
+  revalidatePath("/admin");
 
   return NextResponse.json({ property });
 }

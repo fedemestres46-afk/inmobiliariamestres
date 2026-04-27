@@ -2,6 +2,8 @@ import { AdminPropertiesManager } from "@/components/admin-properties-manager";
 import { getProperties } from "@/lib/properties";
 import { isSupabaseAdminConfigured } from "@/lib/supabase";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminPage() {
   const properties = await getProperties();
 
