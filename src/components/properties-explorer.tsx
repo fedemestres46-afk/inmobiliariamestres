@@ -111,8 +111,18 @@ export function PropertiesExplorer({ properties }: Props) {
   );
 
   useEffect(() => {
-    setActiveMapPropertyId(propertiesWithCoords[0]?.id ?? null);
-  }, [typeFilter, operationFilter, locationFilter, propertiesWithCoords]);
+    setActiveMapPropertyId((currentId) => {
+      if (propertiesWithCoords.length === 0) {
+        return null;
+      }
+
+      if (currentId && propertiesWithCoords.some((property) => property.id === currentId)) {
+        return currentId;
+      }
+
+      return propertiesWithCoords[0]?.id ?? null;
+    });
+  }, [propertiesWithCoords]);
 
   const activeMapProperty =
     propertiesWithCoords.find((property) => property.id === activeMapPropertyId) ??

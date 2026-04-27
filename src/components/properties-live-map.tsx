@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import type { Property } from "@/data/properties";
 
 type Props = {
@@ -9,83 +9,170 @@ type Props = {
   onSelect: (propertyId: string) => void;
 };
 
-function buildOpenStreetMapEmbedUrl(latitude: number, longitude: number) {
-  const delta = 0.008;
-  const left = longitude - delta;
-  const right = longitude + delta;
-  const top = latitude + delta;
-  const bottom = latitude - delta;
-
-  return `https://www.openstreetmap.org/export/embed.html?bbox=${left}%2C${bottom}%2C${right}%2C${top}&layer=mapnik&marker=${latitude}%2C${longitude}`;
-}
+type LeafletModule = typeof import("leaflet");
 
 export function PropertiesLiveMap({
   properties,
   activeProperty,
   onSelect,
 }: Props) {
-  const focusedProperty = activeProperty ?? properties[0];
+  const mapElementRef = useRef<HTMLDivElement | null>(null);
+  const leafletRef = useRef<LeafletModule | null>(null);
+  const mapRef = useRef<any>(null);
+  const markersLayerRef = useRef<any>(null);
+  const popupByPropertyIdRef = useRef<Map<string, any>>(new Map());
+  const focusedIdsRef = useRef<string>("");
 
-  const embedUrl = useMemo(() => {
-    if (
-      !focusedProperty ||
-      typeof focusedProperty.latitude !== "number" ||
-      typeof focusedProperty.longitude !== "number"
-    ) {
-      return null;
+  const validProperties = useMemo(
+    () =>
+      properties.filter(
+        (property) =>
+          typeof property.latitude === "number" &&
+          typeof property.longitude === "number",
+      ),
+    [properties],
+  );
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function setupMap() {
+      if (!mapElementRef.current || mapRef.current) {
+        return;
+      }
+
+      const L = await import("leaflet");
+      if (cancelled || !mapElementRef.current) {
+        return;
+      }
+
+      leafletRef.current = L;
+      const map = L.map(mapElementRef.current, {
+        zoomControl: true,
+        scrollWheelZoom: false,
+      }).setView([-32.952164, -60.6550428], 13);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      markersLayerRef.current = L.layerGroup().addTo(map);
+      mapRef.current = map;
+
+      window.setTimeout(() => {
+        map.invalidateSize();
+      }, 120);
     }
 
-    return buildOpenStreetMapEmbedUrl(
-      focusedProperty.latitude,
-      focusedProperty.longitude,
-    );
-  }, [focusedProperty]);
+    void setupMap();
 
-  if (!embedUrl || !focusedProperty) {
-    return (
-      <div className="flex h-full items-center justify-center bg-[#dde4ea] px-6 text-center text-sm text-[#52606b]">
-        No hay una ubicacion valida para mostrar en el mapa.
-      </div>
-    );
-  }
+    return () => {
+      cancelled = true;
+      popupByPropertyIdRef.current.clear();
 
-  return (
-    <div className="relative h-full w-full bg-[#dde4ea]">
-      <iframe
-        key={`${focusedProperty.id}-${focusedProperty.latitude}-${focusedProperty.longitude}`}
-        title={`Mapa de ${focusedProperty.title}`}
-        src={embedUrl}
-        className="h-full w-full border-0"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-      />
+      if (mapRef.current) {
+        mapRef.current.remove();
+        mapRef.current = null;
+      }
 
-      {properties.length > 1 ? (
-        <div className="absolute bottom-4 left-4 right-4 z-10 md:hidden">
-          <div className="flex gap-3 overflow-x-auto pb-2">
-            {properties.map((property) => (
-              <button
-                key={property.id}
-                type="button"
-                onClick={() => onSelect(property.id)}
-                className={`min-w-[14rem] rounded-[1.25rem] border px-4 py-3 text-left shadow-[0_12px_30px_rgba(19,30,38,0.18)] backdrop-blur transition ${
-                  property.id === focusedProperty.id
-                    ? "border-white/90 bg-white text-[#203947]"
-                    : "border-white/35 bg-[rgba(19,30,38,0.75)] text-white"
-                }`}
-              >
-                <p className="text-[11px] uppercase tracking-[0.22em] opacity-70">
-                  {property.operation} · {property.type}
-                </p>
-                <h5 className="mt-2 font-serif-display text-2xl leading-none">
-                  {property.title}
-                </h5>
-                <p className="mt-2 text-sm opacity-75">{property.location}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : null}
-    </div>
-  );
+      markersLayerRef.current = null;
+    };
+  }, []);
+
+  useEffect(() => {
+    const L = leafletRef.current;
+    const map = mapRef.current;
+    const markersLayer = markersLayerRef.current;
+
+    if (!L || !map || !markersLayer) {
+      return;
+    }
+
+    markersLayer.clearLayers();
+    popupByPropertyIdRef.current.clear();
+
+    if (validProperties.length === 0) {
+      map.setView([-32.952164, -60.6550428], 13, { animate: false });
+      return;
+    }
+
+    validProperties.forEach((property) => {
+      const isActive = property.id === activeProperty?.id;
+      const marker = L.marker([property.latitude!, property.longitude!], {
+        icon: L.divIcon({
+          className: "property-live-marker-shell",
+          html: `<span class="property-live-marker${isActive ? " is-active" : ""}">${property.price}</span>`,
+          iconSize: [132, 40],
+          iconAnchor: [66, 20],
+        }),
+      });
+
+      marker.on("click", () => onSelect(property.id));
+      marker.addTo(markersLayer);
+
+      const popup = L.popup({
+        closeButton: false,
+        autoClose: false,
+        closeOnClick: false,
+        offset: [0, -8],
+      }).setContent(
+        `<div style="min-width:180px"><strong>${property.title}</strong><br/>${property.location}<br/>${property.price}</div>`,
+      );
+
+      popupByPropertyIdRef.current.set(property.id, { marker, popup });
+
+      if (isActive) {
+        marker.setZIndexOffset(1000);
+      }
+    });
+
+    const idsSignature = validProperties.map((property) => property.id).join(",");
+    const didPropertySetChange = focusedIdsRef.current !== idsSignature;
+    focusedIdsRef.current = idsSignature;
+
+    if (validProperties.length === 1) {
+      const [property] = validProperties;
+      map.setView([property.latitude!, property.longitude!], 16, {
+        animate: false,
+      });
+      return;
+    }
+
+    if (didPropertySetChange) {
+      const bounds = L.latLngBounds(
+        validProperties.map((property) => [
+          property.latitude!,
+          property.longitude!,
+        ] as [number, number]),
+      );
+      map.fitBounds(bounds, {
+        padding: [48, 48],
+        maxZoom: 15,
+        animate: false,
+      });
+    }
+  }, [activeProperty?.id, onSelect, validProperties]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) {
+      return;
+    }
+
+    const activeEntry = activeProperty
+      ? popupByPropertyIdRef.current.get(activeProperty.id)
+      : null;
+
+    popupByPropertyIdRef.current.forEach(({ marker, popup }, propertyId) => {
+      if (activeEntry && propertyId === activeProperty?.id) {
+        marker.bindPopup(popup).openPopup();
+        marker.setZIndexOffset(1000);
+      } else {
+        marker.closePopup();
+        marker.setZIndexOffset(0);
+      }
+    });
+  }, [activeProperty]);
+
+  return <div ref={mapElementRef} className="h-full w-full" />;
 }
