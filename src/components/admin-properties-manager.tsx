@@ -85,6 +85,7 @@ export function AdminPropertiesManager({
   const [isPending, startTransition] = useTransition();
   const [isUploading, setIsUploading] = useState(false);
   const [deletingImageUrl, setDeletingImageUrl] = useState<string | null>(null);
+  const [deletingPropertyId, setDeletingPropertyId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const selectedProperty =
@@ -298,9 +299,50 @@ export function AdminPropertiesManager({
     }
   }
 
-  if (!selectedProperty) {
-    return null;
+  async function handleDeleteProperty(propertyId: string) {
+    setDeletingPropertyId(propertyId);
+    setSaveState({ type: "idle", message: "" });
+
+    try {
+      const response = await fetch(`/api/admin/properties/${propertyId}`, {
+        method: "DELETE",
+      });
+
+      const result = (await response.json()) as
+        | { success?: boolean; id?: string; error?: string }
+        | undefined;
+
+      if (!response.ok || !result?.success || !result.id) {
+        setSaveState({
+          type: "error",
+          message: result?.error ?? "No se pudo borrar la propiedad.",
+        });
+        return;
+      }
+
+      setProperties((current) => {
+        const nextProperties = current.filter((property) => property.id !== result.id);
+
+        setSelectedId((currentSelectedId) => {
+          if (currentSelectedId !== result.id) {
+            return currentSelectedId;
+          }
+
+          return nextProperties[0]?.id ?? "";
+        });
+
+        return nextProperties;
+      });
+      setSaveState({
+        type: "success",
+        message: "Propiedad borrada correctamente.",
+      });
+    } finally {
+      setDeletingPropertyId(null);
+    }
   }
+
+  const hasProperties = properties.length > 0;
 
   return (
     <>
@@ -360,47 +402,82 @@ export function AdminPropertiesManager({
 
           <div className="divide-y divide-[#ece4da]">
             {properties.map((property) => (
-              <button
+              <div
                 key={property.id}
-                type="button"
-                onClick={() => {
-                  setSelectedId(property.id);
-                  setSaveState({ type: "idle", message: "" });
-                }}
-                className={`grid w-full grid-cols-1 gap-4 px-6 py-5 text-left transition md:grid-cols-[1.4fr_1fr_0.9fr_0.8fr] ${
-                  property.id === selectedProperty.id
+                className={`grid grid-cols-1 gap-3 px-6 py-5 transition md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,0.9fr)_minmax(0,0.8fr)_auto] md:items-start ${
+                  property.id === selectedProperty?.id
                     ? "bg-[#fcf8f3]"
                     : "hover:bg-[#faf6f0]"
                 }`}
               >
-                <div>
-                  <h2 className="text-xl font-semibold text-[#22313b]">
-                    {property.title}
-                  </h2>
-                  <p className="mt-1 text-sm text-[#667178]">
-                    {property.location}
-                  </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSelectedId(property.id);
+                    setSaveState({ type: "idle", message: "" });
+                  }}
+                  className="grid grid-cols-1 gap-4 text-left md:col-span-4 md:grid-cols-subgrid"
+                >
+                  <div>
+                    <h2 className="text-xl font-semibold text-[#22313b]">
+                      {property.title}
+                    </h2>
+                    <p className="mt-1 text-sm text-[#667178]">
+                      {property.location}
+                    </p>
+                  </div>
+                  <div className="text-sm text-[#42505a]">
+                    <p>{property.operation}</p>
+                    <p className="mt-1 text-[#7a838a]">{property.type}</p>
+                  </div>
+                  <div className="text-sm text-[#42505a]">{property.price}</div>
+                  <div>
+                    <span className="rounded-full bg-[#f2e5d8] px-3 py-1 text-sm text-[#8a5a38]">
+                      {property.status}
+                    </span>
+                  </div>
+                </button>
+                <div className="flex items-start justify-end">
+                  <button
+                    type="button"
+                    aria-label={`Borrar ${property.title}`}
+                    onClick={() => void handleDeleteProperty(property.id)}
+                    disabled={!canPersist || deletingPropertyId === property.id}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-[#d7c7b6] text-xl leading-none text-[#7d5840] transition hover:border-[#9f6b44] hover:bg-[#f7efe5] hover:text-[#9f6b44] disabled:cursor-not-allowed disabled:opacity-60"
+                  >
+                    {deletingPropertyId === property.id ? "..." : "-"}
+                  </button>
                 </div>
-                <div className="text-sm text-[#42505a]">
-                  <p>{property.operation}</p>
-                  <p className="mt-1 text-[#7a838a]">{property.type}</p>
-                </div>
-                <div className="text-sm text-[#42505a]">{property.price}</div>
-                <div>
-                  <span className="rounded-full bg-[#f2e5d8] px-3 py-1 text-sm text-[#8a5a38]">
-                    {property.status}
-                  </span>
-                </div>
-              </button>
+              </div>
             ))}
+            {!hasProperties ? (
+              <div className="px-6 py-8 text-sm text-[#6a7379]">
+                Aun no hay propiedades. Crea una nueva desde este panel.
+              </div>
+            ) : null}
           </div>
         </div>
 
         <form
-          key={selectedProperty.id}
+          key={selectedProperty?.id ?? "empty"}
           action={handleSubmit}
           className="rounded-[2rem] border border-white/80 bg-white p-6 shadow-[0_24px_60px_rgba(35,43,50,0.07)]"
         >
+          {!selectedProperty ? (
+            <div className="flex min-h-[24rem] flex-col items-center justify-center text-center">
+              <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
+                Sin seleccion
+              </p>
+              <h2 className="mt-4 font-serif-display text-4xl text-[#22313b]">
+                No hay propiedades para editar
+              </h2>
+              <p className="mt-4 max-w-md text-base leading-8 text-[#6a7379]">
+                Cuando crees una nueva propiedad o selecciones una existente,
+                los campos apareceran aqui.
+              </p>
+            </div>
+          ) : (
+            <>
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
@@ -732,6 +809,8 @@ export function AdminPropertiesManager({
               {isPending ? "Guardando..." : "Guardar cambios"}
             </button>
           </div>
+            </>
+          )}
         </form>
       </section>
     </>

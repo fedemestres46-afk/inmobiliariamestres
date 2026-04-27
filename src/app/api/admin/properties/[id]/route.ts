@@ -1,8 +1,12 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
-import { mapRowsWithGallery } from "@/lib/properties";
-import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
+import { getPropertyGallery, mapRowsWithGallery } from "@/lib/properties";
+import {
+  getSupabaseAdminClient,
+  isSupabaseAdminConfigured,
+  propertyImagesBucket,
+} from "@/lib/supabase";
 
 type RouteContext = {
   params: Promise<{ id: string }>;
@@ -64,4 +68,66 @@ export async function PATCH(request: Request, context: RouteContext) {
   revalidatePath("/admin");
 
   return NextResponse.json({ property });
+}
+
+export async function DELETE(_request: Request, context: RouteContext) {
+  if (!isSupabaseAdminConfigured()) {
+    return NextResponse.json(
+      {
+        error:
+          "Falta SUPABASE_SERVICE_ROLE_KEY en el servidor. Con eso habilitamos borrado real.",
+      },
+      { status: 503 },
+    );
+  }
+
+  const { id } = await context.params;
+  const supabase = getSupabaseAdminClient();
+  const gallery = await getPropertyGallery(id);
+  const pathsToRemove = gallery
+    .map((imageUrl) => {
+      const marker = `/storage/v1/object/public/${propertyImagesBucket}/`;
+      const index = imageUrl.indexOf(marker);
+
+      if (index === -1) {
+        return null;
+      }
+
+      return imageUrl.slice(index + marker.length);
+    })
+    .filter((path): path is string => Boolean(path));
+
+  if (pathsToRemove.length > 0) {
+    const { error: storageError } = await supabase.storage
+      .from(propertyImagesBucket)
+      .remove(pathsToRemove);
+
+    if (storageError) {
+      return NextResponse.json(
+        {
+          error:
+            storageError.message ??
+            "No se pudieron borrar las imagenes asociadas a la propiedad.",
+        },
+        { status: 500 },
+      );
+    }
+  }
+
+  const { error } = await supabase.from("properties").delete().eq("id", id);
+
+  if (error) {
+    return NextResponse.json(
+      {
+        error:
+          error.message ?? "No se pudo borrar la propiedad en Supabase.",
+      },
+      { status: 500 },
+    );
+  }
+
+  revalidatePath("/");
+  revalidatePath("/admin");
+
+  return NextResponse.json({ success: true, id });
 }
