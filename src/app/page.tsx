@@ -88,16 +88,16 @@ export default async function Home() {
       >
         {[
           {
-            title: "Captacion premium",
-            copy: "Publicacion cuidada, narrativa visual y fichas pensadas para vender mejor.",
+            title: "Ventas",
+            copy: "Acompanamiento comercial para publicar, posicionar y concretar operaciones con una presentacion cuidada.",
           },
           {
-            title: "Operacion ordenada",
-            copy: "El admin centraliza estado, portada, precio y visibilidad de cada propiedad.",
+            title: "Compras",
+            copy: "Busqueda y seleccion de oportunidades con seguimiento cercano para comprar con mas claridad y confianza.",
           },
           {
-            title: "Escala sin rehacer",
-            copy: "Mas adelante conectamos Postgres o Supabase sin tirar esta base.",
+            title: "Tasaciones",
+            copy: "Valoraciones realistas segun zona, contexto y demanda para tomar decisiones mejor informadas.",
           },
         ].map((item) => (
           <article
