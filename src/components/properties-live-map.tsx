@@ -94,18 +94,19 @@ export function PropertiesLiveMap({
 
     validProperties.forEach((property) => {
       const isActive = property.id === activeProperty?.id;
-      const circleMarker = L.circleMarker([property.latitude!, property.longitude!], {
-        radius: isActive ? 12 : 9,
-        color: "#ffffff",
-        weight: 3,
-        fillColor: isActive ? "#9f6b44" : "#203947",
-        fillOpacity: 1,
+      const marker = L.marker([property.latitude!, property.longitude!], {
+        icon: L.divIcon({
+          className: "property-live-marker-shell",
+          html: `<span class="property-live-marker${isActive ? " is-active" : ""}">${property.price}</span>`,
+          iconSize: [132, 40],
+          iconAnchor: [66, 20],
+        }),
       });
-      circleMarker.on("click", () => onSelect(property.id));
-      circleMarker.addTo(markersLayer);
+      marker.on("click", () => onSelect(property.id));
+      marker.addTo(markersLayer);
 
       if (isActive) {
-        circleMarker.bringToFront();
+        marker.setZIndexOffset(1000);
       }
     });
 
