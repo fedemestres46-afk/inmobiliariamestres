@@ -107,6 +107,26 @@ export function PropertiesLiveMap({
 
       if (isActive) {
         marker.setZIndexOffset(1000);
+
+        L.circle([property.latitude!, property.longitude!], {
+          radius: 55,
+          color: "#9f6b44",
+          weight: 2,
+          fillColor: "#9f6b44",
+          fillOpacity: 0.18,
+        }).addTo(markersLayer);
+
+        marker
+          .bindPopup(
+            `<div style="min-width:180px"><strong>${property.title}</strong><br/>${property.location}<br/>${property.price}</div>`,
+            {
+              closeButton: false,
+              autoClose: false,
+              closeOnClick: false,
+              offset: [0, -8],
+            },
+          )
+          .openPopup();
       }
     });
 
