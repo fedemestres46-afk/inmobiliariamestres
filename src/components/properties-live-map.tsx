@@ -80,6 +80,10 @@ export function PropertiesLiveMap({
       return;
     }
 
+    window.setTimeout(() => {
+      map.invalidateSize();
+    }, 60);
+
     markersLayer.clearLayers();
 
     const validProperties = properties.filter(
@@ -105,13 +109,20 @@ export function PropertiesLiveMap({
       }
     });
 
+    if (validProperties.length === 0) {
+      map.setView([-32.952164, -60.6550428], 13, {
+        animate: false,
+      });
+      return;
+    }
+
     if (
       activeProperty &&
       typeof activeProperty.latitude === "number" &&
       typeof activeProperty.longitude === "number"
     ) {
       map.setView([activeProperty.latitude, activeProperty.longitude], 16, {
-        animate: true,
+        animate: false,
       });
       return;
     }
@@ -123,12 +134,15 @@ export function PropertiesLiveMap({
           property.longitude!,
         ] as [number, number]),
       );
-      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15 });
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 15, animate: false });
       return;
     }
 
     if (validProperties.length === 1) {
-      map.setView([validProperties[0].latitude!, validProperties[0].longitude!], 16);
+      const [property] = validProperties;
+      map.setView([property.latitude!, property.longitude!], 16, {
+        animate: false,
+      });
     }
   }, [activeProperty, onSelect, properties]);
 
