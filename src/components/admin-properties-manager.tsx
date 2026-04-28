@@ -29,6 +29,18 @@ const typeOptions: PropertyType[] = [
 const operationOptions: PropertyOperation[] = ["Venta", "Alquiler"];
 const statusOptions: PropertyStatus[] = ["Publicada", "Borrador", "Pausada"];
 
+function getStatusBadgeClasses(status: PropertyStatus) {
+  if (status === "Publicada") {
+    return "bg-[#e6f5ea] text-[#39704a]";
+  }
+
+  if (status === "Pausada") {
+    return "bg-[#fdeceb] text-[#b04c47]";
+  }
+
+  return "bg-[#fff1df] text-[#b46f24]";
+}
+
 function toApiStatus(status: PropertyStatus) {
   if (status === "Publicada") {
     return "published";
@@ -490,9 +502,11 @@ export function AdminPropertiesManager({
                     <p>{property.operation}</p>
                     <p className="mt-1 text-[#7a838a]">{property.type}</p>
                   </div>
-                  <div className="text-sm text-[#42505a]">{property.price}</div>
-                  <div>
-                    <span className="rounded-full bg-[#f2e5d8] px-3 py-1 text-sm text-[#8a5a38]">
+                <div className="text-sm text-[#42505a]">{property.price}</div>
+                <div>
+                    <span
+                      className={`rounded-full px-3 py-1 text-sm ${getStatusBadgeClasses(property.status)}`}
+                    >
                       {property.status}
                     </span>
                   </div>
@@ -552,7 +566,9 @@ export function AdminPropertiesManager({
                 {selectedProperty.title}
               </h2>
             </div>
-            <span className="rounded-full bg-[#f5efe8] px-3 py-1 text-sm text-[#76573b]">
+            <span
+              className={`rounded-full px-3 py-1 text-sm ${getStatusBadgeClasses(selectedProperty.status)}`}
+            >
               {selectedProperty.status}
             </span>
           </div>
