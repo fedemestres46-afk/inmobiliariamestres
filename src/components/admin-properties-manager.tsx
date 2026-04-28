@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import type {
   PropertyAmenity,
   Property,
@@ -91,12 +91,6 @@ function isValidLongitude(value?: number) {
   );
 }
 
-function parseSelectedValues<T extends string>(values: FormDataEntryValue[], validValues: readonly T[]) {
-  return values
-    .map((value) => String(value))
-    .filter((value): value is T => validValues.includes(value as T));
-}
-
 export function AdminPropertiesManager({
   initialProperties,
   canPersist,
@@ -112,6 +106,8 @@ export function AdminPropertiesManager({
   const [isUploading, setIsUploading] = useState(false);
   const [deletingImageUrl, setDeletingImageUrl] = useState<string | null>(null);
   const [deletingPropertyId, setDeletingPropertyId] = useState<string | null>(null);
+  const [selectedServices, setSelectedServices] = useState<PropertyService[]>([]);
+  const [selectedAmenities, setSelectedAmenities] = useState<PropertyAmenity[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const totals = useMemo(
@@ -138,6 +134,11 @@ export function AdminPropertiesManager({
     filteredProperties.find((property) => property.id === selectedId) ??
     filteredProperties[0];
 
+  useEffect(() => {
+    setSelectedServices(selectedProperty?.services ?? []);
+    setSelectedAmenities(selectedProperty?.amenities ?? []);
+  }, [selectedProperty]);
+
   async function handleSubmit(formData: FormData) {
     if (!selectedProperty) {
       return;
@@ -153,15 +154,6 @@ export function AdminPropertiesManager({
     const safeLongitude = isValidLongitude(longitudeRaw)
       ? longitudeRaw
       : extractedCoordinates.longitude;
-    const serviceTags = parseSelectedValues<PropertyService>(
-      formData.getAll("service_tags"),
-      propertyServiceOptions,
-    );
-    const amenityTags = parseSelectedValues<PropertyAmenity>(
-      formData.getAll("amenity_tags"),
-      propertyAmenityOptions,
-    );
-
     const payload = {
       title: String(formData.get("title") ?? ""),
       location: String(formData.get("location") ?? ""),
@@ -183,8 +175,8 @@ export function AdminPropertiesManager({
       featured: formData.get("featured") === "on",
       cover_url: String(formData.get("cover_url") ?? ""),
       description: String(formData.get("description") ?? ""),
-      service_tags: serviceTags,
-      amenity_tags: amenityTags,
+      service_tags: selectedServices,
+      amenity_tags: selectedAmenities,
       latitude: safeLatitude,
       longitude: safeLongitude,
       maps_url: mapsUrlRaw === "" ? undefined : mapsUrlRaw,
@@ -216,6 +208,8 @@ export function AdminPropertiesManager({
           property.id === result.property?.id ? result.property : property,
         ),
       );
+      setSelectedServices(result.property.services);
+      setSelectedAmenities(result.property.amenities);
       setSaveState({
         type: "success",
         message: "Cambios guardados correctamente.",
@@ -997,10 +991,18 @@ export function AdminPropertiesManager({
                     className="flex items-center gap-3 rounded-2xl border border-[#eadfce] bg-white px-4 py-3 text-sm text-[#42505a]"
                   >
                     <input
-                      name="service_tags"
                       type="checkbox"
                       value={option}
-                      defaultChecked={selectedProperty.services.includes(option)}
+                      checked={selectedServices.includes(option)}
+                      onChange={(event) => {
+                        setSelectedServices((current) =>
+                          event.target.checked
+                            ? current.includes(option)
+                              ? current
+                              : [...current, option]
+                            : current.filter((item) => item !== option),
+                        );
+                      }}
                     />
                     <span>{option}</span>
                   </label>
@@ -1019,10 +1021,18 @@ export function AdminPropertiesManager({
                     className="flex items-center gap-3 rounded-2xl border border-[#eadfce] bg-white px-4 py-3 text-sm text-[#42505a]"
                   >
                     <input
-                      name="amenity_tags"
                       type="checkbox"
                       value={option}
-                      defaultChecked={selectedProperty.amenities.includes(option)}
+                      checked={selectedAmenities.includes(option)}
+                      onChange={(event) => {
+                        setSelectedAmenities((current) =>
+                          event.target.checked
+                            ? current.includes(option)
+                              ? current
+                              : [...current, option]
+                            : current.filter((item) => item !== option),
+                        );
+                      }}
                     />
                     <span>{option}</span>
                   </label>
