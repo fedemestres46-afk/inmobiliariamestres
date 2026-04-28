@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import type { Lead, LeadStatus } from "@/data/leads";
 
 type Props = {
@@ -25,13 +25,44 @@ const statusOptions: LeadStatus[] = [
 export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
   const [leads, setLeads] = useState(initialLeads);
   const [selectedLeadId, setSelectedLeadId] = useState(initialLeads[0]?.id ?? "");
+  const [statusFilter, setStatusFilter] = useState<
+    LeadStatus | "En curso" | "Todos"
+  >("Todos");
+  const [searchQuery, setSearchQuery] = useState("");
   const [saveState, setSaveState] = useState<SaveState>({
     type: "idle",
     message: "",
   });
   const [isPending, startTransition] = useTransition();
 
-  const selectedLead = leads.find((lead) => lead.id === selectedLeadId) ?? leads[0];
+  const filteredLeads = useMemo(() => {
+    return leads.filter((lead) => {
+      const matchesStatus =
+        statusFilter === "Todos"
+          ? true
+          : statusFilter === "En curso"
+            ? ["Contactado", "Visita", "Negociacion"].includes(lead.status)
+            : lead.status === statusFilter;
+      const query = searchQuery.trim().toLowerCase();
+      const matchesQuery =
+        query === ""
+          ? true
+          : [
+              lead.fullName,
+              lead.phone,
+              lead.email,
+              lead.propertyTitle,
+              lead.propertyLocation,
+            ]
+              .filter(Boolean)
+              .some((value) => String(value).toLowerCase().includes(query));
+
+      return matchesStatus && matchesQuery;
+    });
+  }, [leads, searchQuery, statusFilter]);
+
+  const selectedLead =
+    filteredLeads.find((lead) => lead.id === selectedLeadId) ?? filteredLeads[0];
 
   const totals = useMemo(
     () => ({
@@ -43,6 +74,31 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
     }),
     [leads],
   );
+
+  useEffect(() => {
+    setSelectedLeadId((currentId) => {
+      if (filteredLeads.length === 0) {
+        return "";
+      }
+
+      if (currentId && filteredLeads.some((lead) => lead.id === currentId)) {
+        return currentId;
+      }
+
+      return filteredLeads[0]?.id ?? "";
+    });
+  }, [filteredLeads]);
+
+  function getWhatsAppHref(lead: Lead) {
+    const sanitizedPhone = lead.phone.replace(/[^\d]/g, "");
+    const internationalPhone = sanitizedPhone.startsWith("54")
+      ? sanitizedPhone
+      : `54${sanitizedPhone}`;
+
+    return `https://wa.me/${internationalPhone}?text=${encodeURIComponent(
+      `Hola ${lead.fullName}, te escribo por tu consulta sobre ${lead.propertyTitle}.`,
+    )}`;
+  }
 
   async function handleSubmit(formData: FormData) {
     if (!selectedLead) {
@@ -87,21 +143,70 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
     <>
       <section className="mt-10 grid gap-4 md:grid-cols-3">
         {[
-          { label: "Nuevos", value: totals.nuevos },
-          { label: "En curso", value: totals.enCurso },
-          { label: "Cerrados", value: totals.cerrados },
+          {
+            label: "Nuevos",
+            value: totals.nuevos,
+            filter: "Nuevo" as LeadStatus,
+            accent: "text-[#9f6b44]",
+            active: "bg-[#fff8ef] border-[#edd8b8]",
+          },
+          {
+            label: "En curso",
+            value: totals.enCurso,
+            filter: "En curso" as const,
+            accent: "text-[#2f617b]",
+            active: "bg-[#f1f8fc] border-[#c8deea]",
+          },
+          {
+            label: "Cerrados",
+            value: totals.cerrados,
+            filter: "Cerrado" as LeadStatus,
+            accent: "text-[#39704a]",
+            active: "bg-[#f3fbf5] border-[#cfe6d6]",
+          },
         ].map((item) => (
-          <article
+          <button
             key={item.label}
-            className="rounded-[1.5rem] border border-white/80 bg-white px-6 py-5 shadow-[0_18px_40px_rgba(35,43,50,0.06)]"
+            type="button"
+            onClick={() =>
+              setStatusFilter((current) =>
+                current === item.filter ? "Todos" : item.filter,
+              )
+            }
+            className={`rounded-[1.5rem] border px-6 py-5 text-left shadow-[0_18px_40px_rgba(35,43,50,0.06)] transition ${
+              statusFilter === item.filter
+                ? item.active
+                : "border-white/80 bg-white hover:bg-[#faf6f0]"
+            }`}
           >
-            <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
+            <p className={`text-sm uppercase tracking-[0.3em] ${item.accent}`}>
               {item.label}
             </p>
             <p className="mt-4 font-serif-display text-4xl">{item.value}</p>
-          </article>
+          </button>
         ))}
       </section>
+
+      <div className="mt-4 grid gap-3 md:grid-cols-[1fr_auto]">
+        <input
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+          placeholder="Buscar por nombre, telefono, email o propiedad"
+          className="w-full rounded-full border border-[#e7ddd2] bg-white px-5 py-3 outline-none transition focus:border-[#9f6b44]"
+        />
+        {statusFilter !== "Todos" || searchQuery.trim() !== "" ? (
+          <button
+            type="button"
+            onClick={() => {
+              setStatusFilter("Todos");
+              setSearchQuery("");
+            }}
+            className="rounded-full border border-[#d8cabd] bg-white px-5 py-3 text-sm font-semibold text-[#5c666d] transition hover:bg-[#f7efe5]"
+          >
+            Limpiar filtros
+          </button>
+        ) : null}
+      </div>
 
       {!crmReady ? (
         <section className="mt-8 rounded-[1.5rem] border border-[#eed8c4] bg-[#fff7ef] px-6 py-5 text-sm leading-7 text-[#7c624b]">
@@ -122,7 +227,7 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
           </div>
 
           <div className="divide-y divide-[#ece4da]">
-            {leads.map((lead) => (
+            {filteredLeads.map((lead) => (
               <button
                 key={lead.id}
                 type="button"
@@ -166,6 +271,11 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                 formulario desde la web, va a aparecer aca.
               </div>
             ) : null}
+            {leads.length > 0 && filteredLeads.length === 0 ? (
+              <div className="px-6 py-8 text-sm text-[#6a7379]">
+                No hay leads que coincidan con los filtros actuales.
+              </div>
+            ) : null}
           </div>
         </div>
 
@@ -207,6 +317,14 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                     Telefono
                   </p>
                   <p className="mt-2 text-lg text-[#22313b]">{selectedLead.phone}</p>
+                  <a
+                    href={getWhatsAppHref(selectedLead)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex rounded-full border border-[#d8cabd] px-4 py-2 text-sm font-semibold text-[#1f3b4d] transition hover:bg-[#f7efe5]"
+                  >
+                    Abrir WhatsApp
+                  </a>
                 </div>
                 <div className="rounded-[1.5rem] border border-[#ece4da] px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.22em] text-[#8b969d]">

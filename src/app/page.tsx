@@ -56,6 +56,12 @@ export default async function Home() {
                 >
                   Ver propiedades destacadas
                 </a>
+                <Link
+                  href="/propiedades"
+                  className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  Ver todas las propiedades
+                </Link>
               </div>
             </div>
 
