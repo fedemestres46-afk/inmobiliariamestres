@@ -16,7 +16,14 @@ function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: str
     error?.message?.includes("covered_surface_m2") ||
     error?.message?.includes("rooms") ||
     error?.message?.includes("bathrooms") ||
-    error?.message?.includes("garage_spaces") ||
+    error?.message?.includes("garage_spaces")
+  );
+}
+
+function isMissingFeatureTags(error?: { code?: string; message?: string } | null) {
+  return (
+    error?.code === "PGRST204" ||
+    error?.code === "42703" ||
     error?.message?.includes("service_tags") ||
     error?.message?.includes("amenity_tags")
   );
@@ -79,6 +86,16 @@ export async function PATCH(request: Request, context: RouteContext) {
     .eq("id", id)
     .select("*")
     .single();
+
+  if (error && isMissingFeatureTags(error)) {
+    return NextResponse.json(
+      {
+        error:
+          "Faltan las columnas de servicios y adicionales en Supabase. Corre el SQL de supabase/property-feature-tags.sql para poder guardar esos checks.",
+      },
+      { status: 500 },
+    );
+  }
 
   if (error && shouldRetryWithoutExtendedFields(error)) {
     const {
