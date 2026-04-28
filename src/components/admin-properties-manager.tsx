@@ -152,6 +152,7 @@ export function AdminPropertiesManager({
       price: Number(formData.get("price") ?? 0),
       currency: String(formData.get("currency") ?? "USD") as "USD" | "ARS",
       surface_m2: Number(formData.get("surface_m2") ?? 0),
+      covered_surface_m2: Number(formData.get("covered_surface_m2") ?? 0),
       rooms: Number(formData.get("rooms") ?? 0),
       bedrooms: Number(formData.get("bedrooms") ?? 0),
       bathrooms: Number(formData.get("bathrooms") ?? 0),
@@ -683,11 +684,20 @@ export function AdminPropertiesManager({
               </select>
             </label>
             <label className="space-y-2">
-              <span className="text-sm text-[#6a7379]">Metros cuadrados</span>
+              <span className="text-sm text-[#6a7379]">Metros cuadrados (totales)</span>
               <input
                 name="surface_m2"
                 type="number"
                 defaultValue={selectedProperty.surfaceM2}
+                className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
+              />
+            </label>
+            <label className="space-y-2">
+              <span className="text-sm text-[#6a7379]">Metros cuadrados (cubiertos)</span>
+              <input
+                name="covered_surface_m2"
+                type="number"
+                defaultValue={selectedProperty.coveredSurfaceM2}
                 className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
               />
             </label>
@@ -825,6 +835,7 @@ export function AdminPropertiesManager({
                           price: selectedProperty.numericPrice,
                           currency: selectedProperty.currency,
                           surface_m2: selectedProperty.surfaceM2,
+                          covered_surface_m2: selectedProperty.coveredSurfaceM2,
                           rooms: selectedProperty.rooms,
                           bedrooms: selectedProperty.bedrooms,
                           bathrooms: selectedProperty.bathrooms,

@@ -9,6 +9,7 @@ function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: str
   return (
     error?.code === "PGRST204" ||
     error?.code === "42703" ||
+    error?.message?.includes("covered_surface_m2") ||
     error?.message?.includes("rooms") ||
     error?.message?.includes("bathrooms") ||
     error?.message?.includes("garage_spaces")
@@ -53,6 +54,7 @@ export async function POST() {
     price: 0,
     currency: "USD",
     surface_m2: 0,
+    covered_surface_m2: 0,
     rooms: 0,
     bedrooms: 0,
     bathrooms: 0,
@@ -73,6 +75,7 @@ export async function POST() {
   if (error && shouldRetryWithoutExtendedFields(error)) {
     const {
       rooms: _rooms,
+      covered_surface_m2: _coveredSurfaceM2,
       bathrooms: _bathrooms,
       garage_spaces: _garageSpaces,
       ...legacyPayload

@@ -13,6 +13,7 @@ function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: str
   return (
     error?.code === "PGRST204" ||
     error?.code === "42703" ||
+    error?.message?.includes("covered_surface_m2") ||
     error?.message?.includes("rooms") ||
     error?.message?.includes("bathrooms") ||
     error?.message?.includes("garage_spaces")
@@ -50,6 +51,9 @@ export async function PATCH(request: Request, context: RouteContext) {
     price: body.price,
     currency: body.currency,
     surface_m2: body.surface_m2,
+    ...(body.covered_surface_m2 !== undefined
+      ? { covered_surface_m2: body.covered_surface_m2 }
+      : {}),
     ...(body.rooms !== undefined ? { rooms: body.rooms } : {}),
     bedrooms: body.bedrooms,
     ...(body.bathrooms !== undefined ? { bathrooms: body.bathrooms } : {}),
@@ -75,6 +79,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   if (error && shouldRetryWithoutExtendedFields(error)) {
     const {
       rooms: _rooms,
+      covered_surface_m2: _coveredSurfaceM2,
       bathrooms: _bathrooms,
       garage_spaces: _garageSpaces,
       ...legacyPayload

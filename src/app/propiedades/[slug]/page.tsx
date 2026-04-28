@@ -178,6 +178,12 @@ export default async function PropertyDetailPage({ params }: Props) {
                   <p className="mt-1 text-base text-white">{property.surface}</p>
                 </div>
                 <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3">
+                  <p className="text-white/58">Cubiertos</p>
+                  <p className="mt-1 text-base text-white">
+                    {property.coveredSurfaceM2} m2
+                  </p>
+                </div>
+                <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3">
                   <p className="text-white/58">Ambientes</p>
                   <p className="mt-1 text-base text-white">{property.rooms}</p>
                 </div>
@@ -254,6 +260,12 @@ export default async function PropertyDetailPage({ params }: Props) {
               <div className="rounded-[1.35rem] bg-[var(--color-cream)] px-4 py-4">
                 <p className="text-sm text-[var(--color-muted)]">Zona</p>
                 <p className="mt-1 text-lg text-[var(--color-deep)]">{property.location}</p>
+              </div>
+              <div className="rounded-[1.35rem] bg-[var(--color-cream)] px-4 py-4">
+                <p className="text-sm text-[var(--color-muted)]">m2 cubiertos</p>
+                <p className="mt-1 text-lg text-[var(--color-deep)]">
+                  {property.coveredSurfaceM2}
+                </p>
               </div>
               <div className="rounded-[1.35rem] bg-[var(--color-cream)] px-4 py-4">
                 <p className="text-sm text-[var(--color-muted)]">Ambientes</p>

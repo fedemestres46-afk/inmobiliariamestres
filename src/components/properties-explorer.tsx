@@ -373,7 +373,8 @@ export function PropertiesExplorer({ properties }: Props) {
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-5 text-sm text-[var(--color-muted)]">
-                  <span>{property.surface}</span>
+                  <span>{property.surface} totales</span>
+                  <span>{property.coveredSurfaceM2} m2 cubiertos</span>
                   <span>{property.rooms} ambientes</span>
                   <span>{property.bedrooms} dormitorios</span>
                   <span>{property.bathrooms} baños</span>
