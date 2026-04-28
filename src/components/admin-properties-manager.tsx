@@ -4,12 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useRef, useState, useTransition } from "react";
 import type {
+  PropertyAmenity,
   Property,
   PropertyOperation,
+  PropertyService,
   PropertyStatus,
   PropertyType,
 } from "@/data/properties";
-import { extractCoordinatesFromMapsUrl } from "@/data/properties";
+import {
+  extractCoordinatesFromMapsUrl,
+  propertyAmenityOptions,
+  propertyServiceOptions,
+} from "@/data/properties";
 
 type SaveState = {
   type: "idle" | "success" | "error";
@@ -85,6 +91,12 @@ function isValidLongitude(value?: number) {
   );
 }
 
+function parseSelectedValues<T extends string>(values: FormDataEntryValue[], validValues: readonly T[]) {
+  return values
+    .map((value) => String(value))
+    .filter((value): value is T => validValues.includes(value as T));
+}
+
 export function AdminPropertiesManager({
   initialProperties,
   canPersist,
@@ -141,6 +153,14 @@ export function AdminPropertiesManager({
     const safeLongitude = isValidLongitude(longitudeRaw)
       ? longitudeRaw
       : extractedCoordinates.longitude;
+    const serviceTags = parseSelectedValues<PropertyService>(
+      formData.getAll("service_tags"),
+      propertyServiceOptions,
+    );
+    const amenityTags = parseSelectedValues<PropertyAmenity>(
+      formData.getAll("amenity_tags"),
+      propertyAmenityOptions,
+    );
 
     const payload = {
       title: String(formData.get("title") ?? ""),
@@ -163,6 +183,8 @@ export function AdminPropertiesManager({
       featured: formData.get("featured") === "on",
       cover_url: String(formData.get("cover_url") ?? ""),
       description: String(formData.get("description") ?? ""),
+      service_tags: serviceTags,
+      amenity_tags: amenityTags,
       latitude: safeLatitude,
       longitude: safeLongitude,
       maps_url: mapsUrlRaw === "" ? undefined : mapsUrlRaw,
@@ -850,6 +872,8 @@ export function AdminPropertiesManager({
                           bedrooms: selectedProperty.bedrooms,
                           bathrooms: selectedProperty.bathrooms,
                           garage_spaces: selectedProperty.garageSpaces,
+                          service_tags: selectedProperty.services,
+                          amenity_tags: selectedProperty.amenities,
                           status: toApiStatus(selectedProperty.status),
                           featured: selectedProperty.featured ?? false,
                           cover_url: imageUrl,
@@ -960,6 +984,52 @@ export function AdminPropertiesManager({
               className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
             />
           </label>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-2">
+            <div className="rounded-[1.5rem] border border-[#e7ddd2] bg-[#fcf8f3] p-5">
+              <p className="text-sm uppercase tracking-[0.2em] text-[#9f6b44]">
+                Servicios
+              </p>
+              <div className="mt-4 grid gap-3">
+                {propertyServiceOptions.map((option) => (
+                  <label
+                    key={option}
+                    className="flex items-center gap-3 rounded-2xl border border-[#eadfce] bg-white px-4 py-3 text-sm text-[#42505a]"
+                  >
+                    <input
+                      name="service_tags"
+                      type="checkbox"
+                      value={option}
+                      defaultChecked={selectedProperty.services.includes(option)}
+                    />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            <div className="rounded-[1.5rem] border border-[#e7ddd2] bg-[#fcf8f3] p-5">
+              <p className="text-sm uppercase tracking-[0.2em] text-[#9f6b44]">
+                Adicionales
+              </p>
+              <div className="mt-4 grid gap-3">
+                {propertyAmenityOptions.map((option) => (
+                  <label
+                    key={option}
+                    className="flex items-center gap-3 rounded-2xl border border-[#eadfce] bg-white px-4 py-3 text-sm text-[#42505a]"
+                  >
+                    <input
+                      name="amenity_tags"
+                      type="checkbox"
+                      value={option}
+                      defaultChecked={selectedProperty.amenities.includes(option)}
+                    />
+                    <span>{option}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
 
           <div className="mt-6 flex items-center justify-between gap-4">
             <p

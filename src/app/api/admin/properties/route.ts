@@ -12,7 +12,9 @@ function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: str
     error?.message?.includes("covered_surface_m2") ||
     error?.message?.includes("rooms") ||
     error?.message?.includes("bathrooms") ||
-    error?.message?.includes("garage_spaces")
+    error?.message?.includes("garage_spaces") ||
+    error?.message?.includes("service_tags") ||
+    error?.message?.includes("amenity_tags")
   );
 }
 
@@ -59,6 +61,8 @@ export async function POST() {
     bedrooms: 0,
     bathrooms: 0,
     garage_spaces: 0,
+    service_tags: [],
+    amenity_tags: [],
     status: "draft",
     featured: false,
     cover_url:
@@ -78,6 +82,8 @@ export async function POST() {
       covered_surface_m2: _coveredSurfaceM2,
       bathrooms: _bathrooms,
       garage_spaces: _garageSpaces,
+      service_tags: _serviceTags,
+      amenity_tags: _amenityTags,
       ...legacyPayload
     } = basePayload;
 

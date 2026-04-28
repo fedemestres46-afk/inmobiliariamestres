@@ -2,6 +2,28 @@ export type PropertyType = "Casa" | "Departamento" | "Lote" | "Oficina";
 export type PropertyOperation = "Venta" | "Alquiler";
 export type PropertyStatus = "Publicada" | "Borrador" | "Pausada";
 
+export const propertyServiceOptions = [
+  "Agua corriente",
+  "Gas natural",
+  "Cloaca",
+  "Electricidad",
+] as const;
+
+export const propertyAmenityOptions = [
+  "Aire acondicionado individual",
+  "Calefaccion",
+  "Patio",
+  "Balcon",
+  "Terraza",
+  "Parrillero",
+  "Pileta",
+  "Lavadero",
+  "Seguridad",
+] as const;
+
+export type PropertyService = (typeof propertyServiceOptions)[number];
+export type PropertyAmenity = (typeof propertyAmenityOptions)[number];
+
 export type Property = {
   id: string;
   slug: string;
@@ -28,6 +50,8 @@ export type Property = {
   longitude?: number;
   mapsUrl?: string;
   description?: string;
+  services: PropertyService[];
+  amenities: PropertyAmenity[];
 };
 
 export type PropertyRow = {
@@ -52,6 +76,8 @@ export type PropertyRow = {
   latitude?: number | null;
   longitude?: number | null;
   maps_url?: string | null;
+  service_tags?: string[] | null;
+  amenity_tags?: string[] | null;
 };
 
 function isValidLatitude(value: number) {
@@ -120,6 +146,12 @@ export function mapPropertyRow(row: PropertyRow, gallery: string[] = []): Proper
   const safeLongitude = isValidLongitude(row.longitude ?? NaN)
     ? (row.longitude ?? undefined)
     : fallbackCoordinates.longitude;
+  const services = (row.service_tags ?? []).filter((item): item is PropertyService =>
+    propertyServiceOptions.includes(item as PropertyService),
+  );
+  const amenities = (row.amenity_tags ?? []).filter((item): item is PropertyAmenity =>
+    propertyAmenityOptions.includes(item as PropertyAmenity),
+  );
 
   return {
     id: row.id,
@@ -147,6 +179,8 @@ export function mapPropertyRow(row: PropertyRow, gallery: string[] = []): Proper
     longitude: safeLongitude,
     mapsUrl: row.maps_url ?? undefined,
     description: row.description ?? undefined,
+    services,
+    amenities,
   };
 }
 
@@ -175,6 +209,8 @@ const mockRows: PropertyRow[] = [
     latitude: -33.0442,
     longitude: -61.1681,
     maps_url: "https://maps.google.com/?q=-33.0442,-61.1681",
+    service_tags: ["Agua corriente", "Gas natural", "Cloaca", "Electricidad"],
+    amenity_tags: ["Aire acondicionado individual", "Patio", "Pileta", "Parrillero"],
   },
   {
     id: "22222222-2222-2222-2222-222222222222",
@@ -200,6 +236,8 @@ const mockRows: PropertyRow[] = [
     latitude: -33.0465,
     longitude: -61.1672,
     maps_url: "https://maps.google.com/?q=-33.0465,-61.1672",
+    service_tags: ["Agua corriente", "Gas natural", "Cloaca", "Electricidad"],
+    amenity_tags: ["Aire acondicionado individual", "Balcon", "Calefaccion", "Seguridad"],
   },
   {
     id: "33333333-3333-3333-3333-333333333333",
@@ -225,6 +263,8 @@ const mockRows: PropertyRow[] = [
     latitude: -33.0408,
     longitude: -61.1656,
     maps_url: "https://maps.google.com/?q=-33.0408,-61.1656",
+    service_tags: ["Agua corriente", "Electricidad"],
+    amenity_tags: ["Aire acondicionado individual", "Calefaccion"],
   },
   {
     id: "44444444-4444-4444-4444-444444444444",
@@ -250,6 +290,8 @@ const mockRows: PropertyRow[] = [
     latitude: -33.0514,
     longitude: -61.1731,
     maps_url: "https://maps.google.com/?q=-33.0514,-61.1731",
+    service_tags: ["Agua corriente", "Electricidad"],
+    amenity_tags: [],
   },
 ];
 

@@ -118,6 +118,17 @@ export default async function PropertyDetailPage({ params }: Props) {
         "@type": "PostalAddress",
         addressLocality: property.location,
       },
+      ...(property.services.length > 0 || property.amenities.length > 0
+        ? {
+            amenityFeature: [...property.services, ...property.amenities].map(
+              (label) => ({
+                "@type": "LocationFeatureSpecification",
+                name: label,
+                value: true,
+              }),
+            ),
+          }
+        : {}),
     },
   };
 
@@ -290,6 +301,46 @@ export default async function PropertyDetailPage({ params }: Props) {
             </div>
           </article>
         </div>
+
+        {property.services.length > 0 || property.amenities.length > 0 ? (
+          <div className="grid gap-4 md:grid-cols-2">
+            {property.services.length > 0 ? (
+              <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-6 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
+                <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
+                  Servicios
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {property.services.map((service) => (
+                    <span
+                      key={service}
+                      className="rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-2 text-sm text-[var(--color-deep)]"
+                    >
+                      {service}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ) : null}
+
+            {property.amenities.length > 0 ? (
+              <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-6 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
+                <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
+                  Adicionales
+                </p>
+                <div className="mt-5 flex flex-wrap gap-3">
+                  {property.amenities.map((amenity) => (
+                    <span
+                      key={amenity}
+                      className="rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-2 text-sm text-[var(--color-deep)]"
+                    >
+                      {amenity}
+                    </span>
+                  ))}
+                </div>
+              </article>
+            ) : null}
+          </div>
+        ) : null}
 
         {property.gallery.length > 1 ? (
           <section className="space-y-4">
