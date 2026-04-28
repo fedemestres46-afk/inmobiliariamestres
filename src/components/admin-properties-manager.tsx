@@ -106,8 +106,12 @@ export function AdminPropertiesManager({
   const [isUploading, setIsUploading] = useState(false);
   const [deletingImageUrl, setDeletingImageUrl] = useState<string | null>(null);
   const [deletingPropertyId, setDeletingPropertyId] = useState<string | null>(null);
-  const [selectedServices, setSelectedServices] = useState<PropertyService[]>([]);
-  const [selectedAmenities, setSelectedAmenities] = useState<PropertyAmenity[]>([]);
+  const [selectedServices, setSelectedServices] = useState<PropertyService[]>(
+    initialProperties[0]?.services ?? [],
+  );
+  const [selectedAmenities, setSelectedAmenities] = useState<PropertyAmenity[]>(
+    initialProperties[0]?.amenities ?? [],
+  );
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const totals = useMemo(
@@ -581,7 +585,11 @@ export function AdminPropertiesManager({
         </div>
 
         <form
-          key={selectedProperty?.id ?? "empty"}
+          key={
+            selectedProperty
+              ? `${selectedProperty.id}-${selectedProperty.services.join("|")}-${selectedProperty.amenities.join("|")}`
+              : "empty"
+          }
           action={handleSubmit}
           className="rounded-[2rem] border border-white/80 bg-white p-6 shadow-[0_24px_60px_rgba(35,43,50,0.07)]"
         >
