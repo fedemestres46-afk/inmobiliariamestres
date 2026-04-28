@@ -32,8 +32,6 @@ function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: str
 
 function isMissingFeatureTags(error?: { code?: string; message?: string } | null) {
   return (
-    error?.code === "PGRST204" ||
-    error?.code === "42703" ||
     error?.message?.includes("service_tags") ||
     error?.message?.includes("amenity_tags")
   );
