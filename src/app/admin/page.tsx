@@ -23,10 +23,6 @@ export default async function AdminPage() {
             <h1 className="mt-3 font-serif-display text-5xl">
               Gestion de propiedades
             </h1>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-[#5c666d]">
-              Esta pantalla queda lista para Supabase Free. Si no hay variables
-              cargadas, usa mock data sin romper la app.
-            </p>
           </div>
           <AdminLogoutButton />
         </header>
