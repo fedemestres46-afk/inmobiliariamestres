@@ -5,6 +5,16 @@ import { getAdminSession } from "@/lib/auth";
 import { mapRowsWithGallery } from "@/lib/properties";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
+function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: string } | null) {
+  return (
+    error?.code === "PGRST204" ||
+    error?.code === "42703" ||
+    error?.message?.includes("rooms") ||
+    error?.message?.includes("bathrooms") ||
+    error?.message?.includes("garage_spaces")
+  );
+}
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -34,29 +44,46 @@ export async function POST() {
   const supabase = getSupabaseAdminClient();
   const baseTitle = "Nueva propiedad";
   const slug = `${slugify(baseTitle)}-${Date.now().toString().slice(-6)}`;
+  const basePayload = {
+    slug,
+    title: baseTitle,
+    location: "Rosario, Santa Fe",
+    property_type: "Departamento",
+    operation_type: "Venta",
+    price: 0,
+    currency: "USD",
+    surface_m2: 0,
+    rooms: 0,
+    bedrooms: 0,
+    bathrooms: 0,
+    garage_spaces: 0,
+    status: "draft",
+    featured: false,
+    cover_url:
+      "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
+    description: "Completa los datos de esta propiedad desde el panel admin.",
+  };
 
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from("properties")
-    .insert({
-      slug,
-      title: baseTitle,
-      location: "Rosario, Santa Fe",
-      property_type: "Departamento",
-      operation_type: "Venta",
-      price: 0,
-      currency: "USD",
-      surface_m2: 0,
-      bedrooms: 0,
-      status: "draft",
-      featured: false,
-      cover_url:
-        "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
-      description: "Completa los datos de esta propiedad desde el panel admin.",
-    })
-    .select(
-      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description, latitude, longitude, maps_url",
-    )
+    .insert(basePayload)
+    .select("*")
     .single();
+
+  if (error && shouldRetryWithoutExtendedFields(error)) {
+    const {
+      rooms: _rooms,
+      bathrooms: _bathrooms,
+      garage_spaces: _garageSpaces,
+      ...legacyPayload
+    } = basePayload;
+
+    ({ data, error } = await supabase
+      .from("properties")
+      .insert(legacyPayload)
+      .select("*")
+      .single());
+  }
 
   if (error || !data) {
     return NextResponse.json(

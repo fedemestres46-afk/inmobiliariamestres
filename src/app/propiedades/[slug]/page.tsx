@@ -113,6 +113,7 @@ export default async function PropertyDetailPage({ params }: Props) {
         unitCode: "MTK",
       },
       numberOfRooms: property.bedrooms,
+      numberOfBathroomsTotal: property.bathrooms,
       address: {
         "@type": "PostalAddress",
         addressLocality: property.location,
@@ -177,8 +178,24 @@ export default async function PropertyDetailPage({ params }: Props) {
                   <p className="mt-1 text-base text-white">{property.surface}</p>
                 </div>
                 <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3">
+                  <p className="text-white/58">Ambientes</p>
+                  <p className="mt-1 text-base text-white">{property.rooms}</p>
+                </div>
+                <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3">
                   <p className="text-white/58">Dormitorios</p>
                   <p className="mt-1 text-base text-white">{property.bedrooms}</p>
+                </div>
+                <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3">
+                  <p className="text-white/58">Baños</p>
+                  <p className="mt-1 text-base text-white">{property.bathrooms}</p>
+                </div>
+                <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3 sm:col-span-2">
+                  <p className="text-white/58">Cochera</p>
+                  <p className="mt-1 text-base text-white">
+                    {property.garageSpaces > 0
+                      ? `${property.garageSpaces} espacio${property.garageSpaces === 1 ? "" : "s"}`
+                      : "Sin cochera"}
+                  </p>
                 </div>
               </div>
 
@@ -237,6 +254,20 @@ export default async function PropertyDetailPage({ params }: Props) {
               <div className="rounded-[1.35rem] bg-[var(--color-cream)] px-4 py-4">
                 <p className="text-sm text-[var(--color-muted)]">Zona</p>
                 <p className="mt-1 text-lg text-[var(--color-deep)]">{property.location}</p>
+              </div>
+              <div className="rounded-[1.35rem] bg-[var(--color-cream)] px-4 py-4">
+                <p className="text-sm text-[var(--color-muted)]">Ambientes</p>
+                <p className="mt-1 text-lg text-[var(--color-deep)]">{property.rooms}</p>
+              </div>
+              <div className="rounded-[1.35rem] bg-[var(--color-cream)] px-4 py-4">
+                <p className="text-sm text-[var(--color-muted)]">Baños</p>
+                <p className="mt-1 text-lg text-[var(--color-deep)]">{property.bathrooms}</p>
+              </div>
+              <div className="rounded-[1.35rem] bg-[var(--color-cream)] px-4 py-4">
+                <p className="text-sm text-[var(--color-muted)]">Cocheras</p>
+                <p className="mt-1 text-lg text-[var(--color-deep)]">
+                  {property.garageSpaces}
+                </p>
               </div>
             </div>
           </article>

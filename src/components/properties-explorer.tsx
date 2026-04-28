@@ -374,7 +374,9 @@ export function PropertiesExplorer({ properties }: Props) {
                 </div>
                 <div className="flex flex-wrap gap-5 text-sm text-[var(--color-muted)]">
                   <span>{property.surface}</span>
+                  <span>{property.rooms} ambientes</span>
                   <span>{property.bedrooms} dormitorios</span>
+                  <span>{property.bathrooms} baños</span>
                   <span>{property.price}</span>
                 </div>
                 <div className="flex flex-wrap gap-3">

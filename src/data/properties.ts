@@ -15,7 +15,10 @@ export type Property = {
   currency: "USD" | "ARS";
   surface: string;
   surfaceM2: number;
+  rooms: number;
   bedrooms: number;
+  bathrooms: number;
+  garageSpaces: number;
   featured?: boolean;
   status: PropertyStatus;
   cover: string;
@@ -36,7 +39,10 @@ export type PropertyRow = {
   price: number;
   currency: "USD" | "ARS";
   surface_m2: number;
+  rooms?: number | null;
   bedrooms: number;
+  bathrooms?: number | null;
+  garage_spaces?: number | null;
   status: "published" | "draft" | "paused";
   featured: boolean;
   cover_url: string | null;
@@ -126,7 +132,10 @@ export function mapPropertyRow(row: PropertyRow, gallery: string[] = []): Proper
     currency: row.currency,
     surface: `${row.surface_m2} m2`,
     surfaceM2: row.surface_m2,
+    rooms: row.rooms ?? row.bedrooms,
     bedrooms: row.bedrooms,
+    bathrooms: row.bathrooms ?? 0,
+    garageSpaces: row.garage_spaces ?? 0,
     featured: row.featured,
     status: mapStatus(row.status),
     cover,
@@ -149,7 +158,10 @@ const mockRows: PropertyRow[] = [
     price: 248000,
     currency: "USD",
     surface_m2: 214,
+    rooms: 6,
     bedrooms: 3,
+    bathrooms: 2,
+    garage_spaces: 1,
     featured: true,
     status: "published",
     cover_url:
@@ -170,7 +182,10 @@ const mockRows: PropertyRow[] = [
     price: 189000,
     currency: "USD",
     surface_m2: 128,
+    rooms: 4,
     bedrooms: 2,
+    bathrooms: 2,
+    garage_spaces: 1,
     featured: true,
     status: "published",
     cover_url:
@@ -191,7 +206,10 @@ const mockRows: PropertyRow[] = [
     price: 1150000,
     currency: "ARS",
     surface_m2: 96,
+    rooms: 3,
     bedrooms: 0,
+    bathrooms: 1,
+    garage_spaces: 0,
     featured: false,
     status: "draft",
     cover_url:
@@ -212,7 +230,10 @@ const mockRows: PropertyRow[] = [
     price: 64000,
     currency: "USD",
     surface_m2: 540,
+    rooms: 0,
     bedrooms: 0,
+    bathrooms: 0,
+    garage_spaces: 0,
     featured: false,
     status: "paused",
     cover_url:

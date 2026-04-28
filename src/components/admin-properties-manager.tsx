@@ -152,7 +152,10 @@ export function AdminPropertiesManager({
       price: Number(formData.get("price") ?? 0),
       currency: String(formData.get("currency") ?? "USD") as "USD" | "ARS",
       surface_m2: Number(formData.get("surface_m2") ?? 0),
+      rooms: Number(formData.get("rooms") ?? 0),
       bedrooms: Number(formData.get("bedrooms") ?? 0),
+      bathrooms: Number(formData.get("bathrooms") ?? 0),
+      garage_spaces: Number(formData.get("garage_spaces") ?? 0),
       status: toApiStatus(
         String(formData.get("status") ?? "Borrador") as PropertyStatus,
       ),
@@ -698,6 +701,33 @@ export function AdminPropertiesManager({
               />
             </label>
             <label className="space-y-2">
+              <span className="text-sm text-[#6a7379]">Ambientes</span>
+              <input
+                name="rooms"
+                type="number"
+                defaultValue={selectedProperty.rooms}
+                className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
+              />
+            </label>
+            <label className="space-y-2">
+              <span className="text-sm text-[#6a7379]">Baños</span>
+              <input
+                name="bathrooms"
+                type="number"
+                defaultValue={selectedProperty.bathrooms}
+                className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
+              />
+            </label>
+            <label className="space-y-2">
+              <span className="text-sm text-[#6a7379]">Cocheras</span>
+              <input
+                name="garage_spaces"
+                type="number"
+                defaultValue={selectedProperty.garageSpaces}
+                className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
+              />
+            </label>
+            <label className="space-y-2">
               <span className="text-sm text-[#6a7379]">Latitud</span>
               <input
                 name="latitude"
@@ -795,7 +825,10 @@ export function AdminPropertiesManager({
                           price: selectedProperty.numericPrice,
                           currency: selectedProperty.currency,
                           surface_m2: selectedProperty.surfaceM2,
+                          rooms: selectedProperty.rooms,
                           bedrooms: selectedProperty.bedrooms,
+                          bathrooms: selectedProperty.bathrooms,
+                          garage_spaces: selectedProperty.garageSpaces,
                           status: toApiStatus(selectedProperty.status),
                           featured: selectedProperty.featured ?? false,
                           cover_url: imageUrl,

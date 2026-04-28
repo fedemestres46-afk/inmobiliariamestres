@@ -22,6 +22,57 @@ const statusOptions: LeadStatus[] = [
   "Descartado",
 ];
 
+const boardColumns: Array<{
+  title: string;
+  statuses: LeadStatus[];
+  accent: string;
+  border: string;
+  bg: string;
+}> = [
+  {
+    title: "Nuevos",
+    statuses: ["Nuevo"],
+    accent: "text-[#9f6b44]",
+    border: "border-[#edd8b8]",
+    bg: "bg-[#fff8ef]",
+  },
+  {
+    title: "Contactados",
+    statuses: ["Contactado"],
+    accent: "text-[#2f617b]",
+    border: "border-[#c8deea]",
+    bg: "bg-[#f1f8fc]",
+  },
+  {
+    title: "Visitas",
+    statuses: ["Visita"],
+    accent: "text-[#486e8d]",
+    border: "border-[#d7e4ee]",
+    bg: "bg-[#f5fafd]",
+  },
+  {
+    title: "Negociacion",
+    statuses: ["Negociacion"],
+    accent: "text-[#766a31]",
+    border: "border-[#e6dbb4]",
+    bg: "bg-[#fffcec]",
+  },
+  {
+    title: "Cerrados",
+    statuses: ["Cerrado"],
+    accent: "text-[#39704a]",
+    border: "border-[#cfe6d6]",
+    bg: "bg-[#f3fbf5]",
+  },
+  {
+    title: "Descartados",
+    statuses: ["Descartado"],
+    accent: "text-[#b04c47]",
+    border: "border-[#ebcbc8]",
+    bg: "bg-[#fff4f3]",
+  },
+];
+
 export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
   const [leads, setLeads] = useState(initialLeads);
   const [selectedLeadId, setSelectedLeadId] = useState(initialLeads[0]?.id ?? "");
@@ -73,6 +124,15 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
       cerrados: leads.filter((lead) => lead.status === "Cerrado").length,
     }),
     [leads],
+  );
+
+  const boardLeads = useMemo(
+    () =>
+      boardColumns.map((column) => ({
+        ...column,
+        leads: filteredLeads.filter((lead) => column.statuses.includes(lead.status)),
+      })),
+    [filteredLeads],
   );
 
   useEffect(() => {
@@ -214,6 +274,72 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
           Supabase para guardar consultas reales desde la web.
         </section>
       ) : null}
+
+      <section className="mt-8 space-y-4">
+        <div>
+          <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
+            Pipeline
+          </p>
+          <h2 className="mt-3 font-serif-display text-4xl text-[#22313b]">
+            Vista rapida del seguimiento
+          </h2>
+        </div>
+
+        <div className="grid gap-4 xl:grid-cols-6">
+          {boardLeads.map((column) => (
+            <article
+              key={column.title}
+              className={`rounded-[1.5rem] border p-4 shadow-[0_18px_40px_rgba(35,43,50,0.05)] ${column.border} ${column.bg}`}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <p className={`text-sm uppercase tracking-[0.22em] ${column.accent}`}>
+                  {column.title}
+                </p>
+                <span className="rounded-full bg-white/80 px-2.5 py-1 text-xs text-[#5c666d]">
+                  {column.leads.length}
+                </span>
+              </div>
+
+              <div className="mt-4 space-y-3">
+                {column.leads.slice(0, 4).map((lead) => (
+                  <button
+                    key={lead.id}
+                    type="button"
+                    onClick={() => {
+                      setSelectedLeadId(lead.id);
+                      setSaveState({ type: "idle", message: "" });
+                    }}
+                    className={`w-full rounded-[1.2rem] border bg-white px-3 py-3 text-left transition ${
+                      lead.id === selectedLead?.id
+                        ? "border-[#9f6b44] shadow-[0_12px_24px_rgba(159,107,68,0.12)]"
+                        : "border-white/80 hover:border-[#d8cabd]"
+                    }`}
+                  >
+                    <p className="text-sm font-semibold text-[#22313b]">
+                      {lead.fullName}
+                    </p>
+                    <p className="mt-1 text-xs text-[#6a7379]">
+                      {lead.propertyTitle}
+                    </p>
+                  </button>
+                ))}
+
+                {column.leads.length === 0 ? (
+                  <div className="rounded-[1.2rem] border border-dashed border-white/80 px-3 py-4 text-xs text-[#7a838a]">
+                    Sin leads en esta etapa.
+                  </div>
+                ) : null}
+
+                {column.leads.length > 4 ? (
+                  <p className="text-xs text-[#7a838a]">
+                    +{column.leads.length - 4} mas
+                  </p>
+                ) : null}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-10 grid gap-8 xl:grid-cols-[1.08fr_0.92fr]">
         <div className="overflow-hidden rounded-[2rem] border border-white/80 bg-white shadow-[0_24px_60px_rgba(35,43,50,0.07)]">
