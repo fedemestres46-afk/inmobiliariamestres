@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
+import type { Lead } from "@/data/leads";
 import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
 import { PropertiesLiveMap } from "@/components/properties-live-map";
 
@@ -40,6 +41,11 @@ const sortOptions: Array<{ value: SortOption; label: string }> = [
   { value: "bedrooms-asc", label: "Ambientes: menor a mayor" },
 ];
 
+type InquiryState = {
+  type: "idle" | "success" | "error";
+  message: string;
+};
+
 export function PropertiesExplorer({ properties }: Props) {
   const [typeFilter, setTypeFilter] = useState<PropertyType | "Todos">("Todos");
   const [operationFilter, setOperationFilter] = useState<
@@ -48,6 +54,12 @@ export function PropertiesExplorer({ properties }: Props) {
   const [locationFilter, setLocationFilter] = useState("");
   const [sortOption, setSortOption] = useState<SortOption>("default");
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
+  const [leadPropertyId, setLeadPropertyId] = useState<string | null>(null);
+  const [inquiryState, setInquiryState] = useState<InquiryState>({
+    type: "idle",
+    message: "",
+  });
+  const [isSubmittingLead, startLeadTransition] = useTransition();
 
   const filteredProperties = useMemo(() => {
     const nextProperties = properties.filter((property) => {
@@ -127,6 +139,100 @@ export function PropertiesExplorer({ properties }: Props) {
   const activeMapProperty =
     propertiesWithCoords.find((property) => property.id === activeMapPropertyId) ??
     propertiesWithCoords[0];
+
+  async function handleLeadSubmit(property: Property, formData: FormData) {
+    const payload = {
+      propertyId: property.id,
+      fullName: String(formData.get("full_name") ?? "").trim(),
+      phone: String(formData.get("phone") ?? "").trim(),
+      email: String(formData.get("email") ?? "").trim(),
+      message: String(formData.get("message") ?? "").trim(),
+    };
+
+    startLeadTransition(async () => {
+      const response = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const result = (await response.json()) as
+        | { lead?: Lead; error?: string }
+        | undefined;
+
+      if (!response.ok || !result?.lead) {
+        setInquiryState({
+          type: "error",
+          message:
+            result?.error ??
+            "No se pudo enviar la consulta en este momento.",
+        });
+        return;
+      }
+
+      setInquiryState({
+        type: "success",
+        message: `Consulta enviada por ${property.title}. Ya quedo guardada en el CRM.`,
+      });
+      setLeadPropertyId(null);
+    });
+  }
+
+  function InquiryForm({ property }: { property: Property }) {
+    return (
+      <form
+        action={(formData) => handleLeadSubmit(property, formData)}
+        className="mt-5 space-y-3 rounded-[1.5rem] border border-[var(--color-line)] bg-[var(--color-cream)] p-4"
+      >
+        <div className="grid gap-3 md:grid-cols-2">
+          <input
+            name="full_name"
+            required
+            placeholder="Nombre y apellido"
+            className="w-full rounded-full border border-[var(--color-line)] bg-white px-4 py-3 outline-none"
+          />
+          <input
+            name="phone"
+            required
+            placeholder="Telefono"
+            className="w-full rounded-full border border-[var(--color-line)] bg-white px-4 py-3 outline-none"
+          />
+        </div>
+        <input
+          name="email"
+          placeholder="Email (opcional)"
+          className="w-full rounded-full border border-[var(--color-line)] bg-white px-4 py-3 outline-none"
+        />
+        <textarea
+          name="message"
+          rows={4}
+          placeholder={`Quiero mas informacion sobre ${property.title}`}
+          className="w-full rounded-[1.25rem] border border-[var(--color-line)] bg-white px-4 py-3 outline-none"
+        />
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p
+            className={`text-sm ${
+              inquiryState.type === "error"
+                ? "text-[#a04d39]"
+                : inquiryState.type === "success"
+                  ? "text-[#39704a]"
+                  : "text-[var(--color-muted)]"
+            }`}
+          >
+            {inquiryState.message ||
+              "Esta consulta quedara asociada a la propiedad en el CRM."}
+          </p>
+          <button
+            type="submit"
+            disabled={isSubmittingLead}
+            className="rounded-full bg-[var(--color-deep)] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-92 disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {isSubmittingLead ? "Enviando..." : "Enviar consulta"}
+          </button>
+        </div>
+      </form>
+    );
+  }
 
   return (
     <div className="mt-10 space-y-8">
@@ -271,15 +377,43 @@ export function PropertiesExplorer({ properties }: Props) {
                   <span>{property.price}</span>
                 </div>
                 {property.mapsUrl ? (
-                  <a
-                    href={property.mapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href={property.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                    >
+                      Ver en Maps
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLeadPropertyId((current) =>
+                          current === property.id ? null : property.id,
+                        );
+                        setInquiryState({ type: "idle", message: "" });
+                      }}
+                      className="inline-flex rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
+                    >
+                      Consultar
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLeadPropertyId((current) =>
+                        current === property.id ? null : property.id,
+                      );
+                      setInquiryState({ type: "idle", message: "" });
+                    }}
+                    className="inline-flex rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
                   >
-                    Ver en Maps
-                  </a>
-                ) : null}
+                    Consultar
+                  </button>
+                )}
+                {leadPropertyId === property.id ? <InquiryForm property={property} /> : null}
               </div>
             </article>
           ))}
@@ -350,16 +484,46 @@ export function PropertiesExplorer({ properties }: Props) {
                         {activeMapProperty.price}
                       </p>
                       {activeMapProperty.mapsUrl ? (
-                        <a
-                          href={activeMapProperty.mapsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                        <div className="flex flex-wrap gap-3">
+                          <a
+                            href={activeMapProperty.mapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                          >
+                            Abrir en Maps
+                          </a>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setLeadPropertyId((current) =>
+                                current === activeMapProperty.id ? null : activeMapProperty.id,
+                              );
+                              setInquiryState({ type: "idle", message: "" });
+                            }}
+                            className="rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
+                          >
+                            Consultar
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setLeadPropertyId((current) =>
+                              current === activeMapProperty.id ? null : activeMapProperty.id,
+                            );
+                            setInquiryState({ type: "idle", message: "" });
+                          }}
+                          className="rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
                         >
-                          Abrir en Maps
-                        </a>
-                      ) : null}
+                          Consultar
+                        </button>
+                      )}
                     </div>
+                    {leadPropertyId === activeMapProperty.id ? (
+                      <InquiryForm property={activeMapProperty} />
+                    ) : null}
                   </div>
                 </article>
               </div>

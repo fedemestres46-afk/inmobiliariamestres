@@ -1,4 +1,5 @@
-import { AdminPropertiesManager } from "@/components/admin-properties-manager";
+import { AdminCrmDashboard } from "@/components/admin-crm-dashboard";
+import { getLeads } from "@/lib/leads";
 import { getProperties } from "@/lib/properties";
 import { isSupabaseAdminConfigured } from "@/lib/supabase";
 
@@ -6,6 +7,7 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   const properties = await getProperties();
+  const { leads, ready } = await getLeads();
 
   return (
     <main className="flex-1 bg-[#f5efe8] px-6 py-10 text-[#1e2930] md:px-10 lg:px-14">
@@ -25,9 +27,11 @@ export default async function AdminPage() {
           </div>
         </header>
 
-        <AdminPropertiesManager
+        <AdminCrmDashboard
           initialProperties={properties}
+          initialLeads={leads}
           canPersist={isSupabaseAdminConfigured()}
+          crmReady={ready}
         />
 
         <section className="mt-8 rounded-[1.5rem] border border-dashed border-[#d7c7b6] bg-[#fbf7f2] px-6 py-5 text-sm leading-7 text-[#6a7379]">
