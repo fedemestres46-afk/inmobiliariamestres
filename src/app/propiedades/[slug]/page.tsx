@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PropertyDetailContact } from "@/components/property-detail-contact";
 import { getPropertyBySlug, getRelatedProperties } from "@/lib/properties";
 
 export const dynamic = "force-dynamic";
@@ -90,9 +91,41 @@ export default async function PropertyDetailPage({ params }: Props) {
     price: property.price,
     description: property.description,
   });
+  const propertySchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateListing",
+    name: property.title,
+    description,
+    image: property.gallery,
+    url: `/propiedades/${property.slug}`,
+    offers: {
+      "@type": "Offer",
+      priceCurrency: property.currency,
+      price: property.numericPrice,
+      availability: "https://schema.org/InStock",
+    },
+    itemOffered: {
+      "@type": "Residence",
+      name: property.title,
+      floorSize: {
+        "@type": "QuantitativeValue",
+        value: property.surfaceM2,
+        unitCode: "MTK",
+      },
+      numberOfRooms: property.bedrooms,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: property.location,
+      },
+    },
+  };
 
   return (
     <main className="flex-1 bg-[var(--color-cream)] text-[var(--color-ink)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(propertySchema) }}
+      />
       <section className="px-6 py-6 md:px-10 lg:px-14">
         <div className="mx-auto max-w-7xl rounded-[2rem] border border-white/35 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_35%),linear-gradient(135deg,_rgba(24,47,60,0.96),_rgba(43,69,83,0.92)_48%,_rgba(198,122,66,0.88))] px-6 py-8 text-white shadow-[0_30px_80px_rgba(24,47,60,0.18)] md:px-10 md:py-10">
           <div className="flex flex-wrap items-center gap-3 text-sm text-white/78">
@@ -279,6 +312,12 @@ export default async function PropertyDetailPage({ params }: Props) {
             </div>
           </article>
         </div>
+
+        <PropertyDetailContact
+          propertyId={property.id}
+          propertyTitle={property.title}
+          whatsappHref={whatsappHref}
+        />
 
         {relatedProperties.length > 0 ? (
           <section className="space-y-4 py-4">
