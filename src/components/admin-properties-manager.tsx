@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useRef, useState, useTransition } from "react";
 import type {
   Property,
@@ -504,12 +505,24 @@ export function AdminPropertiesManager({
                   </div>
                 <div className="text-sm text-[#42505a]">{property.price}</div>
                 <div>
+                  <div className="flex flex-wrap items-center gap-2">
                     <span
                       className={`rounded-full px-3 py-1 text-sm ${getStatusBadgeClasses(property.status)}`}
                     >
                       {property.status}
                     </span>
+                    {property.status === "Publicada" ? (
+                      <Link
+                        href={`/propiedades/${property.slug}`}
+                        target="_blank"
+                        className="text-xs font-medium text-[#1f3b4d] underline decoration-[#d7c7b6] underline-offset-4 transition hover:text-[#9f6b44]"
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        Ver ficha
+                      </Link>
+                    ) : null}
                   </div>
+                </div>
                 </button>
                 <div className="flex items-start justify-end">
                   <button
@@ -572,6 +585,34 @@ export function AdminPropertiesManager({
               {selectedProperty.status}
             </span>
           </div>
+
+          {selectedProperty.status === "Publicada" ? (
+            <div className="mt-4 flex flex-wrap gap-3">
+              <Link
+                href={`/propiedades/${selectedProperty.slug}`}
+                target="_blank"
+                className="rounded-full border border-[#d8cabd] px-5 py-3 text-sm font-semibold text-[#1f3b4d] transition hover:bg-[#f6efe7]"
+              >
+                Ver ficha publica
+              </Link>
+              <button
+                type="button"
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    `${window.location.origin}/propiedades/${selectedProperty.slug}`,
+                  )
+                }
+                className="rounded-full border border-[#d8cabd] px-5 py-3 text-sm font-semibold text-[#1f3b4d] transition hover:bg-[#f6efe7]"
+              >
+                Copiar link
+              </button>
+            </div>
+          ) : (
+            <p className="mt-4 text-sm text-[#7a838a]">
+              La ficha publica se habilita cuando la propiedad esta en estado
+              publicada.
+            </p>
+          )}
 
           <div className="mt-6 grid gap-4 md:grid-cols-2">
             <label className="space-y-2">
