@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
+import { getAdminSession } from "@/lib/auth";
 import { mapRowsWithGallery } from "@/lib/properties";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
@@ -15,6 +16,11 @@ function slugify(value: string) {
 }
 
 export async function POST() {
+  const session = await getAdminSession();
+  if (!session) {
+    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+  }
+
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(
       {

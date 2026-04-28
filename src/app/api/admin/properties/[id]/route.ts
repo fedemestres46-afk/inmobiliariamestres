@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
+import { getAdminSession } from "@/lib/auth";
 import { getPropertyGallery, mapRowsWithGallery } from "@/lib/properties";
 import {
   getSupabaseAdminClient,
@@ -13,6 +14,11 @@ type RouteContext = {
 };
 
 export async function PATCH(request: Request, context: RouteContext) {
+  const session = await getAdminSession();
+  if (!session) {
+    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+  }
+
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(
       {
@@ -71,6 +77,11 @@ export async function PATCH(request: Request, context: RouteContext) {
 }
 
 export async function DELETE(_request: Request, context: RouteContext) {
+  const session = await getAdminSession();
+  if (!session) {
+    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+  }
+
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(
       {

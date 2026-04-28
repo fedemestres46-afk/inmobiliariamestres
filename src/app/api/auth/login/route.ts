@@ -1,0 +1,60 @@
+import { NextResponse } from "next/server";
+import {
+  createAdminSessionToken,
+  isAllowedAdminEmail,
+  setAdminSessionCookie,
+} from "@/lib/auth";
+import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
+
+export async function POST(request: Request) {
+  if (!isSupabaseConfigured()) {
+    return NextResponse.json(
+      { error: "Supabase no esta configurado para iniciar sesion." },
+      { status: 503 },
+    );
+  }
+
+  const body = (await request.json()) as {
+    email?: string;
+    password?: string;
+  };
+
+  const email = body.email?.trim().toLowerCase();
+  const password = body.password ?? "";
+
+  if (!email || !password) {
+    return NextResponse.json(
+      { error: "Completa email y contrasena." },
+      { status: 400 },
+    );
+  }
+
+  if (!isAllowedAdminEmail(email)) {
+    return NextResponse.json(
+      { error: "Este usuario no tiene acceso al panel administrador." },
+      { status: 403 },
+    );
+  }
+
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error || !data.user) {
+    return NextResponse.json(
+      { error: error?.message ?? "No se pudo iniciar sesion." },
+      { status: 401 },
+    );
+  }
+
+  await setAdminSessionCookie(
+    createAdminSessionToken({
+      userId: data.user.id,
+      email: data.user.email ?? email,
+    }),
+  );
+
+  return NextResponse.json({ success: true });
+}

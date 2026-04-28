@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { toApiLeadStatus, type LeadStatus } from "@/data/leads";
+import { getAdminSession } from "@/lib/auth";
 import { getLeadById } from "@/lib/leads";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
@@ -8,6 +9,11 @@ type RouteContext = {
 };
 
 export async function PATCH(request: Request, context: RouteContext) {
+  const session = await getAdminSession();
+  if (!session) {
+    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+  }
+
   if (!isSupabaseAdminConfigured()) {
     return NextResponse.json(
       { error: "Falta la configuracion del backend para editar leads." },

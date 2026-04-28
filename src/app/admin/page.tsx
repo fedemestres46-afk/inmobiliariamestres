@@ -1,4 +1,6 @@
+import { AdminLogoutButton } from "@/components/admin-logout-button";
 import { AdminCrmDashboard } from "@/components/admin-crm-dashboard";
+import { requireAdminSession } from "@/lib/auth";
 import { getLeads } from "@/lib/leads";
 import { getProperties } from "@/lib/properties";
 import { isSupabaseAdminConfigured } from "@/lib/supabase";
@@ -6,6 +8,7 @@ import { isSupabaseAdminConfigured } from "@/lib/supabase";
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
+  await requireAdminSession();
   const properties = await getProperties();
   const { leads, ready } = await getLeads();
 
@@ -25,6 +28,7 @@ export default async function AdminPage() {
               cargadas, usa mock data sin romper la app.
             </p>
           </div>
+          <AdminLogoutButton />
         </header>
 
         <AdminCrmDashboard
