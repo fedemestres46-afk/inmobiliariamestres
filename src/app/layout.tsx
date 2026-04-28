@@ -16,8 +16,9 @@ const displayFont = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Estudio Inmobiliario",
-  description: "Base inmobiliaria con web publica y panel admin sobre Node.js",
+  title: "Mestres Inmobiliaria",
+  description:
+    "Propiedades en Casilda y alrededores con una presentacion cuidada y gestion comercial cercana.",
 };
 
 export default function RootLayout({

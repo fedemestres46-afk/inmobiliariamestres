@@ -85,3 +85,18 @@ export async function getProperties(): Promise<Property[]> {
     return mockProperties;
   }
 }
+
+export async function getPublishedProperties(): Promise<Property[]> {
+  const properties = await getProperties();
+  return properties.filter((property) => property.status === "Publicada");
+}
+
+export async function getPropertyBySlug(slug: string) {
+  const properties = await getPublishedProperties();
+  return properties.find((property) => property.slug === slug) ?? null;
+}
+
+export async function getRelatedProperties(propertyId: string, limit = 3) {
+  const properties = await getPublishedProperties();
+  return properties.filter((property) => property.id !== propertyId).slice(0, limit);
+}

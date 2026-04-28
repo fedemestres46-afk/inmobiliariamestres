@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState, useTransition } from "react";
 import type { Lead } from "@/data/leads";
 import type { Property, PropertyOperation, PropertyType } from "@/data/properties";
@@ -376,8 +377,14 @@ export function PropertiesExplorer({ properties }: Props) {
                   <span>{property.bedrooms} dormitorios</span>
                   <span>{property.price}</span>
                 </div>
-                {property.mapsUrl ? (
-                  <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    href={`/propiedades/${property.slug}`}
+                    className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                  >
+                    Ver detalle
+                  </Link>
+                  {property.mapsUrl ? (
                     <a
                       href={property.mapsUrl}
                       target="_blank"
@@ -386,20 +393,7 @@ export function PropertiesExplorer({ properties }: Props) {
                     >
                       Ver en Maps
                     </a>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setLeadPropertyId((current) =>
-                          current === property.id ? null : property.id,
-                        );
-                        setInquiryState({ type: "idle", message: "" });
-                      }}
-                      className="inline-flex rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
-                    >
-                      Consultar
-                    </button>
-                  </div>
-                ) : (
+                  ) : null}
                   <button
                     type="button"
                     onClick={() => {
@@ -412,7 +406,7 @@ export function PropertiesExplorer({ properties }: Props) {
                   >
                     Consultar
                   </button>
-                )}
+                </div>
                 {leadPropertyId === property.id ? <InquiryForm property={property} /> : null}
               </div>
             </article>
@@ -483,8 +477,14 @@ export function PropertiesExplorer({ properties }: Props) {
                       <p className="text-lg text-[var(--color-deep)]">
                         {activeMapProperty.price}
                       </p>
-                      {activeMapProperty.mapsUrl ? (
-                        <div className="flex flex-wrap gap-3">
+                      <div className="flex flex-wrap gap-3">
+                        <Link
+                          href={`/propiedades/${activeMapProperty.slug}`}
+                          className="rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                        >
+                          Ver detalle
+                        </Link>
+                        {activeMapProperty.mapsUrl ? (
                           <a
                             href={activeMapProperty.mapsUrl}
                             target="_blank"
@@ -493,20 +493,7 @@ export function PropertiesExplorer({ properties }: Props) {
                           >
                             Abrir en Maps
                           </a>
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setLeadPropertyId((current) =>
-                                current === activeMapProperty.id ? null : activeMapProperty.id,
-                              );
-                              setInquiryState({ type: "idle", message: "" });
-                            }}
-                            className="rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
-                          >
-                            Consultar
-                          </button>
-                        </div>
-                      ) : (
+                        ) : null}
                         <button
                           type="button"
                           onClick={() => {
@@ -519,7 +506,7 @@ export function PropertiesExplorer({ properties }: Props) {
                         >
                           Consultar
                         </button>
-                      )}
+                      </div>
                     </div>
                     {leadPropertyId === activeMapProperty.id ? (
                       <InquiryForm property={activeMapProperty} />

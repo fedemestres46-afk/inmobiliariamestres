@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { PropertiesExplorer } from "@/components/properties-explorer";
-import { getProperties } from "@/lib/properties";
+import { getPublishedProperties } from "@/lib/properties";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const properties = await getProperties();
+  const properties = await getPublishedProperties();
 
   return (
     <main className="flex-1 bg-[var(--color-cream)] text-[var(--color-ink)]">
