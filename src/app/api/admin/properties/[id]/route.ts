@@ -9,6 +9,20 @@ import {
   propertyImagesBucket,
 } from "@/lib/supabase";
 
+function getSupabaseProjectLabel() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+  if (!url) {
+    return "sin URL configurada";
+  }
+
+  try {
+    return new URL(url).host;
+  } catch {
+    return url;
+  }
+}
+
 function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: string } | null) {
   return (
     error?.code === "PGRST204" ||
@@ -90,8 +104,7 @@ export async function PATCH(request: Request, context: RouteContext) {
   if (error && isMissingFeatureTags(error)) {
     return NextResponse.json(
       {
-        error:
-          "Faltan las columnas de servicios y adicionales en Supabase. Corre el SQL de supabase/property-feature-tags.sql para poder guardar esos checks.",
+        error: `Faltan las columnas de servicios y adicionales en Supabase. La app esta apuntando a ${getSupabaseProjectLabel()}. Corre el SQL de supabase/property-feature-tags.sql en ese proyecto para poder guardar esos checks.`,
       },
       { status: 500 },
     );
