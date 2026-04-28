@@ -78,6 +78,7 @@ export function AdminPropertiesManager({
 }: Props) {
   const [properties, setProperties] = useState(initialProperties);
   const [selectedId, setSelectedId] = useState(initialProperties[0]?.id ?? "");
+  const [statusFilter, setStatusFilter] = useState<PropertyStatus | "Todas">("Todas");
   const [saveState, setSaveState] = useState<SaveState>({
     type: "idle",
     message: "",
@@ -87,9 +88,6 @@ export function AdminPropertiesManager({
   const [deletingImageUrl, setDeletingImageUrl] = useState<string | null>(null);
   const [deletingPropertyId, setDeletingPropertyId] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const selectedProperty =
-    properties.find((property) => property.id === selectedId) ?? properties[0];
 
   const totals = useMemo(
     () => ({
@@ -102,6 +100,18 @@ export function AdminPropertiesManager({
     }),
     [properties],
   );
+
+  const filteredProperties = useMemo(() => {
+    if (statusFilter === "Todas") {
+      return properties;
+    }
+
+    return properties.filter((property) => property.status === statusFilter);
+  }, [properties, statusFilter]);
+
+  const selectedProperty =
+    filteredProperties.find((property) => property.id === selectedId) ??
+    filteredProperties[0];
 
   async function handleSubmit(formData: FormData) {
     if (!selectedProperty) {
@@ -343,26 +353,76 @@ export function AdminPropertiesManager({
   }
 
   const hasProperties = properties.length > 0;
+  const hasFilteredProperties = filteredProperties.length > 0;
 
   return (
     <>
       <section className="mt-10 grid gap-4 md:grid-cols-3">
         {[
-          { label: "Publicadas", value: totals.published },
-          { label: "Borradores", value: totals.drafts },
-          { label: "Pausadas", value: totals.paused },
+          {
+            label: "Publicadas",
+            value: totals.published,
+            status: "Publicada" as PropertyStatus,
+            accent: "text-[#39704a]",
+            border: "border-[#cfe6d6]",
+            bg: "bg-[#f3fbf5]",
+          },
+          {
+            label: "Borradores",
+            value: totals.drafts,
+            status: "Borrador" as PropertyStatus,
+            accent: "text-[#b46f24]",
+            border: "border-[#edd8b8]",
+            bg: "bg-[#fff8ef]",
+          },
+          {
+            label: "Pausadas",
+            value: totals.paused,
+            status: "Pausada" as PropertyStatus,
+            accent: "text-[#b04c47]",
+            border: "border-[#ebcbc8]",
+            bg: "bg-[#fff4f3]",
+          },
         ].map((item) => (
-          <article
+          <button
             key={item.label}
-            className="rounded-[1.5rem] border border-white/80 bg-white px-6 py-5 shadow-[0_18px_40px_rgba(35,43,50,0.06)]"
+            type="button"
+            onClick={() => {
+              setStatusFilter((current) =>
+                current === item.status ? "Todas" : item.status,
+              );
+              setSaveState({ type: "idle", message: "" });
+            }}
+            className={`rounded-[1.5rem] border px-6 py-5 text-left shadow-[0_18px_40px_rgba(35,43,50,0.06)] transition ${
+              statusFilter === item.status
+                ? `${item.border} ${item.bg}`
+                : "border-white/80 bg-white hover:bg-[#faf6f0]"
+            }`}
           >
-            <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
+            <p className={`text-sm uppercase tracking-[0.3em] ${item.accent}`}>
               {item.label}
             </p>
             <p className="mt-4 font-serif-display text-4xl">{item.value}</p>
-          </article>
+          </button>
         ))}
       </section>
+
+      <div className="mt-4 flex items-center justify-between gap-4 text-sm text-[#6a7379]">
+        <p>
+          {statusFilter === "Todas"
+            ? "Mostrando todas las propiedades."
+            : `Filtrando: ${statusFilter.toLowerCase()}.`}
+        </p>
+        {statusFilter !== "Todas" ? (
+          <button
+            type="button"
+            onClick={() => setStatusFilter("Todas")}
+            className="rounded-full border border-[#d7c7b6] px-4 py-2 text-[#5c666d] transition hover:bg-[#f7efe5]"
+          >
+            Ver todas
+          </button>
+        ) : null}
+      </div>
 
       {!canPersist ? (
         <section className="mt-8 rounded-[1.5rem] border border-[#eed8c4] bg-[#fff7ef] px-6 py-5 text-sm leading-7 text-[#7c624b]">
@@ -401,7 +461,7 @@ export function AdminPropertiesManager({
           </div>
 
           <div className="divide-y divide-[#ece4da]">
-            {properties.map((property) => (
+            {filteredProperties.map((property) => (
               <div
                 key={property.id}
                 className={`grid grid-cols-1 gap-3 px-6 py-5 transition md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_minmax(0,0.9fr)_minmax(0,0.8fr)_auto] md:items-start ${
@@ -453,6 +513,11 @@ export function AdminPropertiesManager({
             {!hasProperties ? (
               <div className="px-6 py-8 text-sm text-[#6a7379]">
                 Aun no hay propiedades. Crea una nueva desde este panel.
+              </div>
+            ) : null}
+            {hasProperties && !hasFilteredProperties ? (
+              <div className="px-6 py-8 text-sm text-[#6a7379]">
+                No hay propiedades en esta seccion todavia.
               </div>
             ) : null}
           </div>
