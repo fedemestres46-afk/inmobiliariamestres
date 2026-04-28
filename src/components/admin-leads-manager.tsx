@@ -168,6 +168,7 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
     const payload = {
       status: String(formData.get("status") ?? "Nuevo") as LeadStatus,
       notes: String(formData.get("notes") ?? ""),
+      scheduledAt: String(formData.get("scheduled_at") ?? ""),
     };
 
     startTransition(async () => {
@@ -373,6 +374,11 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                     <p className="mt-1 text-sm text-[#667178]">
                       {lead.propertyTitle}
                     </p>
+                    {lead.scheduledAt ? (
+                      <p className="mt-2 text-xs uppercase tracking-[0.16em] text-[#8b969d]">
+                        Visita: {lead.scheduledAt}
+                      </p>
+                    ) : null}
                     <p className="mt-2 text-sm text-[#7a838a]">
                       {lead.phone}
                       {lead.email ? ` · ${lead.email}` : ""}
@@ -483,6 +489,29 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                   </p>
                   <p className="mt-2 text-lg text-[#22313b]">
                     {selectedLead.createdAt}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <label className="space-y-2">
+                  <span className="text-sm text-[#6a7379]">Fecha y hora de visita</span>
+                  <input
+                    name="scheduled_at"
+                    type="datetime-local"
+                    defaultValue={selectedLead.scheduledAtValue ?? ""}
+                    className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
+                  />
+                </label>
+                <div className="rounded-[1.5rem] border border-[#ece4da] px-4 py-4">
+                  <p className="text-xs uppercase tracking-[0.22em] text-[#8b969d]">
+                    Calendario
+                  </p>
+                  <p className="mt-2 text-lg text-[#22313b]">
+                    {selectedLead.calendarSyncStatus ?? "Pendiente de integrar"}
+                  </p>
+                  <p className="mt-2 text-sm text-[#6a7379]">
+                    La agenda ya queda lista para una futura conexion con Google Calendar.
                   </p>
                 </div>
               </div>

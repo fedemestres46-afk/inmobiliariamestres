@@ -6,6 +6,8 @@ import {
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
 const leadSelect =
+  "id, property_id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, notes, origin, status, scheduled_at, google_event_id, created_at, properties(id, title, location)";
+const legacyLeadSelect =
   "id, property_id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, notes, origin, status, created_at, properties(id, title, location)";
 
 function isMissingRelationError(error: { message?: string } | null) {
@@ -13,7 +15,9 @@ function isMissingRelationError(error: { message?: string } | null) {
   return (
     message.includes("relation") ||
     message.includes("does not exist") ||
-    message.includes("schema cache")
+    message.includes("schema cache") ||
+    message.includes("scheduled_at") ||
+    message.includes("google_event_id")
   );
 }
 
@@ -24,10 +28,29 @@ export async function getLeads() {
 
   try {
     const supabase = getSupabaseAdminClient();
-    const { data, error } = await supabase
+    let data: LeadRow[] | null = null;
+    let error:
+      | {
+          message?: string;
+          code?: string;
+        }
+      | null = null;
+
+    const initialResult = await supabase
       .from("leads")
       .select(leadSelect)
       .order("created_at", { ascending: false });
+    data = (initialResult.data as unknown as LeadRow[] | null) ?? null;
+    error = initialResult.error;
+
+    if (error && isMissingRelationError(error)) {
+      const legacyResult = await supabase
+        .from("leads")
+        .select(legacyLeadSelect)
+        .order("created_at", { ascending: false });
+      data = (legacyResult.data as unknown as LeadRow[] | null) ?? null;
+      error = legacyResult.error;
+    }
 
     if (error || !data) {
       if (isMissingRelationError(error)) {
@@ -47,11 +70,31 @@ export async function getLeads() {
 
 export async function getLeadById(id: string) {
   const supabase = getSupabaseAdminClient();
-  const { data, error } = await supabase
+  let data: LeadRow | null = null;
+  let error:
+    | {
+        message?: string;
+        code?: string;
+      }
+    | null = null;
+
+  const initialResult = await supabase
     .from("leads")
     .select(leadSelect)
     .eq("id", id)
     .single();
+  data = (initialResult.data as unknown as LeadRow | null) ?? null;
+  error = initialResult.error;
+
+  if (error && isMissingRelationError(error)) {
+    const legacyResult = await supabase
+      .from("leads")
+      .select(legacyLeadSelect)
+      .eq("id", id)
+      .single();
+    data = (legacyResult.data as unknown as LeadRow | null) ?? null;
+    error = legacyResult.error;
+  }
 
   if (error || !data) {
     return null;

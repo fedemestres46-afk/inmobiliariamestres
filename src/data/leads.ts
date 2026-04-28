@@ -21,6 +21,9 @@ export type Lead = {
   origin: LeadOrigin;
   status: LeadStatus;
   createdAt: string;
+  scheduledAt?: string;
+  scheduledAtValue?: string;
+  calendarSyncStatus?: "Pendiente" | "Sincronizado";
 };
 
 export type LeadRow = {
@@ -41,6 +44,8 @@ export type LeadRow = {
     | "negotiation"
     | "closed"
     | "discarded";
+  scheduled_at?: string | null;
+  google_event_id?: string | null;
   created_at: string;
   properties?:
     | {
@@ -129,5 +134,10 @@ export function mapLeadRow(row: LeadRow): Lead {
     origin: mapLeadOrigin(row.origin),
     status: mapLeadStatus(row.status),
     createdAt: formatCreatedAt(row.created_at),
+    scheduledAt: row.scheduled_at ? formatCreatedAt(row.scheduled_at) : undefined,
+    scheduledAtValue: row.scheduled_at
+      ? new Date(row.scheduled_at).toISOString().slice(0, 16)
+      : undefined,
+    calendarSyncStatus: row.google_event_id ? "Sincronizado" : undefined,
   };
 }

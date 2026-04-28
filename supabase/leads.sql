@@ -8,6 +8,8 @@ create table if not exists public.leads (
   email text,
   message text,
   notes text,
+  scheduled_at timestamptz,
+  google_event_id text,
   origin text not null default 'web' check (
     origin in ('web', 'whatsapp', 'zonaprop', 'manual')
   ),
