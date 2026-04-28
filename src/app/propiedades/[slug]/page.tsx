@@ -319,41 +319,9 @@ export default async function PropertyDetailPage({ params }: Props) {
           </section>
         ) : null}
 
-        <div className="max-w-3xl">
-          <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-7 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
-            <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
-              Contacto
-            </p>
-            <h2 className="mt-3 font-serif-display text-4xl">
-              Seguimiento comercial simple
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-[var(--color-muted)]">
-              Esta URL ya sirve para mandar por WhatsApp, publicar en redes o usar
-              como ficha individual desde el panel.
-            </p>
-            <div className="mt-6 flex flex-col gap-3">
-              <a
-                href={whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-[var(--color-deep)] px-5 py-3 text-center text-sm font-semibold text-white transition hover:opacity-92"
-              >
-                Consultar esta propiedad
-              </a>
-              <Link
-                href="/#propiedades"
-                className="rounded-full border border-[var(--color-line)] px-5 py-3 text-center text-sm font-semibold text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
-              >
-                Volver al listado
-              </Link>
-            </div>
-          </article>
-        </div>
-
         <PropertyDetailContact
           propertyId={property.id}
           propertyTitle={property.title}
-          whatsappHref={whatsappHref}
         />
 
         {relatedProperties.length > 0 ? (

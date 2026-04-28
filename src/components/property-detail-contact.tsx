@@ -6,7 +6,6 @@ import type { Lead } from "@/data/leads";
 type Props = {
   propertyId: string;
   propertyTitle: string;
-  whatsappHref: string;
 };
 
 type InquiryState = {
@@ -17,18 +16,12 @@ type InquiryState = {
 export function PropertyDetailContact({
   propertyId,
   propertyTitle,
-  whatsappHref,
 }: Props) {
   const [inquiryState, setInquiryState] = useState<InquiryState>({
     type: "idle",
     message: "",
   });
-  const [shareState, setShareState] = useState<InquiryState>({
-    type: "idle",
-    message: "",
-  });
   const [isSubmittingLead, startLeadTransition] = useTransition();
-  const [isSharing, startShareTransition] = useTransition();
 
   async function handleLeadSubmit(formData: FormData) {
     const payload = {
@@ -66,41 +59,8 @@ export function PropertyDetailContact({
     });
   }
 
-  function handleShare() {
-    startShareTransition(async () => {
-      const shareUrl = window.location.href;
-      const shareText = `${propertyTitle} | Mestres Inmobiliaria`;
-
-      try {
-        if (navigator.share) {
-          await navigator.share({
-            title: shareText,
-            text: shareText,
-            url: shareUrl,
-          });
-          setShareState({
-            type: "success",
-            message: "Ficha compartida correctamente.",
-          });
-          return;
-        }
-
-        await navigator.clipboard.writeText(shareUrl);
-        setShareState({
-          type: "success",
-          message: "Link copiado al portapapeles.",
-        });
-      } catch {
-        setShareState({
-          type: "error",
-          message: "No se pudo compartir el link en este momento.",
-        });
-      }
-    });
-  }
-
   return (
-    <section className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+    <section>
       <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-7 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
         <h2 className="mt-3 font-serif-display text-4xl">
           Consulta directa
@@ -157,49 +117,6 @@ export function PropertyDetailContact({
             </button>
           </div>
         </form>
-      </article>
-
-      <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-7 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
-        <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
-          Compartir
-        </p>
-        <h2 className="mt-3 font-serif-display text-4xl">
-          Lista para mover por WhatsApp y redes
-        </h2>
-        <p className="mt-5 text-lg leading-8 text-[var(--color-muted)]">
-          Esta URL ya funciona como ficha individual. La podes compartir, copiar
-          o mandar directo por WhatsApp con un solo toque.
-        </p>
-        <div className="mt-6 flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={handleShare}
-            disabled={isSharing}
-            className="rounded-full bg-[var(--color-deep)] px-5 py-3 text-center text-sm font-semibold text-white transition hover:opacity-92 disabled:cursor-not-allowed disabled:opacity-60"
-          >
-            {isSharing ? "Compartiendo..." : "Compartir ficha"}
-          </button>
-          <a
-            href={whatsappHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-full border border-[var(--color-line)] px-5 py-3 text-center text-sm font-semibold text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
-          >
-            Abrir WhatsApp
-          </a>
-          <p
-            className={`text-sm ${
-              shareState.type === "error"
-                ? "text-[#a04d39]"
-                : shareState.type === "success"
-                  ? "text-[#39704a]"
-                  : "text-[var(--color-muted)]"
-            }`}
-          >
-            {shareState.message ||
-              "Si el dispositivo no soporta compartir, copiamos el link automaticamente."}
-          </p>
-        </div>
       </article>
     </section>
   );
