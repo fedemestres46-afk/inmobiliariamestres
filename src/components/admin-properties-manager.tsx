@@ -508,8 +508,8 @@ export function AdminPropertiesManager({
                     <p className="mt-1 text-[#7a838a]">{property.type}</p>
                   </div>
                 <div className="text-sm text-[#42505a]">{property.price}</div>
-                <div>
-                  <div className="flex flex-wrap items-center gap-2">
+                <div className="md:flex md:justify-center">
+                  <div className="flex flex-wrap items-center gap-2 md:justify-center">
                     <span
                       className={`rounded-full px-3 py-1 text-sm ${getStatusBadgeClasses(property.status)}`}
                     >
