@@ -102,15 +102,11 @@ export function PropertyDetailContact({
   return (
     <section className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
       <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-7 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
-        <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
-          Consulta directa
-        </p>
         <h2 className="mt-3 font-serif-display text-4xl">
-          Esta ficha ya entra al CRM
+          Consulta directa
         </h2>
         <p className="mt-5 text-lg leading-8 text-[var(--color-muted)]">
-          Si alguien consulta desde aca, el lead queda guardado y asociado
-          automaticamente a esta propiedad en el panel admin.
+          Dejanos tus datos y te contactamos con mas informacion sobre esta propiedad.
         </p>
 
         <form action={handleLeadSubmit} className="mt-6 space-y-3">
