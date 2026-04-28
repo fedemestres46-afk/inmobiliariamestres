@@ -532,7 +532,17 @@ export function AdminPropertiesManager({
                   <button
                     type="button"
                     aria-label={`Borrar ${property.title}`}
-                    onClick={() => void handleDeleteProperty(property.id)}
+                    onClick={() => {
+                      const confirmed = window.confirm(
+                        `Estas seguro de eliminar la propiedad "${property.title}"?`,
+                      );
+
+                      if (!confirmed) {
+                        return;
+                      }
+
+                      void handleDeleteProperty(property.id);
+                    }}
                     disabled={!canPersist || deletingPropertyId === property.id}
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-[#d7c7b6] text-xl leading-none text-[#7d5840] transition hover:border-[#9f6b44] hover:bg-[#f7efe5] hover:text-[#9f6b44] disabled:cursor-not-allowed disabled:opacity-60"
                   >
