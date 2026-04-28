@@ -141,8 +141,8 @@ export default async function PropertyDetailPage({ params }: Props) {
             <span className="text-white">{property.title}</span>
           </div>
 
-          <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-            <div className="space-y-6">
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div className="space-y-6 self-start">
               <div className="flex flex-wrap gap-3 text-sm">
                 <span className="rounded-full bg-white/12 px-4 py-2 text-white">
                   {property.operation}
@@ -159,7 +159,13 @@ export default async function PropertyDetailPage({ params }: Props) {
                 <h1 className="max-w-4xl font-serif-display text-5xl leading-none md:text-7xl">
                   {property.title}
                 </h1>
-                <p className="max-w-3xl text-lg leading-8 text-white/78">
+              </div>
+
+              <div className="max-w-3xl rounded-[1.75rem] border border-white/16 bg-white/8 p-5 backdrop-blur">
+                <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-sand)]">
+                  Descripcion
+                </p>
+                <p className="mt-4 text-lg leading-8 text-white/78">
                   {description}
                 </p>
               </div>
@@ -313,19 +319,7 @@ export default async function PropertyDetailPage({ params }: Props) {
           </section>
         ) : null}
 
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
-          <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-7 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
-            <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
-              Descripcion
-            </p>
-            <h2 className="mt-3 font-serif-display text-4xl">
-              Una ficha lista para compartir
-            </h2>
-            <p className="mt-5 text-lg leading-8 text-[var(--color-muted)]">
-              {description}
-            </p>
-          </article>
-
+        <div className="max-w-3xl">
           <article className="rounded-[2rem] border border-[var(--color-line)] bg-white p-7 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
             <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
               Contacto
