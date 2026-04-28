@@ -43,8 +43,23 @@ export async function POST(request: Request) {
   });
 
   if (error || !data.user) {
+    const isInvalidApiKey = error?.message === "Invalid API key";
+
     return NextResponse.json(
-      { error: error?.message ?? "No se pudo iniciar sesion." },
+      {
+        error: error?.message ?? "No se pudo iniciar sesion.",
+        ...(isInvalidApiKey
+          ? {
+              debug: {
+                supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL ?? null,
+                anonKeyPrefix:
+                  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.slice(0, 24) ?? null,
+                anonKeyLength:
+                  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.length ?? 0,
+              },
+            }
+          : {}),
+      },
       { status: 401 },
     );
   }
