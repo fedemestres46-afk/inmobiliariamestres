@@ -110,8 +110,6 @@ export async function POST() {
       covered_surface_m2: _coveredSurfaceM2,
       bathrooms: _bathrooms,
       garage_spaces: _garageSpaces,
-      service_tags: _serviceTags,
-      amenity_tags: _amenityTags,
       ...legacyPayload
     } = basePayload;
 
