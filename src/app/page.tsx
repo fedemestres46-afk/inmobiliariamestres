@@ -39,7 +39,7 @@ export default async function Home() {
             </nav>
           </header>
 
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 py-10 md:px-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-end lg:py-20">
+          <div className="mx-auto max-w-7xl px-6 py-10 md:px-10 lg:py-20">
             <div className="space-y-8">
               <div className="space-y-5">
                 <p className="max-w-xl text-sm uppercase tracking-[0.4em] text-[var(--color-sand)]">
@@ -63,26 +63,6 @@ export default async function Home() {
                   Ver todas las propiedades
                 </Link>
               </div>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <article className="rounded-[1.75rem] border border-white/20 bg-black/15 p-6 backdrop-blur-sm">
-                <p className="mt-4 text-2xl leading-9">
-                  Una mirada contemporanea para propiedades con caracter,
-                  contexto y valor real.
-                </p>
-              </article>
-              <article className="rounded-[1.75rem] border border-white/20 bg-white/12 p-6 backdrop-blur-sm">
-                <p className="text-sm uppercase tracking-[0.3em] text-white/65">
-                  Enfoque
-                </p>
-                <ul className="mt-4 space-y-3 text-white/82">
-                  <li>Seleccion curada de propiedades</li>
-                  <li>Presentacion visual cuidada</li>
-                  <li>Acompanamiento comercial cercano</li>
-                  <li>Procesos claros de punta a punta</li>
-                </ul>
-              </article>
             </div>
           </div>
         </div>
