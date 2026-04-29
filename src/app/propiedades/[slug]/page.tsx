@@ -212,7 +212,7 @@ export default async function PropertyDetailPage({ params }: Props) {
                   <p className="text-white/58">Baños</p>
                   <p className="mt-1 text-base text-white">{property.bathrooms}</p>
                 </div>
-                <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3 sm:col-span-2">
+                <div className="rounded-[1.25rem] border border-white/16 bg-black/10 px-4 py-3">
                   <p className="text-white/58">Cochera</p>
                   <p className="mt-1 text-base text-white">
                     {property.garageSpaces > 0
