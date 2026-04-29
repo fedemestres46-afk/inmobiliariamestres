@@ -35,6 +35,12 @@ const operationOptions: Array<PropertyOperation | "Todas"> = [
   "Alquiler",
 ];
 
+const currencyOptions: Array<Property["currency"] | "Todas"> = [
+  "Todas",
+  "USD",
+  "ARS",
+];
+
 const sortOptions: Array<{ value: SortOption; label: string }> = [
   { value: "default", label: "Destacadas primero" },
   { value: "price-asc", label: "Menor precio" },
@@ -54,7 +60,12 @@ export function PropertiesExplorer({ properties }: Props) {
   const [operationFilter, setOperationFilter] = useState<
     PropertyOperation | "Todas"
   >("Todas");
+  const [currencyFilter, setCurrencyFilter] = useState<Property["currency"] | "Todas">(
+    "Todas",
+  );
   const [locationFilter, setLocationFilter] = useState("");
+  const [priceFrom, setPriceFrom] = useState("");
+  const [priceTo, setPriceTo] = useState("");
   const [sortOption, setSortOption] = useState<SortOption>("default");
   const [viewMode, setViewMode] = useState<ViewMode>("grid");
   const [leadPropertyId, setLeadPropertyId] = useState<string | null>(null);
@@ -72,14 +83,35 @@ export function PropertiesExplorer({ properties }: Props) {
         operationFilter === "Todas"
           ? true
           : property.operation === operationFilter;
+      const matchesCurrency =
+        currencyFilter === "Todas" ? true : property.currency === currencyFilter;
       const matchesLocation =
         locationFilter.trim() === ""
           ? true
           : property.location
               .toLowerCase()
               .includes(locationFilter.trim().toLowerCase());
+      const minPrice =
+        priceFrom.trim() === "" ? undefined : Number(priceFrom.replace(/\./g, "").replace(",", "."));
+      const maxPrice =
+        priceTo.trim() === "" ? undefined : Number(priceTo.replace(/\./g, "").replace(",", "."));
+      const matchesMinPrice =
+        minPrice === undefined || Number.isNaN(minPrice)
+          ? true
+          : property.numericPrice >= minPrice;
+      const matchesMaxPrice =
+        maxPrice === undefined || Number.isNaN(maxPrice)
+          ? true
+          : property.numericPrice <= maxPrice;
 
-      return matchesType && matchesOperation && matchesLocation;
+      return (
+        matchesType &&
+        matchesOperation &&
+        matchesCurrency &&
+        matchesLocation &&
+        matchesMinPrice &&
+        matchesMaxPrice
+      );
     });
 
     const sortedProperties = [...nextProperties];
@@ -113,7 +145,16 @@ export function PropertiesExplorer({ properties }: Props) {
     }
 
     return sortedProperties;
-  }, [locationFilter, operationFilter, properties, sortOption, typeFilter]);
+  }, [
+    currencyFilter,
+    locationFilter,
+    operationFilter,
+    priceFrom,
+    priceTo,
+    properties,
+    sortOption,
+    typeFilter,
+  ]);
 
   const propertiesWithCoords = filteredProperties.filter(
     (property) =>
@@ -240,7 +281,7 @@ export function PropertiesExplorer({ properties }: Props) {
   return (
     <div className="mt-10 space-y-8">
       <div className="rounded-[2rem] border border-[var(--color-line)] bg-white p-5 shadow-[0_18px_50px_rgba(35,43,50,0.06)]">
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-[1fr_1fr_1.1fr_1fr_auto]">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           <label className="space-y-2">
             <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
               Tipo
@@ -283,6 +324,25 @@ export function PropertiesExplorer({ properties }: Props) {
 
           <label className="space-y-2">
             <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
+              Moneda
+            </span>
+            <select
+              value={currencyFilter}
+              onChange={(event) =>
+                setCurrencyFilter(event.target.value as Property["currency"] | "Todas")
+              }
+              className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
+            >
+              {currencyOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="space-y-2">
+            <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
               Zona
             </span>
             <input
@@ -292,6 +352,28 @@ export function PropertiesExplorer({ properties }: Props) {
               className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
             />
           </label>
+
+          <div className="space-y-2">
+            <span className="block text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
+              Monto
+            </span>
+            <div className="grid grid-cols-2 gap-3">
+              <input
+                value={priceFrom}
+                onChange={(event) => setPriceFrom(event.target.value)}
+                placeholder="Desde"
+                inputMode="numeric"
+                className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
+              />
+              <input
+                value={priceTo}
+                onChange={(event) => setPriceTo(event.target.value)}
+                placeholder="Hasta"
+                inputMode="numeric"
+                className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
+              />
+            </div>
+          </div>
 
           <label className="space-y-2">
             <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
