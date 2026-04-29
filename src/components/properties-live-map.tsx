@@ -11,6 +11,26 @@ type Props = {
 
 type LeafletModule = typeof import("leaflet");
 
+function scheduleMapInvalidate(map: any) {
+  if (!map) {
+    return;
+  }
+
+  const runInvalidate = () => {
+    try {
+      map.invalidateSize();
+    } catch {
+      // no-op
+    }
+  };
+
+  runInvalidate();
+  window.requestAnimationFrame(() => {
+    runInvalidate();
+    window.setTimeout(runInvalidate, 120);
+  });
+}
+
 export function PropertiesLiveMap({
   properties,
   activeProperty,
@@ -58,10 +78,7 @@ export function PropertiesLiveMap({
 
       markersLayerRef.current = L.layerGroup().addTo(map);
       mapRef.current = map;
-
-      window.setTimeout(() => {
-        map.invalidateSize();
-      }, 120);
+      scheduleMapInvalidate(map);
     }
 
     void setupMap();
@@ -80,6 +97,22 @@ export function PropertiesLiveMap({
   }, []);
 
   useEffect(() => {
+    if (!mapElementRef.current || !mapRef.current) {
+      return;
+    }
+
+    const observer = new ResizeObserver(() => {
+      scheduleMapInvalidate(mapRef.current);
+    });
+
+    observer.observe(mapElementRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
     const L = leafletRef.current;
     const map = mapRef.current;
     const markersLayer = markersLayerRef.current;
@@ -88,6 +121,7 @@ export function PropertiesLiveMap({
       return;
     }
 
+    scheduleMapInvalidate(map);
     markersLayer.clearLayers();
     popupByPropertyIdRef.current.clear();
 
@@ -135,6 +169,7 @@ export function PropertiesLiveMap({
       map.setView([property.latitude!, property.longitude!], 16, {
         animate: false,
       });
+      scheduleMapInvalidate(map);
       return;
     }
 
@@ -150,6 +185,7 @@ export function PropertiesLiveMap({
         maxZoom: 15,
         animate: false,
       });
+      scheduleMapInvalidate(map);
     }
   }, [activeProperty?.id, onSelect, validProperties]);
 
@@ -159,6 +195,7 @@ export function PropertiesLiveMap({
       return;
     }
 
+    scheduleMapInvalidate(map);
     const activeEntry = activeProperty
       ? popupByPropertyIdRef.current.get(activeProperty.id)
       : null;
