@@ -37,6 +37,35 @@ function isMissingFeatureTags(error?: { code?: string; message?: string } | null
   );
 }
 
+function stripMissingExtendedFields<T extends Record<string, unknown>>(
+  payload: T,
+  error?: { message?: string } | null,
+) {
+  if (!error?.message) {
+    return payload;
+  }
+
+  const nextPayload = { ...payload };
+
+  if (error.message.includes("covered_surface_m2")) {
+    delete nextPayload.covered_surface_m2;
+  }
+
+  if (error.message.includes("rooms")) {
+    delete nextPayload.rooms;
+  }
+
+  if (error.message.includes("bathrooms")) {
+    delete nextPayload.bathrooms;
+  }
+
+  if (error.message.includes("garage_spaces")) {
+    delete nextPayload.garage_spaces;
+  }
+
+  return nextPayload;
+}
+
 function slugify(value: string) {
   return value
     .toLowerCase()
@@ -105,13 +134,7 @@ export async function POST() {
   }
 
   if (error && shouldRetryWithoutExtendedFields(error)) {
-    const {
-      rooms: _rooms,
-      covered_surface_m2: _coveredSurfaceM2,
-      bathrooms: _bathrooms,
-      garage_spaces: _garageSpaces,
-      ...legacyPayload
-    } = basePayload;
+    const legacyPayload = stripMissingExtendedFields(basePayload, error);
 
     ({ data, error } = await supabase
       .from("properties")
