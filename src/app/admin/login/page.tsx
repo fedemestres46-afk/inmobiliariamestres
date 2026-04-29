@@ -21,8 +21,7 @@ export default async function AdminLoginPage() {
           Panel admin
         </h1>
         <p className="mt-4 text-base leading-8 text-[#5c666d]">
-          Ingresa con tu usuario administrador de Supabase Auth para gestionar
-          propiedades y leads.
+          Ingresa con un usuario autorizado para gestionar propiedades y leads.
         </p>
 
         <div className="mt-8">

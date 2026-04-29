@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
-import { getAdminSession } from "@/lib/auth";
+import { getAdminWriteAccess } from "@/lib/auth";
 import { getPropertyGallery, mapRowsWithGallery } from "@/lib/properties";
 import { validatePropertyWritePayload } from "@/lib/property-validation";
 import {
@@ -76,9 +76,12 @@ type RouteContext = {
 };
 
 export async function PATCH(request: Request, context: RouteContext) {
-  const session = await getAdminSession();
+  const session = await getAdminWriteAccess();
   if (!session) {
-    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+    return NextResponse.json(
+      { error: "No autorizado para editar propiedades." },
+      { status: 403 },
+    );
   }
 
   if (!isSupabaseAdminConfigured()) {
@@ -148,9 +151,12 @@ export async function PATCH(request: Request, context: RouteContext) {
 }
 
 export async function DELETE(_request: Request, context: RouteContext) {
-  const session = await getAdminSession();
+  const session = await getAdminWriteAccess();
   if (!session) {
-    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+    return NextResponse.json(
+      { error: "No autorizado para borrar propiedades." },
+      { status: 403 },
+    );
   }
 
   if (!isSupabaseAdminConfigured()) {

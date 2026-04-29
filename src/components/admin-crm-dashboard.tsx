@@ -11,6 +11,7 @@ type Props = {
   initialLeads: Lead[];
   canPersist: boolean;
   crmReady: boolean;
+  readOnlyReason?: string;
 };
 
 type TabId = "properties" | "leads";
@@ -20,6 +21,7 @@ export function AdminCrmDashboard({
   initialLeads,
   canPersist,
   crmReady,
+  readOnlyReason,
 }: Props) {
   const [activeTab, setActiveTab] = useState<TabId>("properties");
 
@@ -49,9 +51,15 @@ export function AdminCrmDashboard({
         <AdminPropertiesManager
           initialProperties={initialProperties}
           canPersist={canPersist}
+          readOnlyReason={readOnlyReason}
         />
       ) : (
-        <AdminLeadsManager initialLeads={initialLeads} crmReady={crmReady} />
+        <AdminLeadsManager
+          initialLeads={initialLeads}
+          crmReady={crmReady}
+          canEdit={canPersist}
+          readOnlyReason={readOnlyReason}
+        />
       )}
     </>
   );

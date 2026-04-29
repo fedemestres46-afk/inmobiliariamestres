@@ -3,19 +3,24 @@ import "server-only";
 import crypto from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import {
+  canManageContent,
+  formatAdminRoleLabel,
+  getAdminAccessByEmail,
+  getAdminAccessByUserId,
+  type AdminRole,
+} from "@/lib/admin-access";
 
 const sessionCookieName = "mestres_admin_session";
 const sessionTtlSeconds = 60 * 60 * 24 * 7;
 const authSecret =
   process.env.ADMIN_AUTH_SECRET ?? process.env.SUPABASE_SERVICE_ROLE_KEY ?? "";
-const allowedEmails = (process.env.ADMIN_ALLOWED_EMAILS ?? "")
-  .split(",")
-  .map((value) => value.trim().toLowerCase())
-  .filter(Boolean);
 
 type SessionPayload = {
   sub: string;
   email: string;
+  role: AdminRole;
+  name?: string;
   exp: number;
 };
 
@@ -90,18 +95,27 @@ function verifyToken(token: string) {
   }
 }
 
-export function isAllowedAdminEmail(email: string) {
-  if (allowedEmails.length === 0) {
-    return true;
+export async function resolveAdminLoginAccess(email: string) {
+  const access = await getAdminAccessByEmail(email);
+
+  if (!access?.isActive) {
+    return null;
   }
 
-  return allowedEmails.includes(email.toLowerCase());
+  return access;
 }
 
-export function createAdminSessionToken(input: { userId: string; email: string }) {
+export function createAdminSessionToken(input: {
+  userId: string;
+  email: string;
+  role: AdminRole;
+  name?: string;
+}) {
   return signToken({
     sub: input.userId,
     email: input.email,
+    role: input.role,
+    ...(input.name ? { name: input.name } : {}),
     exp: Math.floor(Date.now() / 1000) + sessionTtlSeconds,
   });
 }
@@ -147,4 +161,53 @@ export async function requireAdminSession() {
   }
 
   return session;
+}
+
+export async function requireAdminAccess() {
+  const access = await getCurrentAdminAccess();
+
+  if (!access) {
+    redirect("/admin/login");
+  }
+
+  return access;
+}
+
+export async function getCurrentAdminAccess() {
+  const session = await getAdminSession();
+
+  if (!session) {
+    return null;
+  }
+
+  const access = await getAdminAccessByUserId(session.sub, session.email);
+
+  if (!access?.isActive) {
+    await clearAdminSessionCookie();
+    return null;
+  }
+
+  return {
+    ...session,
+    role: access.role,
+    name: access.fullName ?? session.name,
+  };
+}
+
+export async function getAdminWriteAccess() {
+  const session = await getCurrentAdminAccess();
+
+  if (!session) {
+    return null;
+  }
+
+  if (!canManageContent(session.role)) {
+    return null;
+  }
+
+  return session;
+}
+
+export function getAdminAccessDeniedMessage(role: AdminRole) {
+  return `Tu rol actual (${formatAdminRoleLabel(role)}) no tiene permisos para editar este contenido.`;
 }

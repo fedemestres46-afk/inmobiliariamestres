@@ -25,6 +25,7 @@ type SaveState = {
 type Props = {
   initialProperties: Property[];
   canPersist: boolean;
+  readOnlyReason?: string;
 };
 
 const typeOptions: PropertyType[] = [
@@ -96,6 +97,7 @@ function isValidLongitude(value?: number) {
 export function AdminPropertiesManager({
   initialProperties,
   canPersist,
+  readOnlyReason,
 }: Props) {
   const [properties, setProperties] = useState(initialProperties);
   const [selectedId, setSelectedId] = useState(initialProperties[0]?.id ?? "");
@@ -465,9 +467,8 @@ export function AdminPropertiesManager({
 
       {!canPersist ? (
         <section className="mt-8 rounded-[1.5rem] border border-[#eed8c4] bg-[#fff7ef] px-6 py-5 text-sm leading-7 text-[#7c624b]">
-          El formulario ya esta listo, pero para guardar de verdad falta cargar
-          la variable `SUPABASE_SERVICE_ROLE_KEY` en el servidor. Con la clave
-          publica podemos leer, pero no conviene editar datos reales.
+          {readOnlyReason ??
+            "El formulario esta en modo solo lectura. Revisa permisos de usuario o configuracion del backend para habilitar edicion real."}
         </section>
       ) : null}
 

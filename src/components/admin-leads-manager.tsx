@@ -6,6 +6,8 @@ import type { Lead, LeadStatus } from "@/data/leads";
 type Props = {
   initialLeads: Lead[];
   crmReady: boolean;
+  canEdit: boolean;
+  readOnlyReason?: string;
 };
 
 type SaveState = {
@@ -73,7 +75,12 @@ const boardColumns: Array<{
   },
 ];
 
-export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
+export function AdminLeadsManager({
+  initialLeads,
+  crmReady,
+  canEdit,
+  readOnlyReason,
+}: Props) {
   const [leads, setLeads] = useState(initialLeads);
   const [selectedLeadId, setSelectedLeadId] = useState(initialLeads[0]?.id ?? "");
   const [statusFilter, setStatusFilter] = useState<
@@ -276,6 +283,13 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
         </section>
       ) : null}
 
+      {crmReady && !canEdit ? (
+        <section className="mt-8 rounded-[1.5rem] border border-[#d9dfe3] bg-[#f7fafc] px-6 py-5 text-sm leading-7 text-[#5f6b73]">
+          {readOnlyReason ??
+            "Tu usuario tiene acceso de solo lectura en el CRM. Puedes revisar leads, pero no editar estados ni notas."}
+        </section>
+      ) : null}
+
       <section className="mt-8 space-y-4">
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
@@ -474,6 +488,7 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                   <select
                     name="status"
                     defaultValue={selectedLead.status}
+                    disabled={!canEdit}
                     className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
                   >
                     {statusOptions.map((option) => (
@@ -500,6 +515,7 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                     name="scheduled_at"
                     type="datetime-local"
                     defaultValue={selectedLead.scheduledAtValue ?? ""}
+                    disabled={!canEdit}
                     className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
                   />
                 </label>
@@ -531,6 +547,7 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                   name="notes"
                   defaultValue={selectedLead.notes}
                   rows={6}
+                  disabled={!canEdit}
                   className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
                 />
               </label>
@@ -549,7 +566,7 @@ export function AdminLeadsManager({ initialLeads, crmReady }: Props) {
                 </p>
                 <button
                   type="submit"
-                  disabled={isPending || !crmReady}
+                  disabled={isPending || !crmReady || !canEdit}
                   className="rounded-full bg-[#1f3b4d] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#274b60] disabled:cursor-not-allowed disabled:bg-[#94a3ad]"
                 >
                   {isPending ? "Guardando..." : "Guardar lead"}

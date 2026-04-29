@@ -1,7 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
-import { getAdminSession } from "@/lib/auth";
+import { getAdminWriteAccess } from "@/lib/auth";
 import { mapRowsWithGallery } from "@/lib/properties";
 import { validatePropertyWritePayload } from "@/lib/property-validation";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
@@ -78,9 +78,12 @@ function slugify(value: string) {
 }
 
 export async function POST() {
-  const session = await getAdminSession();
+  const session = await getAdminWriteAccess();
   if (!session) {
-    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+    return NextResponse.json(
+      { error: "No autorizado para crear propiedades." },
+      { status: 403 },
+    );
   }
 
   if (!isSupabaseAdminConfigured()) {

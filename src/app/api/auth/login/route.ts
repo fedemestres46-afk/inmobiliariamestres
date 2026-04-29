@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   createAdminSessionToken,
-  isAllowedAdminEmail,
+  resolveAdminLoginAccess,
   setAdminSessionCookie,
 } from "@/lib/auth";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase";
@@ -29,7 +29,9 @@ export async function POST(request: Request) {
     );
   }
 
-  if (!isAllowedAdminEmail(email)) {
+  const access = await resolveAdminLoginAccess(email);
+
+  if (!access) {
     return NextResponse.json(
       { error: "Este usuario no tiene acceso al panel administrador." },
       { status: 403 },
@@ -68,6 +70,8 @@ export async function POST(request: Request) {
     createAdminSessionToken({
       userId: data.user.id,
       email: data.user.email ?? email,
+      role: access.role,
+      name: access.fullName,
     }),
   );
 

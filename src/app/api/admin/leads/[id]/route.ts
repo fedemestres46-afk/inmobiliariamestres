@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { toApiLeadStatus } from "@/data/leads";
-import { getAdminSession } from "@/lib/auth";
+import { getAdminWriteAccess } from "@/lib/auth";
 import { getLeadById } from "@/lib/leads";
 import { validateAdminLeadPayload } from "@/lib/lead-validation";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
@@ -19,9 +19,12 @@ function shouldRetryWithoutCalendarFields(error?: { code?: string; message?: str
 }
 
 export async function PATCH(request: Request, context: RouteContext) {
-  const session = await getAdminSession();
+  const session = await getAdminWriteAccess();
   if (!session) {
-    return NextResponse.json({ error: "No autorizado." }, { status: 401 });
+    return NextResponse.json(
+      { error: "No autorizado para editar leads." },
+      { status: 403 },
+    );
   }
 
   if (!isSupabaseAdminConfigured()) {

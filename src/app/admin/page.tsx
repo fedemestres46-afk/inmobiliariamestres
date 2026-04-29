@@ -1,6 +1,7 @@
 import { AdminLogoutButton } from "@/components/admin-logout-button";
 import { AdminCrmDashboard } from "@/components/admin-crm-dashboard";
-import { requireAdminSession } from "@/lib/auth";
+import { canManageContent, formatAdminRoleLabel } from "@/lib/admin-access";
+import { requireAdminAccess } from "@/lib/auth";
 import { getLeads } from "@/lib/leads";
 import { getProperties } from "@/lib/properties";
 import { isSupabaseAdminConfigured } from "@/lib/supabase";
@@ -8,9 +9,13 @@ import { isSupabaseAdminConfigured } from "@/lib/supabase";
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  await requireAdminSession();
+  const session = await requireAdminAccess();
   const properties = await getProperties();
   const { leads, ready } = await getLeads();
+  const canEdit = isSupabaseAdminConfigured() && canManageContent(session.role);
+  const readOnlyReason = !isSupabaseAdminConfigured()
+    ? "Falta SUPABASE_SERVICE_ROLE_KEY en el servidor. Con eso habilitamos guardado, subida de imagenes y edicion real."
+    : "Tu usuario tiene acceso de solo lectura. Para editar contenido, asignale un rol owner, admin o editor.";
 
   return (
     <main className="flex-1 bg-[#f5efe8] px-6 py-10 text-[#1e2930] md:px-10 lg:px-14">
@@ -23,6 +28,9 @@ export default async function AdminPage() {
             <h1 className="mt-3 font-serif-display text-5xl">
               Gestion de propiedades
             </h1>
+            <p className="mt-3 text-sm text-[#6a7379]">
+              Sesion activa: {session.email} · Rol {formatAdminRoleLabel(session.role)}
+            </p>
           </div>
           <AdminLogoutButton />
         </header>
@@ -30,8 +38,9 @@ export default async function AdminPage() {
         <AdminCrmDashboard
           initialProperties={properties}
           initialLeads={leads}
-          canPersist={isSupabaseAdminConfigured()}
+          canPersist={canEdit}
           crmReady={ready}
+          readOnlyReason={canEdit ? undefined : readOnlyReason}
         />
       </div>
     </main>
