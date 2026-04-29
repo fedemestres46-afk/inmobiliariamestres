@@ -1,4 +1,10 @@
-export type PropertyType = "Casa" | "Departamento" | "Lote" | "Oficina";
+export type PropertyType =
+  | "Casa"
+  | "Departamento"
+  | "Lote"
+  | "Oficina"
+  | "Cochera"
+  | "Galpon";
 export type PropertyOperation = "Venta" | "Alquiler";
 export type PropertyStatus = "Publicada" | "Borrador" | "Pausada";
 

@@ -32,6 +32,8 @@ const typeOptions: PropertyType[] = [
   "Departamento",
   "Lote",
   "Oficina",
+  "Cochera",
+  "Galpon",
 ];
 const operationOptions: PropertyOperation[] = ["Venta", "Alquiler"];
 const statusOptions: PropertyStatus[] = ["Publicada", "Borrador", "Pausada"];

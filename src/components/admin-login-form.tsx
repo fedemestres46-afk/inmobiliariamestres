@@ -54,7 +54,7 @@ export function AdminLoginForm() {
       </label>
 
       <label className="block space-y-2">
-        <span className="text-sm text-[#6a7379]">Contrasena</span>
+        <span className="text-sm text-[#6a7379]">Contraseña</span>
         <input
           name="password"
           type="password"
