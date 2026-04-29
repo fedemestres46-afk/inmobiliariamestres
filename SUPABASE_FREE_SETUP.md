@@ -5,12 +5,14 @@ sumar complejidad innecesaria.
 
 ## Enfoque
 
-- una sola tabla principal: `properties`
+- una tabla principal de `properties`
+- una tabla de `leads`
+- una tabla de `admin_users`
 - sin Realtime
 - sin Edge Functions
 - sin login publico
 - admin chico, pensado para 1 o 2 personas
-- imagenes externas al principio para no gastar rapido el storage
+- `Supabase Storage` para imagenes
 
 ## Pasos
 
@@ -23,23 +25,32 @@ sumar complejidad innecesaria.
 ```env
 NEXT_PUBLIC_SUPABASE_URL=tu_url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_anon_key
+SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+ADMIN_AUTH_SECRET=tu_secret_para_sesiones
+ADMIN_ALLOWED_EMAILS=tuemail@dominio.com
 ```
 
 6. Reiniciar `npm run dev`.
 
+7. Correr las migraciones complementarias:
+
+- [supabase/property-final-schema.sql](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/supabase/property-final-schema.sql)
+- [supabase/leads.sql](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/supabase/leads.sql)
+- [supabase/lead-calendar.sql](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/supabase/lead-calendar.sql)
+- [supabase/admin-users.sql](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/supabase/admin-users.sql)
+- [supabase/audit-fields.sql](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/supabase/audit-fields.sql)
+
 ## Estrategia para no pasar limites rapido
 
 - Guardar solo datos de propiedades en Postgres.
-- Mantener las fotos fuera de la base de datos.
+- Mantener las fotos en `Storage`, no dentro de Postgres.
 - No activar features que no necesitamos todavia.
 - Usar un solo proyecto por cliente.
 
 ## Que queda listo hoy
 
-- fallback automatico a mock data si Supabase no esta configurado
 - esquema SQL inicial con datos de ejemplo
 - home y admin leyendo desde una capa unica de datos
-
-## Siguiente paso recomendado
-
-- conectar el alta y edicion de propiedades al panel admin
+- login admin con roles
+- mini CRM de leads
+- auditoria minima de edicion
