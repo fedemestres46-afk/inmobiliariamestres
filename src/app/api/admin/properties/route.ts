@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
+import { logAdminActivity } from "@/lib/activity";
 import { getAdminWriteAccess } from "@/lib/auth";
 import { mapRowsWithGallery } from "@/lib/properties";
 import { validatePropertyWritePayload } from "@/lib/property-validation";
@@ -182,8 +183,18 @@ export async function POST() {
   }
 
   const [property] = await mapRowsWithGallery([data as PropertyRow]);
+  const activity = await logAdminActivity({
+    entityType: "property",
+    entityId: property.id,
+    entityLabel: property.title,
+    action: "create",
+    summary: `Creo la propiedad ${property.title}.`,
+    actorUserId: session.sub,
+    actorEmail: session.email,
+    actorRole: session.role,
+  });
   revalidatePath("/");
   revalidatePath("/admin");
 
-  return NextResponse.json({ property });
+  return NextResponse.json({ property, activity });
 }

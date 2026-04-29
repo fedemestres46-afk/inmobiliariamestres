@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
+import { logAdminActivity } from "@/lib/activity";
 import { getAdminWriteAccess } from "@/lib/auth";
 import { getPropertyGallery, mapRowsWithGallery } from "@/lib/properties";
 import {
@@ -197,10 +198,20 @@ export async function POST(request: Request, context: RouteContext) {
   }
 
   const [property] = await mapRowsWithGallery([data as PropertyRow]);
+  const activity = await logAdminActivity({
+    entityType: "property",
+    entityId: property.id,
+    entityLabel: property.title,
+    action: "upload_images",
+    summary: `Subio ${files.length} imagen${files.length === 1 ? "" : "es"} en ${property.title}.`,
+    actorUserId: session.sub,
+    actorEmail: session.email,
+    actorRole: session.role,
+  });
   revalidatePath("/");
   revalidatePath("/admin");
 
-  return NextResponse.json({ property });
+  return NextResponse.json({ property, activity });
 }
 
 export async function DELETE(request: Request, context: RouteContext) {
@@ -306,7 +317,17 @@ export async function DELETE(request: Request, context: RouteContext) {
   }
 
   const [property] = await mapRowsWithGallery([data as PropertyRow]);
+  const activity = await logAdminActivity({
+    entityType: "property",
+    entityId: property.id,
+    entityLabel: property.title,
+    action: "delete_image",
+    summary: `Borro una imagen de ${property.title}.`,
+    actorUserId: session.sub,
+    actorEmail: session.email,
+    actorRole: session.role,
+  });
   revalidatePath("/");
   revalidatePath("/admin");
-  return NextResponse.json({ property });
+  return NextResponse.json({ property, activity });
 }

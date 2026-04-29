@@ -58,3 +58,4 @@ Abrir:
 
 - Guia de deploy: [VERCEL_DEPLOY.md](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/VERCEL_DEPLOY.md)
 - Operacion y respaldos: [OPERACION_Y_RESPALDOS.md](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/OPERACION_Y_RESPALDOS.md)
+- Entrega comercial: [CHECKLIST_ENTREGA_COMERCIAL.md](C:/Users/FEDE/Documents/Codex/2026-04-25/puedo-hacer-algo-asi-https-www/CHECKLIST_ENTREGA_COMERCIAL.md)

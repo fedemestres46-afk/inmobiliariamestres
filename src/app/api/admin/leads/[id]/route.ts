@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { toApiLeadStatus } from "@/data/leads";
+import { logAdminActivity } from "@/lib/activity";
 import { getAdminWriteAccess } from "@/lib/auth";
 import { getLeadById } from "@/lib/leads";
 import { validateAdminLeadPayload } from "@/lib/lead-validation";
@@ -91,5 +92,16 @@ export async function PATCH(request: Request, context: RouteContext) {
     );
   }
 
-  return NextResponse.json({ lead });
+  const activity = await logAdminActivity({
+    entityType: "lead",
+    entityId: lead.id,
+    entityLabel: lead.fullName,
+    action: "update",
+    summary: `Actualizo el lead de ${lead.fullName} por ${lead.propertyTitle}.`,
+    actorUserId: session.sub,
+    actorEmail: session.email,
+    actorRole: session.role,
+  });
+
+  return NextResponse.json({ lead, activity });
 }

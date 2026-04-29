@@ -1,6 +1,7 @@
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
+import { logAdminActivity } from "@/lib/activity";
 import { getAdminWriteAccess } from "@/lib/auth";
 import { getPropertyGallery, mapRowsWithGallery } from "@/lib/properties";
 import { validatePropertyWritePayload } from "@/lib/property-validation";
@@ -158,10 +159,20 @@ export async function PATCH(request: Request, context: RouteContext) {
   }
 
   const [property] = await mapRowsWithGallery([data as PropertyRow]);
+  const activity = await logAdminActivity({
+    entityType: "property",
+    entityId: property.id,
+    entityLabel: property.title,
+    action: "update",
+    summary: `Actualizo la propiedad ${property.title}.`,
+    actorUserId: session.sub,
+    actorEmail: session.email,
+    actorRole: session.role,
+  });
   revalidatePath("/");
   revalidatePath("/admin");
 
-  return NextResponse.json({ property });
+  return NextResponse.json({ property, activity });
 }
 
 export async function DELETE(_request: Request, context: RouteContext) {
@@ -185,6 +196,11 @@ export async function DELETE(_request: Request, context: RouteContext) {
 
   const { id } = await context.params;
   const supabase = getSupabaseAdminClient();
+  const { data: propertyToDelete } = await supabase
+    .from("properties")
+    .select("id, title")
+    .eq("id", id)
+    .maybeSingle();
   const gallery = await getPropertyGallery(id);
   const pathsToRemove = gallery
     .map((imageUrl) => {
@@ -230,6 +246,16 @@ export async function DELETE(_request: Request, context: RouteContext) {
 
   revalidatePath("/");
   revalidatePath("/admin");
+  const activity = await logAdminActivity({
+    entityType: "property",
+    entityId: id,
+    entityLabel: propertyToDelete?.title ?? "Propiedad eliminada",
+    action: "delete",
+    summary: `Elimino la propiedad ${propertyToDelete?.title ?? id}.`,
+    actorUserId: session.sub,
+    actorEmail: session.email,
+    actorRole: session.role,
+  });
 
-  return NextResponse.json({ success: true, id });
+  return NextResponse.json({ success: true, id, activity });
 }

@@ -1,6 +1,8 @@
+import { AdminActivityFeed } from "@/components/admin-activity-feed";
 import { AdminLogoutButton } from "@/components/admin-logout-button";
 import { AdminCrmDashboard } from "@/components/admin-crm-dashboard";
 import { canManageContent, formatAdminRoleLabel } from "@/lib/admin-access";
+import { getRecentAdminActivity } from "@/lib/activity";
 import { requireAdminAccess } from "@/lib/auth";
 import { getLeads } from "@/lib/leads";
 import { getProperties } from "@/lib/properties";
@@ -12,6 +14,7 @@ export default async function AdminPage() {
   const session = await requireAdminAccess();
   const properties = await getProperties();
   const { leads, ready } = await getLeads();
+  const { activities, ready: activityReady } = await getRecentAdminActivity();
   const canEdit = isSupabaseAdminConfigured() && canManageContent(session.role);
   const readOnlyReason = !isSupabaseAdminConfigured()
     ? "Falta SUPABASE_SERVICE_ROLE_KEY en el servidor. Con eso habilitamos guardado, subida de imagenes y edicion real."
@@ -41,6 +44,11 @@ export default async function AdminPage() {
           canPersist={canEdit}
           crmReady={ready}
           readOnlyReason={canEdit ? undefined : readOnlyReason}
+        />
+
+        <AdminActivityFeed
+          initialActivities={activities}
+          activityReady={activityReady}
         />
       </div>
     </main>
