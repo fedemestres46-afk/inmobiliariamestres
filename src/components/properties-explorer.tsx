@@ -25,6 +25,8 @@ const propertyTypeOptions: Array<PropertyType | "Todos"> = [
   "Departamento",
   "Lote",
   "Oficina",
+  "Cochera",
+  "Galpon",
 ];
 
 const operationOptions: Array<PropertyOperation | "Todas"> = [
