@@ -505,6 +505,14 @@ export function AdminLeadsManager({
                   <p className="mt-2 text-lg text-[#22313b]">
                     {selectedLead.createdAt}
                   </p>
+                  {selectedLead.updatedAt ? (
+                    <p className="mt-2 text-xs text-[#8b969d]">
+                      Ultima edicion: {selectedLead.updatedAt}
+                      {selectedLead.lastEditedByEmail
+                        ? ` · ${selectedLead.lastEditedByEmail}`
+                        : ""}
+                    </p>
+                  ) : null}
                 </div>
               </div>
 

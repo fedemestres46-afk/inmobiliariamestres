@@ -1053,21 +1053,31 @@ export function AdminPropertiesManager({
           </div>
 
           <div className="mt-6 flex items-center justify-between gap-4">
-            <p
-              className={`text-sm ${
-                saveState.type === "error"
-                  ? "text-[#a04d39]"
-                  : saveState.type === "success"
-                    ? "text-[#39704a]"
-                    : "text-[#6a7379]"
-              }`}
-            >
-              {saveState.message ||
-                `Precio actual: ${formatPrice(
-                  selectedProperty.numericPrice,
-                  selectedProperty.currency,
-                )}`}
-            </p>
+            <div className="space-y-1">
+              <p
+                className={`text-sm ${
+                  saveState.type === "error"
+                    ? "text-[#a04d39]"
+                    : saveState.type === "success"
+                      ? "text-[#39704a]"
+                      : "text-[#6a7379]"
+                }`}
+              >
+                {saveState.message ||
+                  `Precio actual: ${formatPrice(
+                    selectedProperty.numericPrice,
+                    selectedProperty.currency,
+                  )}`}
+              </p>
+              {selectedProperty.updatedAt ? (
+                <p className="text-xs text-[#8b969d]">
+                  Ultima edicion: {selectedProperty.updatedAt}
+                  {selectedProperty.lastEditedByEmail
+                    ? ` · ${selectedProperty.lastEditedByEmail}`
+                    : ""}
+                </p>
+              ) : null}
+            </div>
             <button
               type="submit"
               disabled={isPending || !canPersist}

@@ -6,9 +6,9 @@ import {
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
 const leadSelect =
-  "id, property_id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, notes, origin, status, scheduled_at, google_event_id, created_at, properties(id, title, location)";
+  "id, property_id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, notes, origin, status, scheduled_at, google_event_id, created_at, updated_at, last_edited_by_email, last_edited_by_user_id, properties(id, title, location)";
 const legacyLeadSelect =
-  "id, property_id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, notes, origin, status, created_at, properties(id, title, location)";
+  "id, property_id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, notes, origin, status, created_at, updated_at, properties(id, title, location)";
 
 function isMissingRelationError(error: { message?: string } | null) {
   const message = error?.message?.toLowerCase() ?? "";
@@ -17,7 +17,9 @@ function isMissingRelationError(error: { message?: string } | null) {
     message.includes("does not exist") ||
     message.includes("schema cache") ||
     message.includes("scheduled_at") ||
-    message.includes("google_event_id")
+    message.includes("google_event_id") ||
+    message.includes("last_edited_by_email") ||
+    message.includes("last_edited_by_user_id")
   );
 }
 

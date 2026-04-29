@@ -14,7 +14,9 @@ function shouldRetryWithoutCalendarFields(error?: { code?: string; message?: str
     error?.code === "PGRST204" ||
     error?.code === "42703" ||
     error?.message?.includes("scheduled_at") ||
-    error?.message?.includes("google_event_id")
+    error?.message?.includes("google_event_id") ||
+    error?.message?.includes("last_edited_by_email") ||
+    error?.message?.includes("last_edited_by_user_id")
   );
 }
 
@@ -52,6 +54,8 @@ export async function PATCH(request: Request, context: RouteContext) {
     ...(validation.data.scheduledAt !== undefined
       ? { scheduled_at: validation.data.scheduledAt || null }
       : {}),
+    last_edited_by_user_id: session.sub,
+    last_edited_by_email: session.email,
   };
 
   let { error } = await supabase
@@ -60,7 +64,12 @@ export async function PATCH(request: Request, context: RouteContext) {
     .eq("id", id);
 
   if (error && shouldRetryWithoutCalendarFields(error)) {
-    const { scheduled_at: _scheduledAt, ...legacyPayload } = updatePayload;
+    const {
+      scheduled_at: _scheduledAt,
+      last_edited_by_user_id: _lastEditedByUserId,
+      last_edited_by_email: _lastEditedByEmail,
+      ...legacyPayload
+    } = updatePayload;
     ({ error } = await supabase.from("leads").update(legacyPayload).eq("id", id));
   }
 

@@ -13,6 +13,36 @@ type RouteContext = {
   params: Promise<{ id: string }>;
 };
 
+function shouldRetryWithoutAuditFields(error?: { code?: string; message?: string } | null) {
+  return (
+    error?.code === "PGRST204" ||
+    error?.code === "42703" ||
+    error?.message?.includes("last_edited_by_email") ||
+    error?.message?.includes("last_edited_by_user_id")
+  );
+}
+
+function stripMissingAuditFields<T extends Record<string, unknown>>(
+  payload: T,
+  error?: { message?: string } | null,
+) {
+  if (!error?.message) {
+    return payload;
+  }
+
+  const nextPayload = { ...payload };
+
+  if (error.message.includes("last_edited_by_email")) {
+    delete nextPayload.last_edited_by_email;
+  }
+
+  if (error.message.includes("last_edited_by_user_id")) {
+    delete nextPayload.last_edited_by_user_id;
+  }
+
+  return nextPayload;
+}
+
 function sanitizeFilename(name: string) {
   return name
     .toLowerCase()
@@ -128,20 +158,32 @@ export async function POST(request: Request, context: RouteContext) {
     }
   }
 
-  const { data, error } = await supabase
+  const coverUpdatePayload = firstUploadedPublicUrl
+    ? {
+        cover_url: firstUploadedPublicUrl,
+        last_edited_by_user_id: session.sub,
+        last_edited_by_email: session.email,
+      }
+    : {
+        last_edited_by_user_id: session.sub,
+        last_edited_by_email: session.email,
+      };
+
+  let { data, error } = await supabase
     .from("properties")
-    .update(
-      firstUploadedPublicUrl
-        ? {
-            cover_url: firstUploadedPublicUrl,
-          }
-        : {},
-    )
+    .update(coverUpdatePayload)
     .eq("id", id)
-    .select(
-      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description, latitude, longitude, maps_url",
-    )
+    .select("*")
     .single();
+
+  if (error && shouldRetryWithoutAuditFields(error)) {
+    ({ data, error } = await supabase
+      .from("properties")
+      .update(stripMissingAuditFields(coverUpdatePayload, error))
+      .eq("id", id)
+      .select("*")
+      .single());
+  }
 
   if (error || !data) {
     return NextResponse.json(
@@ -202,9 +244,7 @@ export async function DELETE(request: Request, context: RouteContext) {
   const supabase = getSupabaseAdminClient();
   const { data: currentProperty, error: propertyError } = await supabase
     .from("properties")
-    .select(
-      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description, latitude, longitude, maps_url",
-    )
+    .select("*")
     .eq("id", id)
     .single();
 
@@ -230,17 +270,29 @@ export async function DELETE(request: Request, context: RouteContext) {
   const updatePayload = shouldUpdateCover
     ? {
         cover_url: nextCover,
+        last_edited_by_user_id: session.sub,
+        last_edited_by_email: session.email,
       }
-    : {};
+    : {
+        last_edited_by_user_id: session.sub,
+        last_edited_by_email: session.email,
+      };
 
-  const { data, error } = await supabase
+  let { data, error } = await supabase
     .from("properties")
     .update(updatePayload)
     .eq("id", id)
-    .select(
-      "id, slug, title, location, property_type, operation_type, price, currency, surface_m2, bedrooms, status, featured, cover_url, description, latitude, longitude, maps_url",
-    )
+    .select("*")
     .single();
+
+  if (error && shouldRetryWithoutAuditFields(error)) {
+    ({ data, error } = await supabase
+      .from("properties")
+      .update(stripMissingAuditFields(updatePayload, error))
+      .eq("id", id)
+      .select("*")
+      .single());
+  }
 
   if (error || !data) {
     return NextResponse.json(

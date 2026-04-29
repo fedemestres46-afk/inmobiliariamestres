@@ -58,6 +58,8 @@ export type Property = {
   description?: string;
   services: PropertyService[];
   amenities: PropertyAmenity[];
+  updatedAt?: string;
+  lastEditedByEmail?: string;
 };
 
 export type PropertyRow = {
@@ -84,6 +86,9 @@ export type PropertyRow = {
   maps_url?: string | null;
   service_tags?: string[] | null;
   amenity_tags?: string[] | null;
+  updated_at?: string | null;
+  last_edited_by_email?: string | null;
+  last_edited_by_user_id?: string | null;
 };
 
 function isValidLatitude(value: number) {
@@ -98,6 +103,17 @@ function formatPrice(price: number, currency: "USD" | "ARS") {
   const locale = "es-AR";
   const formatted = new Intl.NumberFormat(locale).format(price);
   return currency === "USD" ? `USD ${formatted}` : `AR$ ${formatted}`;
+}
+
+function formatDateTime(value?: string | null) {
+  if (!value) {
+    return undefined;
+  }
+
+  return new Intl.DateTimeFormat("es-AR", {
+    dateStyle: "short",
+    timeStyle: "short",
+  }).format(new Date(value));
 }
 
 function mapStatus(status: PropertyRow["status"]): PropertyStatus {
@@ -187,6 +203,8 @@ export function mapPropertyRow(row: PropertyRow, gallery: string[] = []): Proper
     description: row.description ?? undefined,
     services,
     amenities,
+    updatedAt: formatDateTime(row.updated_at),
+    lastEditedByEmail: row.last_edited_by_email ?? undefined,
   };
 }
 

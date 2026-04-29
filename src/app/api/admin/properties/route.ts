@@ -27,7 +27,9 @@ function shouldRetryWithoutExtendedFields(error?: { code?: string; message?: str
     error?.message?.includes("covered_surface_m2") ||
     error?.message?.includes("rooms") ||
     error?.message?.includes("bathrooms") ||
-    error?.message?.includes("garage_spaces")
+    error?.message?.includes("garage_spaces") ||
+    error?.message?.includes("last_edited_by_email") ||
+    error?.message?.includes("last_edited_by_user_id")
   );
 }
 
@@ -62,6 +64,14 @@ function stripMissingExtendedFields<T extends Record<string, unknown>>(
 
   if (error.message.includes("garage_spaces")) {
     delete nextPayload.garage_spaces;
+  }
+
+  if (error.message.includes("last_edited_by_email")) {
+    delete nextPayload.last_edited_by_email;
+  }
+
+  if (error.message.includes("last_edited_by_user_id")) {
+    delete nextPayload.last_edited_by_user_id;
   }
 
   return nextPayload;
@@ -133,6 +143,8 @@ export async function POST() {
   const basePayload = {
     slug,
     ...validation.data,
+    last_edited_by_user_id: session.sub,
+    last_edited_by_email: session.email,
   };
 
   let { data, error } = await supabase
