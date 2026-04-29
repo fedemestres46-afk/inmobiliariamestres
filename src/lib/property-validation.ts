@@ -19,6 +19,7 @@ const propertyTypes: PropertyType[] = [
 const propertyOperations: PropertyOperation[] = ["Venta", "Alquiler"];
 const propertyCurrencies = ["USD", "ARS"] as const;
 const propertyStatuses: PropertyStatus[] = ["Publicada", "Borrador", "Pausada"];
+const propertyApiStatuses = ["published", "draft", "paused"] as const;
 
 export type PropertyWritePayload = {
   title: string;
@@ -136,6 +137,23 @@ function toApiStatus(status: PropertyStatus) {
   }
 }
 
+function parsePropertyStatus(value: unknown): FieldValidation<PropertyWritePayload["status"]> {
+  if (typeof value !== "string") {
+    return { error: "El estado no es valido." };
+  }
+
+  if (propertyApiStatuses.includes(value as (typeof propertyApiStatuses)[number])) {
+    return { value: value as PropertyWritePayload["status"] };
+  }
+
+  const uiStatus = parseEnumValue(value, propertyStatuses, "El estado");
+  if ("error" in uiStatus) {
+    return { error: uiStatus.error };
+  }
+
+  return { value: toApiStatus(uiStatus.value) };
+}
+
 export function validatePropertyWritePayload(body: unknown): ValidationResult<PropertyWritePayload> {
   if (!isObject(body)) {
     return { success: false, error: "No se recibieron datos validos para la propiedad." };
@@ -170,9 +188,9 @@ export function validatePropertyWritePayload(body: unknown): ValidationResult<Pr
     return { success: false, error: currency.error };
   }
 
-  const uiStatus = parseEnumValue(body.status, propertyStatuses, "El estado");
-  if ("error" in uiStatus) {
-    return { success: false, error: uiStatus.error };
+  const status = parsePropertyStatus(body.status);
+  if ("error" in status) {
+    return { success: false, error: status.error };
   }
 
   const price = parseNonNegativeInteger(body.price, "El precio");
@@ -250,7 +268,7 @@ export function validatePropertyWritePayload(body: unknown): ValidationResult<Pr
       bedrooms: bedrooms.value,
       bathrooms: bathrooms.value,
       garage_spaces: garageSpaces.value,
-      status: toApiStatus(uiStatus.value),
+      status: status.value,
       featured: parseBoolean(body.featured),
       cover_url: coverUrl,
       description,
