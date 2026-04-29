@@ -11,7 +11,7 @@ export default async function Home() {
     <main className="flex-1 bg-[var(--color-cream)] text-[var(--color-ink)]">
       <section className="hero-shell px-6 py-6 md:px-10 lg:px-14">
         <div className="hero-panel overflow-hidden rounded-[2rem] border border-white/30 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.26),_transparent_35%),linear-gradient(135deg,_rgba(24,47,60,0.96),_rgba(43,69,83,0.92)_48%,_rgba(198,122,66,0.88))] text-white shadow-[0_30px_80px_rgba(24,47,60,0.18)]">
-          <header className="mx-auto flex max-w-[96rem] flex-col items-center justify-between gap-4 px-6 py-6 text-center md:flex-row md:px-10 md:text-left">
+          <header className="mx-auto flex max-w-[104rem] flex-col items-center justify-between gap-4 px-6 py-6 text-center md:px-12 md:text-left lg:flex-row">
             <div className="w-full md:w-auto">
               <h1 className="font-serif-display text-2xl tracking-[0.18em] md:text-3xl">
                 MESTRES INMOBILIARIA
@@ -39,7 +39,7 @@ export default async function Home() {
             </nav>
           </header>
 
-          <div className="mx-auto max-w-[96rem] px-6 py-10 md:px-10 lg:py-20">
+          <div className="mx-auto max-w-[104rem] px-6 py-10 md:px-12 lg:py-20">
             <div className="space-y-8">
               <div className="space-y-5">
                 <p className="max-w-xl text-sm uppercase tracking-[0.4em] text-[var(--color-sand)]">
@@ -70,7 +70,7 @@ export default async function Home() {
 
       <section
         id="servicios"
-        className="mx-auto grid max-w-[96rem] gap-6 px-6 py-12 md:px-10 lg:grid-cols-3 lg:px-14"
+        className="mx-auto grid max-w-[104rem] gap-6 px-6 py-12 md:px-12 lg:grid-cols-3 lg:px-16"
       >
         {[
           {
@@ -103,7 +103,7 @@ export default async function Home() {
 
       <section
         id="propiedades"
-        className="mx-auto max-w-[96rem] px-6 py-12 md:px-10 lg:px-14"
+        className="mx-auto max-w-[104rem] px-6 py-12 md:px-12 lg:px-16"
       >
         <div>
           <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-clay)]">
@@ -119,7 +119,7 @@ export default async function Home() {
 
       <section
         id="contacto"
-        className="mx-auto max-w-[96rem] px-6 py-12 md:px-10 lg:px-14"
+        className="mx-auto max-w-[104rem] px-6 py-12 md:px-12 lg:px-16"
       >
         <div className="rounded-[2rem] bg-[var(--color-deep)] px-8 py-10 text-white md:px-10">
           <p className="text-sm uppercase tracking-[0.35em] text-[var(--color-sand)]">
@@ -136,7 +136,7 @@ export default async function Home() {
         </div>
       </section>
 
-      <footer className="mx-auto flex max-w-[96rem] items-center justify-between px-6 pb-10 pt-2 text-sm text-[var(--color-muted)] md:px-10 lg:px-14">
+      <footer className="mx-auto flex max-w-[104rem] items-center justify-between px-6 pb-10 pt-2 text-sm text-[var(--color-muted)] md:px-12 lg:px-16">
         <p>MESTRES INMOBILIARIA</p>
         <Link
           href="/admin"
