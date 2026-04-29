@@ -139,7 +139,7 @@ export default async function PropertyDetailPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(propertySchema) }}
       />
       <section className="px-6 py-6 md:px-10 lg:px-14">
-        <div className="mx-auto max-w-7xl rounded-[2rem] border border-white/35 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_35%),linear-gradient(135deg,_rgba(24,47,60,0.96),_rgba(43,69,83,0.92)_48%,_rgba(198,122,66,0.88))] px-6 py-8 text-white shadow-[0_30px_80px_rgba(24,47,60,0.18)] md:px-10 md:py-10">
+        <div className="mx-auto max-w-[96rem] rounded-[2rem] border border-white/35 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.22),_transparent_35%),linear-gradient(135deg,_rgba(24,47,60,0.96),_rgba(43,69,83,0.92)_48%,_rgba(198,122,66,0.88))] px-6 py-8 text-white shadow-[0_30px_80px_rgba(24,47,60,0.18)] md:px-10 md:py-10">
           <div className="flex flex-wrap items-center gap-3 text-sm text-white/78">
             <Link href="/" className="transition hover:text-white">
               Inicio
@@ -167,12 +167,12 @@ export default async function PropertyDetailPage({ params }: Props) {
               </div>
 
               <div className="space-y-4">
-                <h1 className="max-w-4xl font-serif-display text-5xl leading-none md:text-7xl">
+                <h1 className="max-w-5xl font-serif-display text-5xl leading-none md:text-7xl">
                   {property.title}
                 </h1>
               </div>
 
-              <div className="max-w-3xl rounded-[1.75rem] border border-white/16 bg-white/8 p-5 backdrop-blur">
+              <div className="max-w-4xl rounded-[1.75rem] border border-white/16 bg-white/8 p-5 backdrop-blur">
                 <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-sand)]">
                   Descripcion
                 </p>
@@ -247,7 +247,7 @@ export default async function PropertyDetailPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl space-y-8 px-6 py-8 md:px-10 lg:px-14">
+      <section className="mx-auto max-w-[96rem] space-y-8 px-6 py-8 md:px-10 lg:px-14">
         <div className="grid gap-4 lg:grid-cols-[1.45fr_0.55fr]">
           <article className="overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-white shadow-[0_22px_60px_rgba(35,43,50,0.08)]">
             <div className="relative aspect-[16/10]">
