@@ -1,0 +1,27 @@
+alter table public.properties
+add column if not exists slug text,
+add column if not exists title text,
+add column if not exists location text,
+add column if not exists property_type text,
+add column if not exists operation_type text,
+add column if not exists price integer not null default 0,
+add column if not exists currency text not null default 'USD',
+add column if not exists surface_m2 integer not null default 0,
+add column if not exists covered_surface_m2 integer not null default 0,
+add column if not exists rooms integer not null default 0,
+add column if not exists bedrooms integer not null default 0,
+add column if not exists bathrooms integer not null default 0,
+add column if not exists garage_spaces integer not null default 0,
+add column if not exists description text,
+add column if not exists status text not null default 'draft',
+add column if not exists featured boolean not null default false,
+add column if not exists cover_url text,
+add column if not exists latitude double precision,
+add column if not exists longitude double precision,
+add column if not exists maps_url text,
+add column if not exists service_tags text[] not null default '{}',
+add column if not exists amenity_tags text[] not null default '{}',
+add column if not exists created_at timestamptz not null default now(),
+add column if not exists updated_at timestamptz not null default now();
+
+create unique index if not exists properties_slug_key on public.properties (slug);

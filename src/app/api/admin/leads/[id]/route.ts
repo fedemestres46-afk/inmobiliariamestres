@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { toApiLeadStatus, type LeadStatus } from "@/data/leads";
+import { toApiLeadStatus } from "@/data/leads";
 import { getAdminSession } from "@/lib/auth";
 import { getLeadById } from "@/lib/leads";
+import { validateAdminLeadPayload } from "@/lib/lead-validation";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
 type RouteContext = {
@@ -31,18 +32,22 @@ export async function PATCH(request: Request, context: RouteContext) {
   }
 
   const { id } = await context.params;
-  const body = (await request.json()) as {
-    status?: LeadStatus;
-    notes?: string;
-    scheduledAt?: string;
-  };
+  const body = await request.json();
+  const validation = validateAdminLeadPayload(body);
+  if (!validation.success) {
+    return NextResponse.json({ error: validation.error }, { status: 400 });
+  }
 
   const supabase = getSupabaseAdminClient();
   const updatePayload = {
-    ...(body.status ? { status: toApiLeadStatus(body.status) } : {}),
-    ...(body.notes !== undefined ? { notes: body.notes.trim() || null } : {}),
-    ...(body.scheduledAt !== undefined
-      ? { scheduled_at: body.scheduledAt || null }
+    ...(validation.data.status
+      ? { status: toApiLeadStatus(validation.data.status) }
+      : {}),
+    ...(validation.data.notes !== undefined
+      ? { notes: validation.data.notes }
+      : {}),
+    ...(validation.data.scheduledAt !== undefined
+      ? { scheduled_at: validation.data.scheduledAt || null }
       : {}),
   };
 

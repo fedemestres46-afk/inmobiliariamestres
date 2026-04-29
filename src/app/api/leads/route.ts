@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLeadById } from "@/lib/leads";
+import { validatePublicLeadPayload } from "@/lib/lead-validation";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
 export async function POST(request: Request) {
@@ -10,26 +11,13 @@ export async function POST(request: Request) {
     );
   }
 
-  const body = (await request.json()) as {
-    propertyId?: string;
-    fullName?: string;
-    phone?: string;
-    email?: string;
-    message?: string;
-  };
-
-  const propertyId = body.propertyId?.trim();
-  const fullName = body.fullName?.trim();
-  const phone = body.phone?.trim();
-  const email = body.email?.trim() || null;
-  const message = body.message?.trim() || null;
-
-  if (!propertyId || !fullName || !phone) {
-    return NextResponse.json(
-      { error: "Faltan datos para registrar la consulta." },
-      { status: 400 },
-    );
+  const body = await request.json();
+  const validation = validatePublicLeadPayload(body);
+  if (!validation.success) {
+    return NextResponse.json({ error: validation.error }, { status: 400 });
   }
+
+  const { propertyId, fullName, phone, email, message } = validation.data;
 
   const supabase = getSupabaseAdminClient();
   const { data: property, error: propertyError } = await supabase

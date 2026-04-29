@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
 import { getAdminSession } from "@/lib/auth";
 import { getPropertyGallery, mapRowsWithGallery } from "@/lib/properties";
+import { validatePropertyWritePayload } from "@/lib/property-validation";
 import {
   getSupabaseAdminClient,
   isSupabaseAdminConfigured,
@@ -92,34 +93,14 @@ export async function PATCH(request: Request, context: RouteContext) {
 
   const { id } = await context.params;
   const body = await request.json();
+  const validation = validatePropertyWritePayload(body);
+
+  if (!validation.success) {
+    return NextResponse.json({ error: validation.error }, { status: 400 });
+  }
+
   const supabase = getSupabaseAdminClient();
-  const updatePayload = {
-    title: body.title,
-    location: body.location,
-    property_type: body.property_type,
-    operation_type: body.operation_type,
-    price: body.price,
-    currency: body.currency,
-    surface_m2: body.surface_m2,
-    ...(body.covered_surface_m2 !== undefined
-      ? { covered_surface_m2: body.covered_surface_m2 }
-      : {}),
-    ...(body.rooms !== undefined ? { rooms: body.rooms } : {}),
-    bedrooms: body.bedrooms,
-    ...(body.bathrooms !== undefined ? { bathrooms: body.bathrooms } : {}),
-    ...(body.garage_spaces !== undefined
-      ? { garage_spaces: body.garage_spaces }
-      : {}),
-    ...(body.service_tags !== undefined ? { service_tags: body.service_tags } : {}),
-    ...(body.amenity_tags !== undefined ? { amenity_tags: body.amenity_tags } : {}),
-    status: body.status,
-    featured: body.featured,
-    cover_url: body.cover_url,
-    description: body.description,
-    ...(body.latitude !== undefined ? { latitude: body.latitude } : {}),
-    ...(body.longitude !== undefined ? { longitude: body.longitude } : {}),
-    ...(body.maps_url !== undefined ? { maps_url: body.maps_url } : {}),
-  };
+  const updatePayload = validation.data;
 
   let { data, error } = await supabase
     .from("properties")

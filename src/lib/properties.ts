@@ -42,6 +42,10 @@ export async function mapRowsWithGallery(rows: PropertyRow[]) {
 }
 
 export async function getProperties(): Promise<Property[]> {
+  if (!isSupabaseConfigured()) {
+    return mockProperties;
+  }
+
   if (isSupabaseAdminConfigured()) {
     try {
       const supabase = getSupabaseAdminClient();
@@ -63,10 +67,6 @@ export async function getProperties(): Promise<Property[]> {
     }
   }
 
-  if (!isSupabaseConfigured()) {
-    return mockProperties;
-  }
-
   try {
     const supabase = getSupabaseClient();
     const { data, error } = await supabase
@@ -74,15 +74,15 @@ export async function getProperties(): Promise<Property[]> {
       .select("*")
       .order("created_at", { ascending: false });
 
-    if (error || !data || data.length === 0) {
+    if (error || !data) {
       console.error("No se pudieron leer propiedades desde Supabase.", error);
-      return mockProperties;
+      return [];
     }
 
     return (data as PropertyRow[]).map((row) => mapPropertyRow(row));
   } catch (error) {
     console.error("Fallo la inicializacion de Supabase.", error);
-    return mockProperties;
+    return [];
   }
 }
 

@@ -33,12 +33,6 @@ export default async function AdminPage() {
           canPersist={isSupabaseAdminConfigured()}
           crmReady={ready}
         />
-
-        <section className="mt-8 rounded-[1.5rem] border border-dashed border-[#d7c7b6] bg-[#fbf7f2] px-6 py-5 text-sm leading-7 text-[#6a7379]">
-          Recomendacion para el plan gratuito: mantener una sola tabla principal
-          de propiedades, usar URLs externas para imagenes mientras arrancamos y
-          agregar login admin recien cuando la base ya este conectada.
-        </section>
       </div>
     </main>
   );

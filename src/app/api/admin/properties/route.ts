@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { type PropertyRow } from "@/data/properties";
 import { getAdminSession } from "@/lib/auth";
 import { mapRowsWithGallery } from "@/lib/properties";
+import { validatePropertyWritePayload } from "@/lib/property-validation";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
 function getSupabaseProjectLabel() {
@@ -95,8 +96,7 @@ export async function POST() {
   const supabase = getSupabaseAdminClient();
   const baseTitle = "Nueva propiedad";
   const slug = `${slugify(baseTitle)}-${Date.now().toString().slice(-6)}`;
-  const basePayload = {
-    slug,
+  const validation = validatePropertyWritePayload({
     title: baseTitle,
     location: "Rosario, Santa Fe",
     property_type: "Departamento",
@@ -111,11 +111,25 @@ export async function POST() {
     garage_spaces: 0,
     service_tags: [],
     amenity_tags: [],
-    status: "draft",
+    status: "Borrador",
     featured: false,
     cover_url:
       "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80",
     description: "Completa los datos de esta propiedad desde el panel admin.",
+  });
+
+  if (!validation.success) {
+    return NextResponse.json(
+      {
+        error: validation.error,
+      },
+      { status: 500 },
+    );
+  }
+
+  const basePayload = {
+    slug,
+    ...validation.data,
   };
 
   let { data, error } = await supabase
