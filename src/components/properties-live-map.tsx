@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Property } from "@/data/properties";
 
 type Props = {
@@ -36,6 +36,7 @@ export function PropertiesLiveMap({
   activeProperty,
   onSelect,
 }: Props) {
+  const [isMapReady, setIsMapReady] = useState(false);
   const mapElementRef = useRef<HTMLDivElement | null>(null);
   const leafletRef = useRef<LeafletModule | null>(null);
   const mapRef = useRef<any>(null);
@@ -78,6 +79,7 @@ export function PropertiesLiveMap({
 
       markersLayerRef.current = L.layerGroup().addTo(map);
       mapRef.current = map;
+      setIsMapReady(true);
       scheduleMapInvalidate(map);
     }
 
@@ -93,6 +95,7 @@ export function PropertiesLiveMap({
       }
 
       markersLayerRef.current = null;
+      setIsMapReady(false);
     };
   }, []);
 
@@ -117,7 +120,7 @@ export function PropertiesLiveMap({
     const map = mapRef.current;
     const markersLayer = markersLayerRef.current;
 
-    if (!L || !map || !markersLayer) {
+    if (!isMapReady || !L || !map || !markersLayer) {
       return;
     }
 
@@ -187,11 +190,11 @@ export function PropertiesLiveMap({
       });
       scheduleMapInvalidate(map);
     }
-  }, [activeProperty?.id, onSelect, validProperties]);
+  }, [activeProperty?.id, isMapReady, onSelect, validProperties]);
 
   useEffect(() => {
     const map = mapRef.current;
-    if (!map) {
+    if (!isMapReady || !map) {
       return;
     }
 
@@ -209,7 +212,7 @@ export function PropertiesLiveMap({
         marker.setZIndexOffset(0);
       }
     });
-  }, [activeProperty]);
+  }, [activeProperty, isMapReady]);
 
   return <div ref={mapElementRef} className="h-full w-full" />;
 }
