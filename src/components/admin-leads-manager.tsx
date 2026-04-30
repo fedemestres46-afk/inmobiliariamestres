@@ -19,6 +19,11 @@ type SaveState = {
   message: string;
 };
 
+type ExportState = {
+  type: "idle" | "success" | "error";
+  message: string;
+};
+
 const statusOptions: LeadStatus[] = [
   "Nuevo",
   "Contactado",
@@ -98,8 +103,13 @@ export function AdminLeadsManager({
     type: "idle",
     message: "",
   });
+  const [exportState, setExportState] = useState<ExportState>({
+    type: "idle",
+    message: "",
+  });
   const [isPending, startTransition] = useTransition();
-  const isMutating = isPending;
+  const [isExporting, setIsExporting] = useState(false);
+  const isMutating = isPending || isExporting;
 
   const searchFilteredLeads = useMemo(() => {
     return leads.filter((lead) => {
@@ -155,6 +165,11 @@ export function AdminLeadsManager({
       ).length,
       cerrados: leads.filter((lead) => lead.status === "Cerrado").length,
     }),
+    [leads],
+  );
+
+  const pendingExportCount = useMemo(
+    () => leads.filter((lead) => !lead.exportedAt).length,
     [leads],
   );
 
@@ -265,6 +280,67 @@ export function AdminLeadsManager({
     });
   }
 
+  async function handleExportLeads() {
+    if (!crmReady || !canEdit || isMutating || pendingExportCount === 0) {
+      return;
+    }
+
+    setIsExporting(true);
+    setExportState({ type: "idle", message: "" });
+
+    try {
+      const response = await fetch("/api/admin/leads/export", {
+        method: "POST",
+      });
+
+      if (!response.ok) {
+        const result = (await response.json()) as { error?: string };
+        setExportState({
+          type: "error",
+          message: result.error ?? "No se pudieron exportar los leads.",
+        });
+        return;
+      }
+
+      const blob = await response.blob();
+      const fileName =
+        response.headers
+          .get("Content-Disposition")
+          ?.match(/filename="([^"]+)"/)?.[1] ?? "leads.xlsx";
+      const exportedAt =
+        response.headers.get("X-Exported-At") ?? new Date().toISOString();
+      const exportBatchId = response.headers.get("X-Export-Batch-Id") ?? "manual";
+      const exportedCount = Number(response.headers.get("X-Exported-Count") ?? "0");
+
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+
+      setLeads((current) =>
+        current.map((lead) =>
+          lead.exportedAt
+            ? lead
+            : {
+                ...lead,
+                exportedAt,
+                exportBatchId,
+              },
+        ),
+      );
+      setExportState({
+        type: "success",
+        message: `Se exportaron ${exportedCount} lead(s) nuevos a Excel.`,
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  }
+
   return (
     <>
       <section className="mt-10 grid gap-4 md:grid-cols-3">
@@ -333,6 +409,32 @@ export function AdminLeadsManager({
           </button>
         ) : null}
       </div>
+
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-[#6a7379]">
+          {pendingExportCount > 0
+            ? `${pendingExportCount} lead(s) pendientes de exportacion.`
+            : "No hay leads nuevos para exportar."}
+        </p>
+        <button
+          type="button"
+          onClick={() => void handleExportLeads()}
+          disabled={!crmReady || !canEdit || isMutating || pendingExportCount === 0}
+          className="rounded-full border border-[#d8cabd] bg-white px-5 py-3 text-sm font-semibold text-[#1f3b4d] transition hover:bg-[#f7efe5] disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {isExporting ? "Exportando..." : "Exportar todo"}
+        </button>
+      </div>
+
+      {exportState.message ? (
+        <p
+          className={`mt-3 text-sm ${
+            exportState.type === "error" ? "text-[#a04d39]" : "text-[#39704a]"
+          }`}
+        >
+          {exportState.message}
+        </p>
+      ) : null}
 
       {!crmReady ? (
         <section className="mt-8 rounded-[1.5rem] border border-[#eed8c4] bg-[#fff7ef] px-6 py-5 text-sm leading-7 text-[#7c624b]">

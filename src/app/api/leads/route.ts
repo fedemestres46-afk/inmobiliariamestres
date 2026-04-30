@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { getLeadById } from "@/lib/leads";
 import { validatePublicLeadPayload } from "@/lib/lead-validation";
-import { syncLeadToGoogleSheets } from "@/lib/google-sheets";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
 
 export async function POST(request: Request) {
@@ -62,25 +61,6 @@ export async function POST(request: Request) {
   }
 
   const lead = await getLeadById(data.id);
-
-  if (lead) {
-    try {
-      await syncLeadToGoogleSheets({
-        leadId: lead.id,
-        propertyTitle: lead.propertyTitle,
-        propertyLocation: lead.propertyLocation,
-        fullName: lead.fullName,
-        phone: lead.phone,
-        email: lead.email,
-        message: lead.message,
-        origin: lead.origin,
-        status: lead.status,
-        createdAt: lead.createdAt,
-      });
-    } catch (error) {
-      console.error("No se pudo sincronizar el lead con Google Sheets.", error);
-    }
-  }
 
   return NextResponse.json({ lead });
 }
