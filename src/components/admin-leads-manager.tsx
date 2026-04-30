@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useRef, useState, useTransition } from "react";
 import type { Lead, LeadStatus } from "@/data/leads";
 
 type Props = {
@@ -81,6 +81,7 @@ export function AdminLeadsManager({
   canEdit,
   readOnlyReason,
 }: Props) {
+  const leadsSectionRef = useRef<HTMLElement | null>(null);
   const [leads, setLeads] = useState(initialLeads);
   const [selectedLeadId, setSelectedLeadId] = useState(initialLeads[0]?.id ?? "");
   const [statusFilter, setStatusFilter] = useState<
@@ -93,14 +94,8 @@ export function AdminLeadsManager({
   });
   const [isPending, startTransition] = useTransition();
 
-  const filteredLeads = useMemo(() => {
+  const searchFilteredLeads = useMemo(() => {
     return leads.filter((lead) => {
-      const matchesStatus =
-        statusFilter === "Todos"
-          ? true
-          : statusFilter === "En curso"
-            ? ["Contactado", "Visita", "Negociacion"].includes(lead.status)
-            : lead.status === statusFilter;
       const query = searchQuery.trim().toLowerCase();
       const matchesQuery =
         query === ""
@@ -115,9 +110,19 @@ export function AdminLeadsManager({
               .filter(Boolean)
               .some((value) => String(value).toLowerCase().includes(query));
 
-      return matchesStatus && matchesQuery;
+      return matchesQuery;
     });
-  }, [leads, searchQuery, statusFilter]);
+  }, [leads, searchQuery]);
+
+  const filteredLeads = useMemo(() => {
+    return searchFilteredLeads.filter((lead) => {
+      return statusFilter === "Todos"
+        ? true
+        : statusFilter === "En curso"
+          ? ["Contactado", "Visita", "Negociacion"].includes(lead.status)
+          : lead.status === statusFilter;
+    });
+  }, [searchFilteredLeads, statusFilter]);
 
   const selectedLead =
     filteredLeads.find((lead) => lead.id === selectedLeadId) ?? filteredLeads[0];
@@ -137,9 +142,11 @@ export function AdminLeadsManager({
     () =>
       boardColumns.map((column) => ({
         ...column,
-        leads: filteredLeads.filter((lead) => column.statuses.includes(lead.status)),
+        leads: searchFilteredLeads.filter((lead) =>
+          column.statuses.includes(lead.status),
+        ),
       })),
-    [filteredLeads],
+    [searchFilteredLeads],
   );
 
   useEffect(() => {
@@ -165,6 +172,22 @@ export function AdminLeadsManager({
     return `https://wa.me/${internationalPhone}?text=${encodeURIComponent(
       `Hola ${lead.fullName}, te escribo por tu consulta sobre ${lead.propertyTitle}.`,
     )}`;
+  }
+
+  function focusLeadStage(status: LeadStatus, leadId?: string) {
+    setStatusFilter(status);
+    setSaveState({ type: "idle", message: "" });
+
+    if (leadId) {
+      setSelectedLeadId(leadId);
+    }
+
+    window.setTimeout(() => {
+      leadsSectionRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 80);
   }
 
   async function handleSubmit(formData: FormData) {
@@ -316,14 +339,11 @@ export function AdminLeadsManager({
               </div>
 
               <div className="mt-4 space-y-3">
-                {column.leads.slice(0, 4).map((lead) => (
+                {column.leads.slice(0, 2).map((lead) => (
                   <button
                     key={lead.id}
                     type="button"
-                    onClick={() => {
-                      setSelectedLeadId(lead.id);
-                      setSaveState({ type: "idle", message: "" });
-                    }}
+                    onClick={() => focusLeadStage(lead.status, lead.id)}
                     className={`w-full rounded-[1.2rem] border bg-white px-3 py-3 text-left transition ${
                       lead.id === selectedLead?.id
                         ? "border-[#9f6b44] shadow-[0_12px_24px_rgba(159,107,68,0.12)]"
@@ -345,10 +365,14 @@ export function AdminLeadsManager({
                   </div>
                 ) : null}
 
-                {column.leads.length > 4 ? (
-                  <p className="text-xs text-[#7a838a]">
-                    +{column.leads.length - 4} mas
-                  </p>
+                {column.leads.length > 2 ? (
+                  <button
+                    type="button"
+                    onClick={() => focusLeadStage(column.statuses[0])}
+                    className="w-full rounded-[1.2rem] border border-dashed border-white/80 px-3 py-3 text-center text-lg font-semibold text-[#7a838a] transition hover:border-[#d8cabd] hover:bg-white/70"
+                  >
+                    +{column.leads.length - 2}
+                  </button>
                 ) : null}
               </div>
             </article>
@@ -356,7 +380,10 @@ export function AdminLeadsManager({
         </div>
       </section>
 
-      <section className="mt-10 grid gap-8 xl:grid-cols-[1.08fr_0.92fr]">
+      <section
+        ref={leadsSectionRef}
+        className="mt-10 grid gap-8 xl:grid-cols-[1.08fr_0.92fr]"
+      >
         <div className="overflow-hidden rounded-[2rem] border border-white/80 bg-white shadow-[0_24px_60px_rgba(35,43,50,0.07)]">
           <div className="border-b border-[#ece4da] px-6 py-5">
             <p className="text-sm uppercase tracking-[0.2em] text-[#7a838a]">
