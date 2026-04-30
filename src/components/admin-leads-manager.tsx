@@ -516,21 +516,6 @@ export function AdminLeadsManager({
               </div>
 
               <div className="mt-5 grid gap-4 md:grid-cols-2">
-                <label className="space-y-2">
-                  <span className="text-sm text-[#6a7379]">Estado</span>
-                  <select
-                    name="status"
-                    defaultValue={selectedLead.status}
-                    disabled={!canEdit}
-                    className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
-                  >
-                    {statusOptions.map((option) => (
-                      <option key={option} value={option}>
-                        {option}
-                      </option>
-                    ))}
-                  </select>
-                </label>
                 <div className="rounded-[1.5rem] border border-[#ece4da] px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.22em] text-[#8b969d]">
                     Ingreso
@@ -547,19 +532,6 @@ export function AdminLeadsManager({
                     </p>
                   ) : null}
                 </div>
-              </div>
-
-              <div className="mt-5 grid gap-4 md:grid-cols-2">
-                <label className="space-y-2">
-                  <span className="text-sm text-[#6a7379]">Fecha y hora de visita</span>
-                  <input
-                    name="scheduled_at"
-                    type="datetime-local"
-                    defaultValue={selectedLead.scheduledAtValue ?? ""}
-                    disabled={!canEdit}
-                    className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
-                  />
-                </label>
                 <div className="rounded-[1.5rem] border border-[#ece4da] px-4 py-4">
                   <p className="text-xs uppercase tracking-[0.22em] text-[#8b969d]">
                     Calendario
@@ -571,6 +543,34 @@ export function AdminLeadsManager({
                     La agenda ya queda lista para una futura conexion con Google Calendar.
                   </p>
                 </div>
+              </div>
+
+              <div className="mt-5 grid gap-4 md:grid-cols-2">
+                <label className="space-y-2">
+                  <span className="text-sm text-[#6a7379]">Estado</span>
+                  <select
+                    name="status"
+                    defaultValue={selectedLead.status}
+                    disabled={!canEdit}
+                    className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
+                  >
+                    {statusOptions.map((option) => (
+                      <option key={option} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="space-y-2">
+                  <span className="text-sm text-[#6a7379]">Fecha y hora de visita</span>
+                  <input
+                    name="scheduled_at"
+                    type="datetime-local"
+                    defaultValue={selectedLead.scheduledAtValue ?? ""}
+                    disabled={!canEdit}
+                    className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
+                  />
+                </label>
               </div>
 
               <div className="mt-5 rounded-[1.5rem] border border-[#ece4da] bg-[#fbf8f4] px-5 py-4">
