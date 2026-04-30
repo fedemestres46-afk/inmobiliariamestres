@@ -1,19 +1,8 @@
+import ExcelJS from "exceljs";
 import { NextResponse } from "next/server";
-import * as XLSX from "xlsx";
 import { logAdminActivity } from "@/lib/activity";
 import { getAdminWriteAccess } from "@/lib/auth";
 import { getSupabaseAdminClient, isSupabaseAdminConfigured } from "@/lib/supabase";
-
-function isMissingExportColumns(error?: { code?: string; message?: string } | null) {
-  const message = error?.message?.toLowerCase() ?? "";
-  return (
-    error?.code === "PGRST204" ||
-    error?.code === "42703" ||
-    message.includes("exported_at") ||
-    message.includes("export_batch_id") ||
-    message.includes("schema cache")
-  );
-}
 
 function formatSpreadsheetDate(value: string) {
   return new Intl.DateTimeFormat("es-AR", {
@@ -58,40 +47,198 @@ function formatLeadStatus(value: string) {
   }
 }
 
-function buildWorkbook(
-  rows: Array<Record<string, string>>,
+function getStatusFill(value: string) {
+  switch (value) {
+    case "Cerrado":
+      return "FFE6F4EA";
+    case "Descartado":
+      return "FFFBE4E2";
+    case "Visita":
+      return "FFE7F1F8";
+    case "Contactado":
+      return "FFEFF5FA";
+    case "Negociacion":
+      return "FFFBF3D9";
+    default:
+      return "FFF7EBDD";
+  }
+}
+
+function getOriginFill(value: string) {
+  switch (value) {
+    case "WhatsApp":
+      return "FFE8F5E9";
+    case "Zonaprop":
+      return "FFE8EEF9";
+    case "Manual":
+      return "FFF3EAFB";
+    default:
+      return "FFF4F0EA";
+  }
+}
+
+async function buildWorkbook(
+  rows: Array<{
+    fechaIngreso: string;
+    codigoLead: string;
+    propiedad: string;
+    ubicacion: string;
+    nombre: string;
+    telefono: string;
+    email: string;
+    mensaje: string;
+    origen: string;
+    estado: string;
+  }>,
   exportedAt: string,
-  exportedCount: number,
 ) {
-  const worksheet = XLSX.utils.aoa_to_sheet([
-    ["MESTRES INMOBILIARIA · Exportacion de leads"],
-    [`Generado: ${formatSpreadsheetDate(exportedAt)} · Leads exportados: ${exportedCount}`],
-    [],
-    Object.keys(rows[0] ?? {}),
-    ...rows.map((row) => Object.values(row)),
-  ]);
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet("Leads CRM", {
+    views: [{ state: "frozen", ySplit: 4 }],
+  });
 
-  worksheet["!cols"] = [
-    { wch: 20 },
-    { wch: 38 },
-    { wch: 30 },
-    { wch: 26 },
-    { wch: 24 },
-    { wch: 18 },
-    { wch: 28 },
-    { wch: 42 },
-    { wch: 16 },
-    { wch: 16 },
+  worksheet.columns = [
+    { header: "Fecha de ingreso", key: "fechaIngreso", width: 20 },
+    { header: "Codigo del lead", key: "codigoLead", width: 38 },
+    { header: "Propiedad", key: "propiedad", width: 30 },
+    { header: "Ubicacion", key: "ubicacion", width: 26 },
+    { header: "Nombre", key: "nombre", width: 24 },
+    { header: "Telefono", key: "telefono", width: 18 },
+    { header: "Email", key: "email", width: 28 },
+    { header: "Mensaje", key: "mensaje", width: 42 },
+    { header: "Origen", key: "origen", width: 16 },
+    { header: "Estado", key: "estado", width: 16 },
   ];
-  worksheet["!merges"] = [
-    { s: { r: 0, c: 0 }, e: { r: 0, c: 9 } },
-    { s: { r: 1, c: 0 }, e: { r: 1, c: 9 } },
-  ];
-  worksheet["!autofilter"] = { ref: "A4:J4" };
 
-  const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Leads CRM");
-  return XLSX.write(workbook, { type: "buffer", bookType: "xlsx" });
+  worksheet.mergeCells("A1:J1");
+  worksheet.mergeCells("A2:J2");
+
+  const titleCell = worksheet.getCell("A1");
+  titleCell.value = "MESTRES INMOBILIARIA";
+  titleCell.font = {
+    name: "Calibri",
+    size: 18,
+    bold: true,
+    color: { argb: "FFFFFFFF" },
+  };
+  titleCell.alignment = { horizontal: "center", vertical: "middle" };
+  titleCell.fill = {
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FF1F3B4D" },
+  };
+
+  const subtitleCell = worksheet.getCell("A2");
+  subtitleCell.value = `Exportacion de leads | Generado el ${formatSpreadsheetDate(exportedAt)} | Total: ${rows.length}`;
+  subtitleCell.font = {
+    name: "Calibri",
+    size: 11,
+    color: { argb: "FF3E4A52" },
+  };
+  subtitleCell.alignment = { horizontal: "center", vertical: "middle" };
+  subtitleCell.fill = {
+    type: "pattern",
+    pattern: "solid",
+    fgColor: { argb: "FFF5EFE8" },
+  };
+
+  worksheet.getRow(1).height = 28;
+  worksheet.getRow(2).height = 22;
+
+  const headerRow = worksheet.getRow(4);
+  headerRow.values = [
+    undefined,
+    "Fecha de ingreso",
+    "Codigo del lead",
+    "Propiedad",
+    "Ubicacion",
+    "Nombre",
+    "Telefono",
+    "Email",
+    "Mensaje",
+    "Origen",
+    "Estado",
+  ];
+  headerRow.height = 22;
+  headerRow.eachCell((cell) => {
+    cell.font = {
+      name: "Calibri",
+      size: 11,
+      bold: true,
+      color: { argb: "FFFFFFFF" },
+    };
+    cell.alignment = { horizontal: "center", vertical: "middle" };
+    cell.fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: "FF9F6B44" },
+    };
+    cell.border = {
+      top: { style: "thin", color: { argb: "FFE5D7C9" } },
+      left: { style: "thin", color: { argb: "FFE5D7C9" } },
+      bottom: { style: "thin", color: { argb: "FFE5D7C9" } },
+      right: { style: "thin", color: { argb: "FFE5D7C9" } },
+    };
+  });
+
+  rows.forEach((row, index) => {
+    const excelRow = worksheet.addRow(row);
+    excelRow.height = 20;
+    excelRow.eachCell((cell) => {
+      cell.alignment = { vertical: "top", wrapText: true };
+      cell.border = {
+        top: { style: "thin", color: { argb: "FFECE4DA" } },
+        left: { style: "thin", color: { argb: "FFECE4DA" } },
+        bottom: { style: "thin", color: { argb: "FFECE4DA" } },
+        right: { style: "thin", color: { argb: "FFECE4DA" } },
+      };
+      cell.fill = {
+        type: "pattern",
+        pattern: "solid",
+        fgColor: {
+          argb: index % 2 === 0 ? "FFFFFFFF" : "FFFCF8F3",
+        },
+      };
+      cell.font = {
+        name: "Calibri",
+        size: 10.5,
+        color: { argb: "FF22313B" },
+      };
+    });
+
+    excelRow.getCell("I").alignment = { horizontal: "center", vertical: "middle" };
+    excelRow.getCell("J").alignment = { horizontal: "center", vertical: "middle" };
+    excelRow.getCell("I").font = {
+      name: "Calibri",
+      size: 10,
+      bold: true,
+      color: { argb: "FF44515B" },
+    };
+    excelRow.getCell("J").font = {
+      name: "Calibri",
+      size: 10,
+      bold: true,
+      color: { argb: "FF44515B" },
+    };
+    excelRow.getCell("I").fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: getOriginFill(row.origen) },
+    };
+    excelRow.getCell("J").fill = {
+      type: "pattern",
+      pattern: "solid",
+      fgColor: { argb: getStatusFill(row.estado) },
+    };
+  });
+
+  worksheet.autoFilter = {
+    from: { row: 4, column: 1 },
+    to: { row: 4, column: 10 },
+  };
+
+  const buffer = await workbook.xlsx.writeBuffer();
+  return Buffer.from(buffer);
 }
 
 export async function POST() {
@@ -114,22 +261,11 @@ export async function POST() {
   const { data, error } = await supabase
     .from("leads")
     .select(
-      "id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, origin, status, created_at, exported_at",
+      "id, property_title_snapshot, property_location_snapshot, full_name, phone, email, message, origin, status, created_at",
     )
-    .is("exported_at", null)
     .order("created_at", { ascending: true });
 
   if (error || !data) {
-    if (isMissingExportColumns(error)) {
-      return NextResponse.json(
-        {
-          error:
-            "Faltan las columnas de exportacion en Supabase. Corre el SQL de supabase/lead-export-fields.sql para habilitar Exportar todo.",
-        },
-        { status: 400 },
-      );
-    }
-
     return NextResponse.json(
       { error: error?.message ?? "No se pudieron preparar los leads para exportar." },
       { status: 500 },
@@ -138,59 +274,37 @@ export async function POST() {
 
   if (data.length === 0) {
     return NextResponse.json(
-      { error: "No hay leads nuevos para exportar. Ya fueron exportados anteriormente." },
+      { error: "Todavia no hay leads para exportar." },
       { status: 409 },
     );
   }
 
   const exportBatchId = crypto.randomUUID();
   const exportedAt = new Date().toISOString();
-  const spreadsheetRows = data.map((lead) => ({
-    "Fecha de ingreso": lead.created_at ? formatSpreadsheetDate(lead.created_at) : "",
-    "Codigo del lead": lead.id ?? "",
-    Propiedad: lead.property_title_snapshot ?? "",
-    Ubicacion: lead.property_location_snapshot ?? "",
-    Nombre: lead.full_name ?? "",
-    Telefono: lead.phone ?? "",
-    Email: lead.email ?? "",
-    Mensaje: lead.message ?? "",
-    Origen: formatLeadOrigin(lead.origin ?? ""),
-    Estado: formatLeadStatus(lead.status ?? ""),
-  }));
-  const workbookBuffer = buildWorkbook(spreadsheetRows, exportedAt, data.length);
+
+  const workbookBuffer = await buildWorkbook(
+    data.map((lead) => ({
+      fechaIngreso: lead.created_at ? formatSpreadsheetDate(lead.created_at) : "",
+      codigoLead: lead.id ?? "",
+      propiedad: lead.property_title_snapshot ?? "",
+      ubicacion: lead.property_location_snapshot ?? "",
+      nombre: lead.full_name ?? "",
+      telefono: lead.phone ?? "",
+      email: lead.email ?? "",
+      mensaje: lead.message ?? "",
+      origen: formatLeadOrigin(lead.origin ?? ""),
+      estado: formatLeadStatus(lead.status ?? ""),
+    })),
+    exportedAt,
+  );
 
   const exportedLeadIds = data.map((lead) => lead.id).filter(Boolean);
-
-  const { error: updateError } = await supabase
-    .from("leads")
-    .update({
-      exported_at: exportedAt,
-      export_batch_id: exportBatchId,
-    })
-    .in("id", exportedLeadIds);
-
-  if (updateError) {
-    if (isMissingExportColumns(updateError)) {
-      return NextResponse.json(
-        {
-          error:
-            "Faltan las columnas de exportacion en Supabase. Corre el SQL de supabase/lead-export-fields.sql para habilitar Exportar todo.",
-        },
-        { status: 400 },
-      );
-    }
-
-    return NextResponse.json(
-      { error: updateError.message ?? "No se pudo marcar la exportacion de leads." },
-      { status: 500 },
-    );
-  }
 
   await logAdminActivity({
     entityType: "lead",
     entityLabel: "Exportacion de leads",
     action: "export",
-    summary: `Exporto ${exportedLeadIds.length} lead(s) nuevos a Excel.`,
+    summary: `Exporto ${exportedLeadIds.length} lead(s) del CRM a Excel.`,
     actorUserId: session.sub,
     actorEmail: session.email,
     actorRole: session.role,

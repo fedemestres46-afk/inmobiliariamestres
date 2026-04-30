@@ -168,11 +168,6 @@ export function AdminLeadsManager({
     [leads],
   );
 
-  const pendingExportCount = useMemo(
-    () => leads.filter((lead) => !lead.exportedAt).length,
-    [leads],
-  );
-
   const boardLeads = useMemo(
     () =>
       boardColumns.map((column) => ({
@@ -281,7 +276,7 @@ export function AdminLeadsManager({
   }
 
   async function handleExportLeads() {
-    if (!crmReady || !canEdit || isMutating || pendingExportCount === 0) {
+    if (!crmReady || !canEdit || isMutating || leads.length === 0) {
       return;
     }
 
@@ -307,9 +302,6 @@ export function AdminLeadsManager({
         response.headers
           .get("Content-Disposition")
           ?.match(/filename="([^"]+)"/)?.[1] ?? "leads.xlsx";
-      const exportedAt =
-        response.headers.get("X-Exported-At") ?? new Date().toISOString();
-      const exportBatchId = response.headers.get("X-Export-Batch-Id") ?? "manual";
       const exportedCount = Number(response.headers.get("X-Exported-Count") ?? "0");
 
       const url = window.URL.createObjectURL(blob);
@@ -321,20 +313,9 @@ export function AdminLeadsManager({
       link.remove();
       window.URL.revokeObjectURL(url);
 
-      setLeads((current) =>
-        current.map((lead) =>
-          lead.exportedAt
-            ? lead
-            : {
-                ...lead,
-                exportedAt,
-                exportBatchId,
-              },
-        ),
-      );
       setExportState({
         type: "success",
-        message: `Se exportaron ${exportedCount} lead(s) nuevos a Excel.`,
+        message: `Se exportaron ${exportedCount} lead(s) a Excel.`,
       });
     } finally {
       setIsExporting(false);
@@ -412,14 +393,14 @@ export function AdminLeadsManager({
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-[#6a7379]">
-          {pendingExportCount > 0
-            ? `${pendingExportCount} lead(s) pendientes de exportacion.`
-            : "No hay leads nuevos para exportar."}
+          {leads.length > 0
+            ? `${leads.length} lead(s) listos para exportar.`
+            : "Todavia no hay leads para exportar."}
         </p>
         <button
           type="button"
           onClick={() => void handleExportLeads()}
-          disabled={!crmReady || !canEdit || isMutating || pendingExportCount === 0}
+          disabled={!crmReady || !canEdit || isMutating || leads.length === 0}
           className="rounded-full border border-[#d8cabd] bg-white px-5 py-3 text-sm font-semibold text-[#1f3b4d] transition hover:bg-[#f7efe5] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {isExporting ? "Exportando..." : "Exportar todo"}
