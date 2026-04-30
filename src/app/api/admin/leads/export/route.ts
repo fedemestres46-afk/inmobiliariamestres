@@ -15,10 +15,82 @@ function isMissingExportColumns(error?: { code?: string; message?: string } | nu
   );
 }
 
-function buildWorkbook(rows: Array<Record<string, string>>) {
-  const worksheet = XLSX.utils.json_to_sheet(rows);
+function formatSpreadsheetDate(value: string) {
+  return new Intl.DateTimeFormat("es-AR", {
+    dateStyle: "short",
+    timeStyle: "short",
+  }).format(new Date(value));
+}
+
+function formatFilenameDate(value: string) {
+  const date = new Date(value);
+  const pad = (segment: number) => String(segment).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}-${pad(date.getHours())}${pad(date.getMinutes())}`;
+}
+
+function formatLeadOrigin(value: string) {
+  switch (value) {
+    case "whatsapp":
+      return "WhatsApp";
+    case "zonaprop":
+      return "Zonaprop";
+    case "manual":
+      return "Manual";
+    default:
+      return "Web";
+  }
+}
+
+function formatLeadStatus(value: string) {
+  switch (value) {
+    case "contacted":
+      return "Contactado";
+    case "visit":
+      return "Visita";
+    case "negotiation":
+      return "Negociacion";
+    case "closed":
+      return "Cerrado";
+    case "discarded":
+      return "Descartado";
+    default:
+      return "Nuevo";
+  }
+}
+
+function buildWorkbook(
+  rows: Array<Record<string, string>>,
+  exportedAt: string,
+  exportedCount: number,
+) {
+  const worksheet = XLSX.utils.aoa_to_sheet([
+    ["MESTRES INMOBILIARIA · Exportacion de leads"],
+    [`Generado: ${formatSpreadsheetDate(exportedAt)} · Leads exportados: ${exportedCount}`],
+    [],
+    Object.keys(rows[0] ?? {}),
+    ...rows.map((row) => Object.values(row)),
+  ]);
+
+  worksheet["!cols"] = [
+    { wch: 20 },
+    { wch: 38 },
+    { wch: 30 },
+    { wch: 26 },
+    { wch: 24 },
+    { wch: 18 },
+    { wch: 28 },
+    { wch: 42 },
+    { wch: 16 },
+    { wch: 16 },
+  ];
+  worksheet["!merges"] = [
+    { s: { r: 0, c: 0 }, e: { r: 0, c: 9 } },
+    { s: { r: 1, c: 0 }, e: { r: 1, c: 9 } },
+  ];
+  worksheet["!autofilter"] = { ref: "A4:J4" };
+
   const workbook = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(workbook, worksheet, "Leads");
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Leads CRM");
   return XLSX.write(workbook, { type: "buffer", bookType: "xlsx" });
 }
 
@@ -73,21 +145,19 @@ export async function POST() {
 
   const exportBatchId = crypto.randomUUID();
   const exportedAt = new Date().toISOString();
-
-  const workbookBuffer = buildWorkbook(
-    data.map((lead) => ({
-      "Fecha de ingreso": lead.created_at ?? "",
-      "Lead ID": lead.id ?? "",
-      Propiedad: lead.property_title_snapshot ?? "",
-      Ubicacion: lead.property_location_snapshot ?? "",
-      Nombre: lead.full_name ?? "",
-      Telefono: lead.phone ?? "",
-      Email: lead.email ?? "",
-      Mensaje: lead.message ?? "",
-      Origen: lead.origin ?? "",
-      Estado: lead.status ?? "",
-    })),
-  );
+  const spreadsheetRows = data.map((lead) => ({
+    "Fecha de ingreso": lead.created_at ? formatSpreadsheetDate(lead.created_at) : "",
+    "Codigo del lead": lead.id ?? "",
+    Propiedad: lead.property_title_snapshot ?? "",
+    Ubicacion: lead.property_location_snapshot ?? "",
+    Nombre: lead.full_name ?? "",
+    Telefono: lead.phone ?? "",
+    Email: lead.email ?? "",
+    Mensaje: lead.message ?? "",
+    Origen: formatLeadOrigin(lead.origin ?? ""),
+    Estado: formatLeadStatus(lead.status ?? ""),
+  }));
+  const workbookBuffer = buildWorkbook(spreadsheetRows, exportedAt, data.length);
 
   const exportedLeadIds = data.map((lead) => lead.id).filter(Boolean);
 
@@ -132,7 +202,7 @@ export async function POST() {
     headers: {
       "Content-Type":
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-      "Content-Disposition": `attachment; filename="leads-${exportBatchId}.xlsx"`,
+      "Content-Disposition": `attachment; filename="leads-mestres-${formatFilenameDate(exportedAt)}.xlsx"`,
       "X-Exported-Count": String(exportedLeadIds.length),
       "X-Exported-At": exportedAt,
       "X-Export-Batch-Id": exportBatchId,
