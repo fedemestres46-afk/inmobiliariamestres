@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { EntityActivityList } from "@/components/entity-activity-list";
+import type { AdminActivity } from "@/data/admin-activity";
 import type { Lead, LeadStatus } from "@/data/leads";
 
 type Props = {
@@ -8,6 +10,8 @@ type Props = {
   crmReady: boolean;
   canEdit: boolean;
   readOnlyReason?: string;
+  initialActivities: AdminActivity[];
+  activityReady: boolean;
 };
 
 type SaveState = {
@@ -80,6 +84,8 @@ export function AdminLeadsManager({
   crmReady,
   canEdit,
   readOnlyReason,
+  initialActivities,
+  activityReady,
 }: Props) {
   const leadsSectionRef = useRef<HTMLElement | null>(null);
   const [leads, setLeads] = useState(initialLeads);
@@ -127,6 +133,19 @@ export function AdminLeadsManager({
 
   const selectedLead =
     filteredLeads.find((lead) => lead.id === selectedLeadId) ?? filteredLeads[0];
+
+  const selectedLeadActivities = useMemo(() => {
+    if (!selectedLead) {
+      return [];
+    }
+
+    return initialActivities
+      .filter(
+        (activity) =>
+          activity.entityType === "lead" && activity.entityId === selectedLead.id,
+      )
+      .slice(0, 6);
+  }, [initialActivities, selectedLead]);
 
   const totals = useMemo(
     () => ({
@@ -615,6 +634,16 @@ export function AdminLeadsManager({
                   className="w-full rounded-2xl border border-[#e7ddd2] px-4 py-3 outline-none transition focus:border-[#9f6b44]"
                 />
               </label>
+
+              <div className="mt-5">
+                <EntityActivityList
+                  title="Historial de este lead"
+                  subtitle="Seguimiento reciente vinculado a esta consulta."
+                  activities={selectedLeadActivities}
+                  activityReady={activityReady}
+                  emptyMessage="Todavia no hay movimientos registrados para este lead."
+                />
+              </div>
 
               <div className="mt-6 flex items-center justify-between gap-4">
                 <p

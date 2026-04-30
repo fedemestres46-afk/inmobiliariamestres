@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { AdminActivity } from "@/data/admin-activity";
 import type { Lead } from "@/data/leads";
 import type { Property } from "@/data/properties";
 import { AdminLeadsManager } from "@/components/admin-leads-manager";
@@ -12,6 +13,8 @@ type Props = {
   canPersist: boolean;
   crmReady: boolean;
   readOnlyReason?: string;
+  initialActivities: AdminActivity[];
+  activityReady: boolean;
 };
 
 type TabId = "properties" | "leads";
@@ -22,6 +25,8 @@ export function AdminCrmDashboard({
   canPersist,
   crmReady,
   readOnlyReason,
+  initialActivities,
+  activityReady,
 }: Props) {
   const [activeTab, setActiveTab] = useState<TabId>("properties");
 
@@ -52,6 +57,8 @@ export function AdminCrmDashboard({
           initialProperties={initialProperties}
           canPersist={canPersist}
           readOnlyReason={readOnlyReason}
+          initialActivities={initialActivities}
+          activityReady={activityReady}
         />
       ) : (
         <AdminLeadsManager
@@ -59,6 +66,8 @@ export function AdminCrmDashboard({
           crmReady={crmReady}
           canEdit={canPersist}
           readOnlyReason={readOnlyReason}
+          initialActivities={initialActivities}
+          activityReady={activityReady}
         />
       )}
     </>

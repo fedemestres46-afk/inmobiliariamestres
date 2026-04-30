@@ -3,6 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, useTransition } from "react";
+import { EntityActivityList } from "@/components/entity-activity-list";
+import type { AdminActivity } from "@/data/admin-activity";
 import type {
   PropertyAmenity,
   Property,
@@ -26,6 +28,8 @@ type Props = {
   initialProperties: Property[];
   canPersist: boolean;
   readOnlyReason?: string;
+  initialActivities: AdminActivity[];
+  activityReady: boolean;
 };
 
 const typeOptions: PropertyType[] = [
@@ -98,6 +102,8 @@ export function AdminPropertiesManager({
   initialProperties,
   canPersist,
   readOnlyReason,
+  initialActivities,
+  activityReady,
 }: Props) {
   const [properties, setProperties] = useState(initialProperties);
   const [selectedId, setSelectedId] = useState(initialProperties[0]?.id ?? "");
@@ -146,6 +152,20 @@ export function AdminPropertiesManager({
   const selectedProperty =
     filteredProperties.find((property) => property.id === selectedId) ??
     filteredProperties[0];
+
+  const selectedPropertyActivities = useMemo(() => {
+    if (!selectedProperty) {
+      return [];
+    }
+
+    return initialActivities
+      .filter(
+        (activity) =>
+          activity.entityType === "property" &&
+          activity.entityId === selectedProperty.id,
+      )
+      .slice(0, 6);
+  }, [initialActivities, selectedProperty]);
 
   useEffect(() => {
     setSelectedServices(selectedProperty?.services ?? []);
@@ -1089,6 +1109,16 @@ export function AdminPropertiesManager({
                 ))}
               </div>
             </div>
+          </div>
+
+          <div className="mt-6">
+            <EntityActivityList
+              title="Historial de esta propiedad"
+              subtitle="Cambios recientes asociados a esta ficha."
+              activities={selectedPropertyActivities}
+              activityReady={activityReady}
+              emptyMessage="Todavia no hay cambios registrados para esta propiedad."
+            />
           </div>
 
           <div className="mt-6 flex items-center justify-between gap-4">

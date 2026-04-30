@@ -44,6 +44,8 @@ export default async function AdminPage() {
           canPersist={canEdit}
           crmReady={ready}
           readOnlyReason={canEdit ? undefined : readOnlyReason}
+          initialActivities={activities}
+          activityReady={activityReady}
         />
 
         <AdminActivityFeed
