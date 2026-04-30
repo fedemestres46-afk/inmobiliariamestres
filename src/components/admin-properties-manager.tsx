@@ -117,6 +117,11 @@ export function AdminPropertiesManager({
     initialProperties[0]?.amenities ?? [],
   );
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const isMutating =
+    isPending ||
+    isUploading ||
+    deletingImageUrl !== null ||
+    deletingPropertyId !== null;
 
   const totals = useMemo(
     () => ({
@@ -148,7 +153,31 @@ export function AdminPropertiesManager({
   }, [selectedProperty]);
 
   async function handleSubmit(formData: FormData) {
-    if (!selectedProperty) {
+    if (!selectedProperty || !canPersist || isMutating) {
+      return;
+    }
+
+    const nextStatusLabel = String(
+      formData.get("status") ?? "Borrador",
+    ) as PropertyStatus;
+
+    if (
+      selectedProperty.status === "Publicada" &&
+      nextStatusLabel !== "Publicada" &&
+      !window.confirm(
+        `La propiedad "${selectedProperty.title}" dejara de estar visible en la web. Quieres continuar?`,
+      )
+    ) {
+      return;
+    }
+
+    if (
+      selectedProperty.status !== "Publicada" &&
+      nextStatusLabel === "Publicada" &&
+      !window.confirm(
+        `La propiedad "${selectedProperty.title}" pasara a estar publicada en la web. Confirmas este cambio?`,
+      )
+    ) {
       return;
     }
 
@@ -177,9 +206,7 @@ export function AdminPropertiesManager({
       bedrooms: Number(formData.get("bedrooms") ?? 0),
       bathrooms: Number(formData.get("bathrooms") ?? 0),
       garage_spaces: Number(formData.get("garage_spaces") ?? 0),
-      status: toApiStatus(
-        String(formData.get("status") ?? "Borrador") as PropertyStatus,
-      ),
+      status: toApiStatus(nextStatusLabel),
       featured: formData.get("featured") === "on",
       cover_url: String(formData.get("cover_url") ?? ""),
       description: String(formData.get("description") ?? ""),
@@ -226,6 +253,10 @@ export function AdminPropertiesManager({
   }
 
   function handleCreateProperty() {
+    if (!canPersist || isMutating) {
+      return;
+    }
+
     startTransition(async () => {
       const response = await fetch("/api/admin/properties", {
         method: "POST",
@@ -255,7 +286,7 @@ export function AdminPropertiesManager({
   }
 
   async function handleCoverUpload(files: File[]) {
-    if (!selectedProperty) {
+    if (!selectedProperty || !canPersist || isMutating) {
       return;
     }
 
@@ -307,7 +338,7 @@ export function AdminPropertiesManager({
   }
 
   async function handleDeleteImage(imageUrl: string) {
-    if (!selectedProperty) {
+    if (!selectedProperty || !canPersist || isMutating) {
       return;
     }
 
@@ -351,6 +382,10 @@ export function AdminPropertiesManager({
   }
 
   async function handleDeleteProperty(propertyId: string) {
+    if (!canPersist || isMutating) {
+      return;
+    }
+
     setDeletingPropertyId(propertyId);
     setSaveState({ type: "idle", message: "" });
 
@@ -486,7 +521,7 @@ export function AdminPropertiesManager({
             <button
               type="button"
               onClick={handleCreateProperty}
-              disabled={isPending || !canPersist}
+              disabled={isMutating || !canPersist}
               className="rounded-full bg-[#1f3b4d] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#274b60] disabled:cursor-not-allowed disabled:bg-[#94a3ad]"
             >
               {isPending ? "Procesando..." : "Nueva propiedad"}
@@ -513,9 +548,13 @@ export function AdminPropertiesManager({
                 <button
                   type="button"
                   onClick={() => {
+                    if (isMutating) {
+                      return;
+                    }
                     setSelectedId(property.id);
                     setSaveState({ type: "idle", message: "" });
                   }}
+                  disabled={isMutating}
                   className="grid grid-cols-1 gap-4 text-left md:col-span-4 md:grid-cols-subgrid"
                 >
                   <div>
@@ -566,7 +605,7 @@ export function AdminPropertiesManager({
 
                       void handleDeleteProperty(property.id);
                     }}
-                    disabled={!canPersist || deletingPropertyId === property.id}
+                    disabled={!canPersist || isMutating || deletingPropertyId === property.id}
                     className="flex h-9 w-9 items-center justify-center rounded-full border border-[#d7c7b6] text-xl leading-none text-[#7d5840] transition hover:border-[#9f6b44] hover:bg-[#f7efe5] hover:text-[#9f6b44] disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {deletingPropertyId === property.id ? "..." : "-"}
@@ -610,7 +649,7 @@ export function AdminPropertiesManager({
               </p>
             </div>
           ) : (
-            <>
+            <fieldset disabled={isMutating || !canPersist} className="contents">
           <div className="flex items-start justify-between gap-4">
             <div>
               <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
@@ -848,7 +887,7 @@ export function AdminPropertiesManager({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                disabled={isUploading || !canPersist}
+                disabled={isMutating || !canPersist}
                 className="rounded-full border border-[#d8cabd] px-5 py-3 text-sm font-semibold text-[#1f3b4d] transition hover:bg-[#f6efe7] disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {isUploading ? "Subiendo imagenes..." : "Subir imagenes"}
@@ -944,7 +983,7 @@ export function AdminPropertiesManager({
                       type="button"
                       aria-label="Borrar imagen"
                       onClick={() => void handleDeleteImage(imageUrl)}
-                      disabled={deletingImageUrl === imageUrl || !canPersist}
+                      disabled={isMutating || deletingImageUrl === imageUrl || !canPersist}
                       className="absolute right-2 top-2 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-[rgba(31,59,77,0.92)] text-lg leading-none text-white shadow-[0_8px_18px_rgba(35,43,50,0.25)] transition hover:bg-[#9f6b44] disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {deletingImageUrl === imageUrl ? "…" : "×"}
@@ -1080,13 +1119,13 @@ export function AdminPropertiesManager({
             </div>
             <button
               type="submit"
-              disabled={isPending || !canPersist}
+              disabled={isMutating || !canPersist}
               className="rounded-full bg-[#1f3b4d] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#274b60] disabled:cursor-not-allowed disabled:bg-[#94a3ad]"
             >
-              {isPending ? "Guardando..." : "Guardar cambios"}
+              {isMutating ? "Guardando..." : "Guardar cambios"}
             </button>
           </div>
-            </>
+            </fieldset>
           )}
         </form>
       </section>

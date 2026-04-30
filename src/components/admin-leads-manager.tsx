@@ -93,6 +93,7 @@ export function AdminLeadsManager({
     message: "",
   });
   const [isPending, startTransition] = useTransition();
+  const isMutating = isPending;
 
   const searchFilteredLeads = useMemo(() => {
     return leads.filter((lead) => {
@@ -194,12 +195,24 @@ export function AdminLeadsManager({
   }
 
   async function handleSubmit(formData: FormData) {
-    if (!selectedLead) {
+    if (!selectedLead || !crmReady || !canEdit || isMutating) {
+      return;
+    }
+
+    const nextStatus = String(formData.get("status") ?? "Nuevo") as LeadStatus;
+
+    if (
+      selectedLead.status !== nextStatus &&
+      ["Cerrado", "Descartado"].includes(nextStatus) &&
+      !window.confirm(
+        `El lead de ${selectedLead.fullName} pasara a ${nextStatus.toLowerCase()}. Quieres continuar?`,
+      )
+    ) {
       return;
     }
 
     const payload = {
-      status: String(formData.get("status") ?? "Nuevo") as LeadStatus,
+      status: nextStatus,
       notes: String(formData.get("notes") ?? ""),
       scheduledAt: String(formData.get("scheduled_at") ?? ""),
     };
@@ -332,13 +345,18 @@ export function AdminLeadsManager({
               key={column.title}
               role="button"
               tabIndex={0}
+              aria-disabled={isMutating}
               onClick={() => focusLeadStage(column.statuses[0], column.leads[0]?.id)}
               onKeyDown={(event) => {
+                if (isMutating) {
+                  return;
+                }
                 if (event.key === "Enter" || event.key === " ") {
                   event.preventDefault();
                   focusLeadStage(column.statuses[0], column.leads[0]?.id);
                 }
               }}
+              style={isMutating ? { pointerEvents: "none", opacity: 0.7 } : undefined}
               className={`cursor-pointer rounded-[1.5rem] border p-4 shadow-[0_18px_40px_rgba(35,43,50,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(35,43,50,0.08)] ${column.border} ${column.bg}`}
             >
               <div className="flex items-center justify-between gap-3">
@@ -406,9 +424,13 @@ export function AdminLeadsManager({
                 key={lead.id}
                 type="button"
                 onClick={() => {
+                  if (isMutating) {
+                    return;
+                  }
                   setSelectedLeadId(lead.id);
                   setSaveState({ type: "idle", message: "" });
                 }}
+                disabled={isMutating}
                 className={`w-full px-6 py-5 text-left transition ${
                   lead.id === selectedLead?.id ? "bg-[#fcf8f3]" : "hover:bg-[#faf6f0]"
                 }`}
@@ -470,6 +492,7 @@ export function AdminLeadsManager({
             </div>
           ) : (
             <form key={selectedLead.id} action={handleSubmit}>
+              <fieldset disabled={isMutating || !crmReady || !canEdit} className="contents">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm uppercase tracking-[0.3em] text-[#9f6b44]">
@@ -607,12 +630,13 @@ export function AdminLeadsManager({
                 </p>
                 <button
                   type="submit"
-                  disabled={isPending || !crmReady || !canEdit}
+                  disabled={isMutating || !crmReady || !canEdit}
                   className="rounded-full bg-[#1f3b4d] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#274b60] disabled:cursor-not-allowed disabled:bg-[#94a3ad]"
                 >
-                  {isPending ? "Guardando..." : "Guardar lead"}
+                  {isMutating ? "Guardando..." : "Guardar lead"}
                 </button>
               </div>
+              </fieldset>
             </form>
           )}
         </div>
