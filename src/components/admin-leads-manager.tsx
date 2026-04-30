@@ -175,11 +175,14 @@ export function AdminLeadsManager({
   }
 
   function focusLeadStage(status: LeadStatus, leadId?: string) {
+    const stageLeadId =
+      leadId ?? searchFilteredLeads.find((currentLead) => currentLead.status === status)?.id;
+
     setStatusFilter(status);
     setSaveState({ type: "idle", message: "" });
 
-    if (leadId) {
-      setSelectedLeadId(leadId);
+    if (stageLeadId) {
+      setSelectedLeadId(stageLeadId);
     }
 
     window.setTimeout(() => {
@@ -327,7 +330,16 @@ export function AdminLeadsManager({
           {boardLeads.map((column) => (
             <article
               key={column.title}
-              className={`rounded-[1.5rem] border p-4 shadow-[0_18px_40px_rgba(35,43,50,0.05)] ${column.border} ${column.bg}`}
+              role="button"
+              tabIndex={0}
+              onClick={() => focusLeadStage(column.statuses[0], column.leads[0]?.id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  focusLeadStage(column.statuses[0], column.leads[0]?.id);
+                }
+              }}
+              className={`cursor-pointer rounded-[1.5rem] border p-4 shadow-[0_18px_40px_rgba(35,43,50,0.05)] transition hover:-translate-y-0.5 hover:shadow-[0_22px_48px_rgba(35,43,50,0.08)] ${column.border} ${column.bg}`}
             >
               <div className="flex items-center justify-between gap-3">
                 <p className={`text-sm uppercase tracking-[0.22em] ${column.accent}`}>
@@ -340,10 +352,8 @@ export function AdminLeadsManager({
 
               <div className="mt-4 space-y-3">
                 {column.leads.slice(0, 2).map((lead) => (
-                  <button
+                  <div
                     key={lead.id}
-                    type="button"
-                    onClick={() => focusLeadStage(lead.status, lead.id)}
                     className={`w-full rounded-[1.2rem] border bg-white px-3 py-3 text-left transition ${
                       lead.id === selectedLead?.id
                         ? "border-[#9f6b44] shadow-[0_12px_24px_rgba(159,107,68,0.12)]"
@@ -356,7 +366,7 @@ export function AdminLeadsManager({
                     <p className="mt-1 text-xs text-[#6a7379]">
                       {lead.propertyTitle}
                     </p>
-                  </button>
+                  </div>
                 ))}
 
                 {column.leads.length === 0 ? (
@@ -366,13 +376,9 @@ export function AdminLeadsManager({
                 ) : null}
 
                 {column.leads.length > 2 ? (
-                  <button
-                    type="button"
-                    onClick={() => focusLeadStage(column.statuses[0])}
-                    className="w-full rounded-[1.2rem] border border-dashed border-white/80 px-3 py-3 text-center text-lg font-semibold text-[#7a838a] transition hover:border-[#d8cabd] hover:bg-white/70"
-                  >
+                  <div className="w-full rounded-[1.2rem] border border-dashed border-white/80 px-3 py-3 text-center text-lg font-semibold text-[#7a838a] transition hover:border-[#d8cabd] hover:bg-white/70">
                     +{column.leads.length - 2}
-                  </button>
+                  </div>
                 ) : null}
               </div>
             </article>
