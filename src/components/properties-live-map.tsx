@@ -153,7 +153,17 @@ export function PropertiesLiveMap({
         closeOnClick: false,
         offset: [0, -8],
       }).setContent(
-        `<div style="min-width:180px"><strong>${property.title}</strong><br/>${property.location}<br/>${property.price}</div>`,
+        `<div style="min-width:200px">
+          <strong>${property.title}</strong><br/>
+          ${property.location}<br/>
+          <span style="display:inline-block;margin-top:6px;font-weight:700;">${property.price}</span>
+          <a
+            href="/propiedades/${property.slug}"
+            style="display:block;margin-top:10px;padding:10px 14px;border-radius:999px;background:#203947;color:#fff;text-align:center;font-size:12px;font-weight:700;text-decoration:none;"
+          >
+            Ver ficha completa
+          </a>
+        </div>`,
       );
 
       popupByPropertyIdRef.current.set(property.id, { marker, popup });
