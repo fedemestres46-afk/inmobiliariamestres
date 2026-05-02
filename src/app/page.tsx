@@ -9,8 +9,9 @@ export default async function Home() {
 
   return (
     <main className="flex-1 bg-[var(--color-cream)] text-[var(--color-ink)]">
-      <section className="hero-shell px-6 py-6 md:px-12 lg:px-16">
-        <div className="hero-panel mx-auto max-w-[104rem] overflow-hidden rounded-[2rem] border border-white/30 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.26),_transparent_35%),linear-gradient(135deg,_rgba(24,47,60,0.96),_rgba(43,69,83,0.92)_48%,_rgba(198,122,66,0.88))] text-white shadow-[0_30px_80px_rgba(24,47,60,0.18)]">
+      <section className="hero-shell">
+        <div className="mx-auto max-w-[104rem] px-6 py-6 md:px-12 lg:px-16">
+          <div className="hero-panel overflow-hidden rounded-[2rem] border border-white/30 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.26),_transparent_35%),linear-gradient(135deg,_rgba(24,47,60,0.96),_rgba(43,69,83,0.92)_48%,_rgba(198,122,66,0.88))] text-white shadow-[0_30px_80px_rgba(24,47,60,0.18)]">
           <header className="flex flex-col items-center justify-between gap-4 px-6 py-6 text-center md:px-12 md:text-left lg:flex-row">
             <div className="w-full md:w-auto">
               <h1 className="font-serif-display text-2xl tracking-[0.18em] md:text-3xl">
@@ -65,6 +66,7 @@ export default async function Home() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </section>
 
