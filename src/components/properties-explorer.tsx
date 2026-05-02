@@ -521,13 +521,13 @@ export function PropertiesExplorer({ properties }: Props) {
           {filteredProperties.map((property) => (
             <article
               key={property.id}
-              className="overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-white shadow-[0_22px_60px_rgba(35,43,50,0.08)]"
+              className="flex h-full flex-col overflow-hidden rounded-[2rem] border border-[var(--color-line)] bg-white shadow-[0_22px_60px_rgba(35,43,50,0.08)]"
             >
               <div
                 className="h-72 bg-cover bg-center"
                 style={{ backgroundImage: `url(${property.cover})` }}
               />
-              <div className="space-y-5 p-7">
+              <div className="flex flex-1 flex-col space-y-5 p-7">
                 <div className="flex flex-wrap gap-3 text-sm">
                   <span className="rounded-full bg-[var(--color-cream)] px-3 py-1 text-[var(--color-deep)]">
                     {property.operation}
@@ -551,38 +551,40 @@ export function PropertiesExplorer({ properties }: Props) {
                   <span>{property.bedrooms} dormitorios</span>
                   <span>{property.bathrooms} baños</span>
                 </div>
-                <p className="text-2xl font-black tracking-tight text-[var(--color-deep)]">
-                  {property.price}
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link
-                    href={`/propiedades/${property.slug}`}
-                    className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
-                  >
-                    Ver detalle
-                  </Link>
-                  {property.mapsUrl ? (
-                    <a
-                      href={property.mapsUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                <div className="mt-auto space-y-4 pt-3">
+                  <p className="text-2xl font-black tracking-tight text-[var(--color-deep)]">
+                    {property.price}
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    <Link
+                      href={`/propiedades/${property.slug}`}
                       className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
                     >
-                      Ver en Maps
-                    </a>
-                  ) : null}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setLeadPropertyId((current) =>
-                        current === property.id ? null : property.id,
-                      );
-                      setInquiryState({ type: "idle", message: "" });
-                    }}
-                    className="inline-flex rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
-                  >
-                    Consultar
-                  </button>
+                      Ver detalle
+                    </Link>
+                    {property.mapsUrl ? (
+                      <a
+                        href={property.mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                      >
+                        Ver en Maps
+                      </a>
+                    ) : null}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLeadPropertyId((current) =>
+                          current === property.id ? null : property.id,
+                        );
+                        setInquiryState({ type: "idle", message: "" });
+                      }}
+                      className="inline-flex rounded-full bg-[var(--color-deep)] px-4 py-2 text-sm text-white transition hover:opacity-92"
+                    >
+                      Consultar
+                    </button>
+                  </div>
                 </div>
                 {leadPropertyId === property.id ? <InquiryForm property={property} /> : null}
               </div>
