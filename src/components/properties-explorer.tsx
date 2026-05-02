@@ -18,6 +18,7 @@ type SortOption =
   | "surface-desc"
   | "surface-asc"
   | "bedrooms-asc";
+type GarageFilter = "Todas" | "Con cochera" | "Sin cochera";
 
 const propertyTypeOptions: Array<PropertyType | "Todos"> = [
   "Todos",
@@ -41,6 +42,17 @@ const currencyOptions: Array<Property["currency"] | "Todas"> = [
   "ARS",
 ];
 
+const garageOptions: GarageFilter[] = ["Todas", "Con cochera", "Sin cochera"];
+
+const bedroomOptions = [
+  { value: "any", label: "Cualquiera" },
+  { value: "0", label: "Monoambiente" },
+  { value: "1", label: "1 dormitorio" },
+  { value: "2", label: "2 dormitorios" },
+  { value: "3", label: "3 dormitorios" },
+  { value: "4", label: "4 dormitorios o mas" },
+] as const;
+
 const sortOptions: Array<{ value: SortOption; label: string }> = [
   { value: "default", label: "Destacadas primero" },
   { value: "price-asc", label: "Menor precio" },
@@ -63,6 +75,9 @@ export function PropertiesExplorer({ properties }: Props) {
   const [currencyFilter, setCurrencyFilter] = useState<Property["currency"] | "Todas">(
     "Todas",
   );
+  const [garageFilter, setGarageFilter] = useState<GarageFilter>("Todas");
+  const [bedroomsMin, setBedroomsMin] = useState("any");
+  const [bedroomsMax, setBedroomsMax] = useState("any");
   const [locationFilter, setLocationFilter] = useState("");
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
@@ -85,12 +100,32 @@ export function PropertiesExplorer({ properties }: Props) {
           : property.operation === operationFilter;
       const matchesCurrency =
         currencyFilter === "Todas" ? true : property.currency === currencyFilter;
+      const matchesGarage =
+        garageFilter === "Todas"
+          ? true
+          : garageFilter === "Con cochera"
+            ? property.garageSpaces > 0
+            : property.garageSpaces === 0;
       const matchesLocation =
         locationFilter.trim() === ""
           ? true
           : property.location
               .toLowerCase()
               .includes(locationFilter.trim().toLowerCase());
+      const parsedMinBedrooms =
+        bedroomsMin === "any" ? undefined : Number(bedroomsMin);
+      const parsedMaxBedrooms =
+        bedroomsMax === "any" ? undefined : Number(bedroomsMax);
+      const matchesMinBedrooms =
+        parsedMinBedrooms === undefined || Number.isNaN(parsedMinBedrooms)
+          ? true
+          : property.bedrooms >= parsedMinBedrooms;
+      const matchesMaxBedrooms =
+        parsedMaxBedrooms === undefined || Number.isNaN(parsedMaxBedrooms)
+          ? true
+          : parsedMaxBedrooms >= 4
+            ? property.bedrooms >= 4
+            : property.bedrooms <= parsedMaxBedrooms;
       const minPrice =
         priceFrom.trim() === "" ? undefined : Number(priceFrom.replace(/\./g, "").replace(",", "."));
       const maxPrice =
@@ -108,7 +143,10 @@ export function PropertiesExplorer({ properties }: Props) {
         matchesType &&
         matchesOperation &&
         matchesCurrency &&
+        matchesGarage &&
         matchesLocation &&
+        matchesMinBedrooms &&
+        matchesMaxBedrooms &&
         matchesMinPrice &&
         matchesMaxPrice
       );
@@ -147,6 +185,9 @@ export function PropertiesExplorer({ properties }: Props) {
     return sortedProperties;
   }, [
     currencyFilter,
+    garageFilter,
+    bedroomsMax,
+    bedroomsMin,
     locationFilter,
     operationFilter,
     priceFrom,
@@ -343,6 +384,23 @@ export function PropertiesExplorer({ properties }: Props) {
 
           <label className="space-y-2">
             <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
+              Cochera
+            </span>
+            <select
+              value={garageFilter}
+              onChange={(event) => setGarageFilter(event.target.value as GarageFilter)}
+              className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
+            >
+              {garageOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          <label className="space-y-2">
+            <span className="text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
               Zona
             </span>
             <input
@@ -352,6 +410,36 @@ export function PropertiesExplorer({ properties }: Props) {
               className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
             />
           </label>
+
+          <div className="space-y-2">
+            <span className="block text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
+              Dormitorios
+            </span>
+            <div className="grid grid-cols-2 gap-3">
+              <select
+                value={bedroomsMin}
+                onChange={(event) => setBedroomsMin(event.target.value)}
+                className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
+              >
+                {bedroomOptions.map((option) => (
+                  <option key={`min-${option.value}`} value={option.value}>
+                    {option.value === "any" ? "Minimo" : option.label}
+                  </option>
+                ))}
+              </select>
+              <select
+                value={bedroomsMax}
+                onChange={(event) => setBedroomsMax(event.target.value)}
+                className="w-full rounded-full border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 outline-none"
+              >
+                {bedroomOptions.map((option) => (
+                  <option key={`max-${option.value}`} value={option.value}>
+                    {option.value === "any" ? "Maximo" : option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
 
           <div className="space-y-2">
             <span className="block text-sm uppercase tracking-[0.2em] text-[var(--color-clay)]">
