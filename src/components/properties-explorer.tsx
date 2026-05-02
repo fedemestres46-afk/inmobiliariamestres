@@ -550,8 +550,10 @@ export function PropertiesExplorer({ properties }: Props) {
                   <span>{property.rooms} ambientes</span>
                   <span>{property.bedrooms} dormitorios</span>
                   <span>{property.bathrooms} baños</span>
-                  <span>{property.price}</span>
                 </div>
+                <p className="text-2xl font-black tracking-tight text-[var(--color-deep)]">
+                  {property.price}
+                </p>
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={`/propiedades/${property.slug}`}
@@ -617,6 +619,24 @@ export function PropertiesExplorer({ properties }: Props) {
                     {property.price}
                   </p>
                 </button>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <Link
+                    href={`/propiedades/${property.slug}`}
+                    className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm font-semibold text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                  >
+                    Ver ficha
+                  </Link>
+                  {property.mapsUrl ? (
+                    <a
+                      href={property.mapsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
+                    >
+                      Ver en Maps
+                    </a>
+                  ) : null}
+                </div>
               </article>
             ))}
           </div>
