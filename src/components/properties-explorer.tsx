@@ -613,7 +613,7 @@ export function PropertiesExplorer({ properties }: Props) {
                   <p className="mt-2 text-[var(--color-muted)]">
                     {property.location}
                   </p>
-                  <p className="mt-3 text-[var(--color-deep)]">
+                  <p className="mt-3 text-lg font-bold text-[var(--color-deep)]">
                     {property.price}
                   </p>
                 </button>
@@ -649,7 +649,7 @@ export function PropertiesExplorer({ properties }: Props) {
                       </p>
                     </div>
                     <div className="flex items-center justify-between gap-4">
-                      <p className="text-lg text-[var(--color-deep)]">
+                      <p className="text-xl font-bold text-[var(--color-deep)]">
                         {activeMapProperty.price}
                       </p>
                       <div className="flex flex-wrap gap-3">

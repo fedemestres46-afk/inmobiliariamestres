@@ -131,6 +131,9 @@ export default async function PropertyDetailPage({ params }: Props) {
         : {}),
     },
   };
+  const galleryImages = property.gallery.slice(1);
+  const visibleGalleryImages = galleryImages.slice(0, 3);
+  const remainingGalleryCount = Math.max(galleryImages.length - 3, 0);
 
   return (
     <main className="flex-1 bg-[var(--color-cream)] text-[var(--color-ink)]">
@@ -186,7 +189,7 @@ export default async function PropertyDetailPage({ params }: Props) {
               <p className="text-sm uppercase tracking-[0.3em] text-[var(--color-sand)]">
                 Valor de referencia
               </p>
-              <p className="mt-4 font-serif-display text-5xl leading-none">
+              <p className="mt-4 font-serif-display text-5xl font-bold leading-none text-white">
                 {property.price}
               </p>
               <div className="mt-6 grid gap-3 text-sm text-white/84 sm:grid-cols-2">
@@ -342,7 +345,7 @@ export default async function PropertyDetailPage({ params }: Props) {
           </div>
         ) : null}
 
-        {property.gallery.length > 1 ? (
+        {galleryImages.length > 0 ? (
           <section className="space-y-4">
             <div>
               <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-clay)]">
@@ -350,8 +353,12 @@ export default async function PropertyDetailPage({ params }: Props) {
               </p>
               <h2 className="mt-3 font-serif-display text-4xl">Recorrido visual</h2>
             </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {property.gallery.slice(1).map((image, index) => (
+            <div className="grid gap-4 md:grid-cols-3">
+              {visibleGalleryImages.map((image, index) => {
+                const isLastVisibleCard =
+                  index === visibleGalleryImages.length - 1 && remainingGalleryCount > 0;
+
+                return (
                 <article
                   key={`${image}-${index}`}
                   className="overflow-hidden rounded-[1.75rem] border border-[var(--color-line)] bg-white shadow-[0_18px_50px_rgba(35,43,50,0.06)]"
@@ -363,9 +370,20 @@ export default async function PropertyDetailPage({ params }: Props) {
                       fill
                       className="object-cover"
                     />
+                    {isLastVisibleCard ? (
+                      <div className="absolute inset-0 flex items-center justify-center bg-[rgba(24,47,60,0.48)]">
+                        <div className="rounded-full border border-white/45 bg-[rgba(19,30,38,0.68)] px-6 py-3 text-center text-white shadow-[0_18px_40px_rgba(19,30,38,0.22)] backdrop-blur-sm">
+                          <p className="text-4xl font-bold leading-none">+{remainingGalleryCount}</p>
+                          <p className="mt-1 text-xs uppercase tracking-[0.24em] text-white/82">
+                            fotos
+                          </p>
+                        </div>
+                      </div>
+                    ) : null}
                   </div>
                 </article>
-              ))}
+                );
+              })}
             </div>
           </section>
         ) : null}
@@ -418,7 +436,9 @@ export default async function PropertyDetailPage({ params }: Props) {
                       </p>
                     </div>
                     <div className="flex items-center justify-between gap-4">
-                      <p className="text-[var(--color-deep)]">{relatedProperty.price}</p>
+                      <p className="text-lg font-bold text-[var(--color-deep)]">
+                        {relatedProperty.price}
+                      </p>
                       <Link
                         href={`/propiedades/${relatedProperty.slug}`}
                         className="rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
