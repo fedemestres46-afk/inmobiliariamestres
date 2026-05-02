@@ -673,12 +673,6 @@ export function PropertiesExplorer({ properties }: Props) {
                         {activeMapProperty.price}
                       </p>
                       <div className="flex flex-wrap gap-3">
-                        <Link
-                          href={`/propiedades/${activeMapProperty.slug}`}
-                          className="rounded-full border border-[var(--color-line)] px-4 py-2 text-sm text-[var(--color-deep)] transition hover:bg-[var(--color-cream)]"
-                        >
-                          Ver detalle
-                        </Link>
                         {activeMapProperty.mapsUrl ? (
                           <a
                             href={activeMapProperty.mapsUrl}
@@ -703,6 +697,13 @@ export function PropertiesExplorer({ properties }: Props) {
                         </button>
                       </div>
                     </div>
+                    <Link
+                      href={`/propiedades/${activeMapProperty.slug}`}
+                      className="flex w-full items-center justify-between rounded-[1.2rem] border border-[var(--color-line)] bg-[var(--color-cream)] px-4 py-3 text-sm font-semibold text-[var(--color-deep)] transition hover:bg-[#efe3d4]"
+                    >
+                      <span>Ver ficha completa</span>
+                      <span className="text-lg leading-none">+</span>
+                    </Link>
                     {leadPropertyId === activeMapProperty.id ? (
                       <InquiryForm property={activeMapProperty} />
                     ) : null}
